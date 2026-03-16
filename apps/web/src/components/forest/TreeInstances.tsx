@@ -1,8 +1,8 @@
-import { useRef, useMemo, useCallback } from 'react';
+import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { useFrame, ThreeEvent } from '@react-three/fiber';
 import * as THREE from 'three';
-import type { CompanyPlacement } from '@/lib/types';
-import { getSpecies } from '@/lib/species-config';
+import type { CompanyPlacement, Sector } from '@/lib/types';
+import { getSpecies, SECTOR_ORDER } from '@/lib/species-config';
 import { useForestStore } from '@/stores/forest-store';
 
 interface TreeInstancesProps {
@@ -14,65 +14,94 @@ interface TreeInstancesProps {
 const tempObject = new THREE.Object3D();
 const tempColor = new THREE.Color();
 
-// Canopy geometry generators by shape (used for future per-species instancing)
-export function createCanopyGeometry(shape: string): THREE.BufferGeometry {
+// -- Sector-specific canopy geometries --
+
+function createCanopyGeometry(shape: string): THREE.BufferGeometry {
   switch (shape) {
-    case 'cone':
-      return new THREE.ConeGeometry(1, 1.6, 8);
-    case 'dome':
-      return new THREE.SphereGeometry(1, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2);
-    case 'broad':
-      return new THREE.SphereGeometry(1, 12, 8);
+    case 'cone': {
+      const geo = new THREE.ConeGeometry(1, 2.0, 8);
+      return geo;
+    }
+    case 'dome': {
+      const geo = new THREE.SphereGeometry(1, 10, 8, 0, Math.PI * 2, 0, Math.PI * 0.55);
+      geo.scale(1.05, 0.9, 1.05);
+      return geo;
+    }
+    case 'broad': {
+      const geo = new THREE.SphereGeometry(1, 10, 8);
+      geo.scale(1.45, 0.6, 1.45);
+      return geo;
+    }
     case 'organic': {
       const geo = new THREE.IcosahedronGeometry(1, 1);
-      // Distort vertices for organic feel
       const pos = geo.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const x = pos.getX(i);
         const y = pos.getY(i);
         const z = pos.getZ(i);
-        const noise = 1 + Math.sin(x * 3) * Math.cos(z * 3) * 0.15;
-        pos.setXYZ(i, x * noise, y * noise, z * noise);
+        const n = 1 + Math.sin(x * 4.5) * Math.cos(z * 3.7) * 0.22;
+        pos.setXYZ(i, x * n, y * (0.85 + Math.abs(Math.sin(x * 2)) * 0.25), z * n);
       }
       geo.computeVertexNormals();
       return geo;
     }
-    case 'round':
-      return new THREE.SphereGeometry(1, 16, 12);
-    case 'angular':
-      return new THREE.OctahedronGeometry(1, 0);
-    case 'spire':
-      return new THREE.ConeGeometry(0.6, 2.2, 6);
-    case 'columnar':
-      return new THREE.CylinderGeometry(0.7, 0.9, 1.8, 8);
+    case 'round': {
+      const geo = new THREE.SphereGeometry(1, 12, 10);
+      geo.scale(1.1, 0.95, 1.1);
+      return geo;
+    }
+    case 'angular': {
+      const geo = new THREE.OctahedronGeometry(1, 1);
+      geo.scale(1.0, 0.85, 1.0);
+      return geo;
+    }
+    case 'columnar': {
+      return new THREE.CylinderGeometry(0.6, 0.85, 2.2, 8);
+    }
     case 'spreading': {
       const geo = new THREE.SphereGeometry(1, 12, 8);
-      geo.scale(1.3, 0.6, 1.3);
+      geo.scale(1.55, 0.42, 1.55);
       return geo;
     }
     case 'weeping': {
-      const geo = new THREE.SphereGeometry(1, 12, 10);
+      const geo = new THREE.SphereGeometry(1, 10, 10);
       const pos = geo.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const y = pos.getY(i);
-        if (y < 0) {
-          const droopFactor = 1 + Math.abs(y) * 0.4;
-          pos.setX(i, pos.getX(i) * droopFactor);
-          pos.setZ(i, pos.getZ(i) * droopFactor);
-          pos.setY(i, y * 1.3);
+        if (y < -0.15) {
+          const droop = 1 + Math.abs(y) * 0.55;
+          pos.setX(i, pos.getX(i) * droop);
+          pos.setZ(i, pos.getZ(i) * droop);
+          pos.setY(i, y * 1.45);
         }
       }
       geo.computeVertexNormals();
       return geo;
     }
     default:
-      return new THREE.SphereGeometry(1, 12, 8);
+      return new THREE.SphereGeometry(1, 10, 8);
   }
 }
 
+// -- Group placements by sector for per-sector canopy instancing --
+
+function groupBySector(placements: CompanyPlacement[], companyIds: string[]) {
+  const groups = new Map<Sector, { placements: CompanyPlacement[]; ids: string[] }>();
+  placements.forEach((p, i) => {
+    let g = groups.get(p.species_type);
+    if (!g) {
+      g = { placements: [], ids: [] };
+      groups.set(p.species_type, g);
+    }
+    g.placements.push(p);
+    g.ids.push(companyIds[i]);
+  });
+  return groups;
+}
+
+// -- Main component --
+
 export function TreeInstances({ placements, companyIds, filteredIds }: TreeInstancesProps) {
-  const trunkRef = useRef<THREE.InstancedMesh>(null);
-  const canopyRef = useRef<THREE.InstancedMesh>(null);
   const selectCompany = useForestStore((s) => s.selectCompany);
   const hoverCompany = useForestStore((s) => s.hoverCompany);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
@@ -80,135 +109,62 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
 
   const count = placements.length;
 
-  // Precompute canopy and trunk colors
-  const { trunkColors, canopyColors } = useMemo(() => {
-    const tc = new Float32Array(count * 3);
-    const cc = new Float32Array(count * 3);
+  // Shared tapered trunk geometry
+  const trunkGeo = useMemo(() => new THREE.CylinderGeometry(0.65, 1.0, 1, 8), []);
+
+  // Build per-sector canopy geometry map
+  const canopyGeos = useMemo(() => {
+    const m = new Map<string, THREE.BufferGeometry>();
+    SECTOR_ORDER.forEach((s) => m.set(s, createCanopyGeometry(getSpecies(s).canopyShape)));
+    return m;
+  }, []);
+
+  const sectorGroups = useMemo(() => groupBySector(placements, companyIds), [placements, companyIds]);
+
+  // -- Trunk instanced mesh (all companies) --
+  const trunkRef = useRef<THREE.InstancedMesh>(null);
+
+  useEffect(() => {
+    const mesh = trunkRef.current;
+    if (!mesh) return;
+    const colors = new Float32Array(count * 3);
 
     placements.forEach((p, i) => {
-      const species = getSpecies(p.species_type);
+      const sp = getSpecies(p.species_type);
+      tempColor.set(sp.barkColor).lerp(new THREE.Color(sp.barkColorDark), p.bark_variant / 3);
+      colors[i * 3] = tempColor.r;
+      colors[i * 3 + 1] = tempColor.g;
+      colors[i * 3 + 2] = tempColor.b;
 
-      // Bark varies by age via bark_variant
-      const barkLerp = p.bark_variant / 3;
-      tempColor.set(species.barkColor).lerp(new THREE.Color(species.barkColorDark), barkLerp);
-      tc[i * 3] = tempColor.r;
-      tc[i * 3 + 1] = tempColor.g;
-      tc[i * 3 + 2] = tempColor.b;
-
-      // Canopy color with slight variant
-      const canopyLerp = p.canopy_variant / 6;
-      tempColor.set(species.canopyColor).lerp(new THREE.Color(species.canopyColorHighlight), canopyLerp);
-      cc[i * 3] = tempColor.r;
-      cc[i * 3 + 1] = tempColor.g;
-      cc[i * 3 + 2] = tempColor.b;
+      const radius = p.trunk_radius * 1.3;
+      tempObject.position.set(p.world_x, p.elevation + p.tree_height * 0.5, p.world_z);
+      tempObject.scale.set(radius, p.tree_height, radius);
+      tempObject.rotation.set(0, pseudoRandom(p.world_x, p.world_z) * Math.PI * 2, 0);
+      tempObject.updateMatrix();
+      mesh.setMatrixAt(i, tempObject.matrix);
     });
 
-    return { trunkColors: tc, canopyColors: cc };
+    mesh.instanceColor = new THREE.InstancedBufferAttribute(colors, 3);
+    mesh.instanceMatrix.needsUpdate = true;
+    mesh.computeBoundingSphere();
   }, [placements, count]);
 
-  // Default canopy geometry (we use a single shape and scale differently per sector)
-  // For v1, we use a combined approach: single instanced mesh with sphere geometry
-  // and scale it to approximate different shapes
-  const trunkGeo = useMemo(() => new THREE.CylinderGeometry(1, 1.2, 1, 8), []);
-  const canopyGeo = useMemo(() => new THREE.IcosahedronGeometry(1, 2), []);
-
-  // Update instance matrices and colors
-  useMemo(() => {
-    if (!trunkRef.current || !canopyRef.current) return;
-
-    const trunkMesh = trunkRef.current;
-    const canopyMesh = canopyRef.current;
-
-    // Set instance colors
-    trunkMesh.instanceColor = new THREE.InstancedBufferAttribute(trunkColors, 3);
-    canopyMesh.instanceColor = new THREE.InstancedBufferAttribute(canopyColors, 3);
-
-    placements.forEach((p, i) => {
-      const species = getSpecies(p.species_type);
-
-      // Trunk
-      tempObject.position.set(p.world_x, p.elevation + p.tree_height / 2, p.world_z);
-      tempObject.scale.set(p.trunk_radius, p.tree_height, p.trunk_radius);
-      tempObject.updateMatrix();
-      trunkMesh.setMatrixAt(i, tempObject.matrix);
-
-      // Canopy: position on top of trunk, scale by funding importance
-      const canopyRadius = p.trunk_radius * 2.5 + p.tree_height * 0.15;
-      const canopyHeight = canopyRadius * getCanopyHeightMultiplier(species.canopyShape);
-      tempObject.position.set(
-        p.world_x,
-        p.elevation + p.tree_height + canopyHeight * 0.4,
-        p.world_z,
-      );
-
-      const scaleX = canopyRadius * getCanopyWidthMultiplier(species.canopyShape);
-      const scaleY = canopyHeight;
-      const scaleZ = canopyRadius * getCanopyWidthMultiplier(species.canopyShape);
-      tempObject.scale.set(scaleX, scaleY, scaleZ);
-      tempObject.updateMatrix();
-      canopyMesh.setMatrixAt(i, tempObject.matrix);
-    });
-
-    trunkMesh.instanceMatrix.needsUpdate = true;
-    canopyMesh.instanceMatrix.needsUpdate = true;
-  }, [placements, trunkColors, canopyColors]);
-
-  // Animate selected/hovered states through color modulation
-  useFrame(() => {
-    if (!canopyRef.current || !canopyRef.current.instanceColor) return;
-
-    const colors = canopyRef.current.instanceColor;
-    let needsUpdate = false;
-
-    placements.forEach((p, i) => {
-      const id = companyIds[i];
-      const isSelected = id === selectedCompanyId;
-      const isHovered = id === hoveredCompanyId;
-      const isFiltered = filteredIds && !filteredIds.has(id);
-      const species = getSpecies(p.species_type);
-
-      if (isSelected) {
-        tempColor.set(species.canopyColorHighlight);
-        tempColor.multiplyScalar(1.5);
-        needsUpdate = true;
-      } else if (isHovered) {
-        tempColor.set(species.canopyColorHighlight);
-        tempColor.multiplyScalar(1.2);
-        needsUpdate = true;
-      } else if (isFiltered) {
-        tempColor.set(species.canopyColorDark);
-        tempColor.multiplyScalar(0.3);
-        needsUpdate = true;
-      } else {
-        const canopyLerp = p.canopy_variant / 6;
-        tempColor.set(species.canopyColor).lerp(new THREE.Color(species.canopyColorHighlight), canopyLerp);
-      }
-
-      colors.setXYZ(i, tempColor.r, tempColor.g, tempColor.b);
-    });
-
-    if (needsUpdate) {
-      colors.needsUpdate = true;
-    }
-  });
-
-  const handleClick = useCallback(
+  // Trunk click/hover
+  const handleTrunkClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
       e.stopPropagation();
-      const instanceId = e.instanceId;
-      if (instanceId !== undefined && instanceId < companyIds.length) {
-        selectCompany(companyIds[instanceId]);
+      if (e.instanceId !== undefined && e.instanceId < companyIds.length) {
+        selectCompany(companyIds[e.instanceId]);
       }
     },
     [companyIds, selectCompany],
   );
 
-  const handlePointerOver = useCallback(
+  const handleTrunkOver = useCallback(
     (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
-      const instanceId = e.instanceId;
-      if (instanceId !== undefined && instanceId < companyIds.length) {
-        hoverCompany(companyIds[instanceId]);
+      if (e.instanceId !== undefined && e.instanceId < companyIds.length) {
+        hoverCompany(companyIds[e.instanceId]);
         document.body.style.cursor = 'pointer';
       }
     },
@@ -224,67 +180,204 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
 
   return (
     <group>
-      {/* Trunks */}
+      {/* All trunks: single instanced mesh */}
       <instancedMesh
         ref={trunkRef}
         args={[trunkGeo, undefined, count]}
         castShadow
         receiveShadow
-        onClick={handleClick}
-        onPointerOver={handlePointerOver}
+        onClick={handleTrunkClick}
+        onPointerOver={handleTrunkOver}
         onPointerOut={handlePointerOut}
+        frustumCulled
       >
-        <meshStandardMaterial
-          roughness={0.9}
-          metalness={0.05}
-          vertexColors
-        />
+        <meshStandardMaterial roughness={0.92} metalness={0.02} vertexColors />
       </instancedMesh>
 
-      {/* Canopies */}
-      <instancedMesh
-        ref={canopyRef}
-        args={[canopyGeo, undefined, count]}
-        castShadow
-        receiveShadow
-        onClick={handleClick}
-        onPointerOver={handlePointerOver}
-        onPointerOut={handlePointerOut}
-      >
-        <meshStandardMaterial
-          roughness={0.7}
-          metalness={0.1}
-          vertexColors
-        />
-      </instancedMesh>
+      {/* Per-sector canopy meshes with distinct shapes */}
+      {SECTOR_ORDER.map((sector) => {
+        const g = sectorGroups.get(sector);
+        if (!g || g.placements.length === 0) return null;
+        return (
+          <SectorCanopies
+            key={sector}
+            sector={sector}
+            geometry={canopyGeos.get(sector)!}
+            placements={g.placements}
+            ids={g.ids}
+            filteredIds={filteredIds}
+            selectedCompanyId={selectedCompanyId}
+            hoveredCompanyId={hoveredCompanyId}
+            onSelect={selectCompany}
+            onHover={hoverCompany}
+          />
+        );
+      })}
     </group>
   );
 }
 
-function getCanopyHeightMultiplier(shape: string): number {
+// -- Per-sector canopy instanced mesh --
+
+function SectorCanopies({
+  sector,
+  geometry,
+  placements,
+  ids,
+  filteredIds,
+  selectedCompanyId,
+  hoveredCompanyId,
+  onSelect,
+  onHover,
+}: {
+  sector: Sector;
+  geometry: THREE.BufferGeometry;
+  placements: CompanyPlacement[];
+  ids: string[];
+  filteredIds?: Set<string>;
+  selectedCompanyId: string | null;
+  hoveredCompanyId: string | null;
+  onSelect: (id: string | null) => void;
+  onHover: (id: string | null) => void;
+}) {
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const species = getSpecies(sector);
+  const n = placements.length;
+
+  useEffect(() => {
+    const mesh = meshRef.current;
+    if (!mesh) return;
+    const colors = new Float32Array(n * 3);
+
+    placements.forEach((p, i) => {
+      tempColor
+        .set(species.canopyColor)
+        .lerp(new THREE.Color(species.canopyColorHighlight), p.canopy_variant / 5);
+      colors[i * 3] = tempColor.r;
+      colors[i * 3 + 1] = tempColor.g;
+      colors[i * 3 + 2] = tempColor.b;
+
+      // Canopy size: generous, proportional to importance
+      const baseR = p.trunk_radius * 3.2 + p.tree_height * 0.22 + 1.2;
+      const hRatio = canopyHeightRatio(species.canopyShape);
+      const wRatio = canopyWidthRatio(species.canopyShape);
+      const cH = baseR * hRatio;
+      const cW = baseR * wRatio;
+      const cY = p.elevation + p.tree_height * 0.82 + cH * 0.38;
+
+      tempObject.position.set(p.world_x, cY, p.world_z);
+      tempObject.scale.set(cW, cH, cW);
+      tempObject.rotation.set(0, pseudoRandom(p.world_x, p.world_z) * Math.PI * 2, 0);
+      tempObject.updateMatrix();
+      mesh.setMatrixAt(i, tempObject.matrix);
+    });
+
+    mesh.instanceColor = new THREE.InstancedBufferAttribute(colors, 3);
+    mesh.instanceMatrix.needsUpdate = true;
+    mesh.computeBoundingSphere();
+  }, [placements, n, species]);
+
+  // Animate selection/hover/filter colors
+  useFrame(() => {
+    const mesh = meshRef.current;
+    if (!mesh || !mesh.instanceColor) return;
+    const c = mesh.instanceColor;
+    let dirty = false;
+
+    for (let i = 0; i < n; i++) {
+      const id = ids[i];
+      const p = placements[i];
+
+      if (id === selectedCompanyId) {
+        tempColor.set(species.canopyColorHighlight).multiplyScalar(1.7);
+        dirty = true;
+      } else if (id === hoveredCompanyId) {
+        tempColor.set(species.canopyColorHighlight).multiplyScalar(1.35);
+        dirty = true;
+      } else if (filteredIds && !filteredIds.has(id)) {
+        tempColor.set(species.canopyColorDark).multiplyScalar(0.2);
+        dirty = true;
+      } else {
+        tempColor
+          .set(species.canopyColor)
+          .lerp(new THREE.Color(species.canopyColorHighlight), p.canopy_variant / 5);
+      }
+      c.setXYZ(i, tempColor.r, tempColor.g, tempColor.b);
+    }
+    if (dirty) c.needsUpdate = true;
+  });
+
+  const onClick = useCallback(
+    (e: ThreeEvent<MouseEvent>) => {
+      e.stopPropagation();
+      if (e.instanceId !== undefined && e.instanceId < ids.length) onSelect(ids[e.instanceId]);
+    },
+    [ids, onSelect],
+  );
+  const onPointerOver = useCallback(
+    (e: ThreeEvent<PointerEvent>) => {
+      e.stopPropagation();
+      if (e.instanceId !== undefined && e.instanceId < ids.length) {
+        onHover(ids[e.instanceId]);
+        document.body.style.cursor = 'pointer';
+      }
+    },
+    [ids, onHover],
+  );
+  const onPointerOut = useCallback(() => {
+    onHover(null);
+    document.body.style.cursor = 'default';
+  }, [onHover]);
+
+  return (
+    <instancedMesh
+      ref={meshRef}
+      args={[geometry, undefined, n]}
+      castShadow
+      receiveShadow
+      onClick={onClick}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}
+      frustumCulled
+    >
+      <meshStandardMaterial roughness={0.72} metalness={0.05} vertexColors side={THREE.DoubleSide} />
+    </instancedMesh>
+  );
+}
+
+// -- Helpers --
+
+function canopyHeightRatio(shape: string): number {
   switch (shape) {
-    case 'cone': return 1.6;
-    case 'spire': return 2.0;
-    case 'dome': return 0.8;
-    case 'broad': return 0.7;
-    case 'spreading': return 0.5;
-    case 'columnar': return 1.4;
-    case 'angular': return 1.0;
-    case 'weeping': return 1.1;
-    default: return 1.0;
+    case 'cone':      return 1.6;
+    case 'dome':      return 0.9;
+    case 'broad':     return 0.6;
+    case 'organic':   return 1.0;
+    case 'round':     return 1.0;
+    case 'angular':   return 1.1;
+    case 'columnar':  return 1.7;
+    case 'spreading': return 0.45;
+    case 'weeping':   return 1.1;
+    default:          return 1.0;
   }
 }
 
-function getCanopyWidthMultiplier(shape: string): number {
+function canopyWidthRatio(shape: string): number {
   switch (shape) {
-    case 'cone': return 0.7;
-    case 'spire': return 0.5;
-    case 'dome': return 1.1;
-    case 'broad': return 1.4;
-    case 'spreading': return 1.5;
-    case 'columnar': return 0.6;
-    case 'angular': return 0.9;
-    case 'weeping': return 1.2;
-    default: return 1.0;
+    case 'cone':      return 0.8;
+    case 'dome':      return 1.15;
+    case 'broad':     return 1.5;
+    case 'organic':   return 1.1;
+    case 'round':     return 1.15;
+    case 'angular':   return 0.9;
+    case 'columnar':  return 0.55;
+    case 'spreading': return 1.6;
+    case 'weeping':   return 1.25;
+    default:          return 1.0;
   }
+}
+
+function pseudoRandom(a: number, b: number): number {
+  const s = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453;
+  return s - Math.floor(s);
 }

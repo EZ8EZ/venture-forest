@@ -10,7 +10,6 @@ export function ForestCamera() {
   const reducedMotion = useForestStore((s) => s.reducedMotion);
   const { camera } = useThree();
 
-  // Idle breathing animation
   const idleTime = useRef(0);
   const isAnimating = useRef(false);
   const animTarget = useRef(new THREE.Vector3());
@@ -21,18 +20,17 @@ export function ForestCamera() {
     if (!cameraTarget) return;
     isAnimating.current = true;
     animTarget.current.set(
-      cameraTarget.x + 15,
-      cameraTarget.y + 12,
-      cameraTarget.z + 15,
+      cameraTarget.x + 12,
+      cameraTarget.y + 8,
+      cameraTarget.z + 12,
     );
-    animLookAt.current.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
+    animLookAt.current.set(cameraTarget.x, cameraTarget.y * 0.6, cameraTarget.z);
     animProgress.current = 0;
   }, [cameraTarget]);
 
   useFrame((_, delta) => {
     if (!controlsRef.current) return;
 
-    // Fly-to animation
     if (isAnimating.current && animProgress.current < 1) {
       const speed = reducedMotion ? 4 : 2;
       animProgress.current = Math.min(1, animProgress.current + delta * speed);
@@ -42,18 +40,15 @@ export function ForestCamera() {
       controlsRef.current.target.lerp(animLookAt.current, t);
       controlsRef.current.update();
 
-      if (animProgress.current >= 1) {
-        isAnimating.current = false;
-      }
+      if (animProgress.current >= 1) isAnimating.current = false;
       return;
     }
 
-    // Subtle idle drift when not interacting
+    // Gentle idle breathing
     if (!reducedMotion && !isAnimating.current) {
-      idleTime.current += delta * 0.15;
-      const drift = Math.sin(idleTime.current) * 0.02;
-      camera.position.x += drift;
-      camera.position.z += Math.cos(idleTime.current * 0.7) * 0.01;
+      idleTime.current += delta * 0.12;
+      camera.position.x += Math.sin(idleTime.current) * 0.012;
+      camera.position.z += Math.cos(idleTime.current * 0.7) * 0.008;
       controlsRef.current.update();
     }
   });
@@ -63,14 +58,15 @@ export function ForestCamera() {
       ref={controlsRef}
       makeDefault
       enableDamping
-      dampingFactor={0.05}
+      dampingFactor={0.06}
       minDistance={5}
-      maxDistance={500}
+      maxDistance={400}
       maxPolarAngle={Math.PI / 2 - 0.05}
-      minPolarAngle={0.1}
+      minPolarAngle={0.15}
       rotateSpeed={0.5}
       zoomSpeed={0.8}
       panSpeed={0.5}
+      target={[0, 5, 0]}
     />
   );
 }

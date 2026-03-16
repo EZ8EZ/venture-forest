@@ -20,12 +20,13 @@ export function ForestScene() {
         powerPreference: 'high-performance',
         alpha: false,
       }}
-      shadows={quality === 'high'}
+      shadows={quality !== 'low'}
       style={{ position: 'absolute', inset: 0 }}
-      camera={{ fov: 55, near: 0.5, far: 1500, position: [0, 80, 120] }}
+      camera={{ fov: 50, near: 0.5, far: 1200, position: [40, 25, 60] }}
     >
-      <color attach="background" args={['#0a0c10']} />
-      <fog attach="fog" args={['#0a0c10', 100, 600]} />
+      {/* Deep forest twilight background */}
+      <color attach="background" args={['#060c14']} />
+      <fog attach="fog" args={['#060c14', 60, 450]} />
 
       <Suspense fallback={null}>
         <ForestCamera />

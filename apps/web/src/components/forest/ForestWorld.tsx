@@ -3,6 +3,7 @@ import { useSnapshot } from '@/hooks/useSnapshot';
 import { useForestStore } from '@/stores/forest-store';
 import { Terrain } from './Terrain';
 import { TreeInstances } from './TreeInstances';
+import { BackgroundTrees } from './BackgroundTrees';
 import { ForestLabels } from './ForestLabels';
 import { GroveMarkers } from './GroveMarkers';
 import { InvestorRoots } from './InvestorRoots';
@@ -13,7 +14,6 @@ export function ForestWorld() {
   const { data: snapshot, isLoading } = useSnapshot();
   const filters = useForestStore((s) => s.filters);
 
-  // Build company lookup and placement index
   const { companyIds, placementIndex, companiesOrdered } = useMemo(() => {
     if (!snapshot) return { companyIds: [], placementIndex: new Map(), companiesOrdered: [] };
 
@@ -31,7 +31,6 @@ export function ForestWorld() {
     return { companyIds: ids, placementIndex: index, companiesOrdered: ordered };
   }, [snapshot]);
 
-  // Compute filtered set
   const filteredIds = useMemo(() => {
     if (!snapshot) return undefined;
 
@@ -71,6 +70,7 @@ export function ForestWorld() {
   return (
     <group>
       <Terrain />
+      <BackgroundTrees placements={snapshot.placements} />
       <TreeInstances
         placements={snapshot.placements}
         companyIds={companyIds}
