@@ -80,7 +80,7 @@ export function BackgroundTrees({ placements }: BackgroundTreesProps) {
       obj.updateMatrix();
       trunk.setMatrixAt(i, obj.matrix);
 
-      tc.setRGB(0.15 + p.hue * 0.05, 0.1 + p.hue * 0.03, 0.06);
+      tc.setRGB(0.22 + p.hue * 0.08, 0.16 + p.hue * 0.05, 0.10);
       trunkColors[i * 3] = tc.r;
       trunkColors[i * 3 + 1] = tc.g;
       trunkColors[i * 3 + 2] = tc.b;
@@ -92,9 +92,9 @@ export function BackgroundTrees({ placements }: BackgroundTreesProps) {
       obj.updateMatrix();
       canopy.setMatrixAt(i, obj.matrix);
 
-      // Dark muted greens/teals
-      const g = 0.04 + p.hue * 0.06;
-      tc.setRGB(g * 0.4, g, g * 0.3);
+      // Muted forest greens, visible against dark background
+      const g = 0.10 + p.hue * 0.12;
+      tc.setRGB(g * 0.5, g, g * 0.4);
       canopyColors[i * 3] = tc.r;
       canopyColors[i * 3 + 1] = tc.g;
       canopyColors[i * 3 + 2] = tc.b;
@@ -114,7 +114,13 @@ export function BackgroundTrees({ placements }: BackgroundTreesProps) {
         <meshStandardMaterial roughness={0.95} metalness={0} vertexColors />
       </instancedMesh>
       <instancedMesh ref={canopyRef} args={[canopyGeo, undefined, count]} frustumCulled>
-        <meshStandardMaterial roughness={0.85} metalness={0} vertexColors transparent opacity={0.7} />
+        <meshStandardMaterial
+          roughness={0.82}
+          metalness={0}
+          vertexColors
+          emissive="#0a2a0a"
+          emissiveIntensity={0.12}
+        />
       </instancedMesh>
     </group>
   );

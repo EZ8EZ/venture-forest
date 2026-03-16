@@ -5,14 +5,14 @@ export function ForestPostProcessing() {
   return (
     <EffectComposer multisampling={0}>
       <Bloom
-        intensity={0.25}
-        luminanceThreshold={0.5}
-        luminanceSmoothing={0.8}
+        intensity={0.3}
+        luminanceThreshold={0.35}
+        luminanceSmoothing={0.7}
         mipmapBlur
       />
       <Vignette
-        darkness={0.6}
-        offset={0.25}
+        darkness={0.35}
+        offset={0.3}
       />
       <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
     </EffectComposer>

@@ -191,7 +191,13 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
         onPointerOut={handlePointerOut}
         frustumCulled
       >
-        <meshStandardMaterial roughness={0.92} metalness={0.02} vertexColors />
+        <meshStandardMaterial
+          roughness={0.88}
+          metalness={0.02}
+          vertexColors
+          emissive="#3a2820"
+          emissiveIntensity={0.08}
+        />
       </instancedMesh>
 
       {/* Per-sector canopy meshes with distinct shapes */}
@@ -340,7 +346,14 @@ function SectorCanopies({
       onPointerOut={onPointerOut}
       frustumCulled
     >
-      <meshStandardMaterial roughness={0.72} metalness={0.05} vertexColors side={THREE.DoubleSide} />
+      <meshStandardMaterial
+        roughness={0.68}
+        metalness={0.03}
+        vertexColors
+        side={THREE.DoubleSide}
+        emissive={species.canopyColor}
+        emissiveIntensity={0.15}
+      />
     </instancedMesh>
   );
 }

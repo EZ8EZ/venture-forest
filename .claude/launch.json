@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Web (Vite)",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@venture-forest/web", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "API (Hono)",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@venture-forest/api", "dev"],
+      "port": 3001
+    }
+  ]
+}
