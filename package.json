@@ -1,0 +1,32 @@
+{
+  "name": "venture-forest",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An interactive 3D forest where each tree represents a startup, revealing the shape of the venture ecosystem",
+  "author": "Venture Forest Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "scripts": {
+    "dev": "pnpm --filter @venture-forest/web dev",
+    "dev:api": "pnpm --filter @venture-forest/api dev",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter @venture-forest/web build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @venture-forest/web test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "pnpm -r clean",
+    "db:generate": "pnpm --filter @venture-forest/api db:generate",
+    "db:migrate": "pnpm --filter @venture-forest/api db:migrate",
+    "db:push": "pnpm --filter @venture-forest/api db:push",
+    "db:seed": "pnpm --filter @venture-forest/api db:seed",
+    "data:ingest": "python scripts/ingest.py",
+    "data:snapshot": "python scripts/generate_snapshot.py"
+  }
+}

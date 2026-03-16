@@ -1,0 +1,13 @@
+dist/
+build/
+node_modules/
+coverage/
+pnpm-lock.yaml
+*.snap
+.next/
+.nuxt/
+.turbo/
+.vercel/
+__pycache__/
+*.egg-info/
+.venv/

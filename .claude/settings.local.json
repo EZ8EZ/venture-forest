@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --version)",
+      "Read(//usr/local/**)",
+      "Read(//opt/homebrew/**)",
+      "Bash(git init:*)",
+      "Bash(pnpm approve-builds:*)",
+      "Bash(export NVM_DIR=\"/Users/ez/.nvm\")",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(pnpm rebuild:*)",
+      "Bash(bash -c 'export NVM_DIR=\"\"/Users/ez/.nvm\"\" && [ -s \"\"$NVM_DIR/nvm.sh\"\" ] && \\\\. \"\"$NVM_DIR/nvm.sh\"\" && which node && which pnpm && pnpm rebuild 2>&1 | tail -20')",
+      "Bash(bash -c 'export NVM_DIR=\"\"/Users/ez/.nvm\"\" && [ -s \"\"$NVM_DIR/nvm.sh\"\" ] && \\\\. \"\"$NVM_DIR/nvm.sh\"\" && pnpm --filter @venture-forest/web add postprocessing 2>&1')",
+      "Bash(pkill -f vite)",
+      "Bash(bash -c \"export NVM_DIR=\"\"/Users/ez/.nvm\"\" && [ -s \"\"$NVM_DIR/nvm.sh\"\" ] && \\\\. \"\"$NVM_DIR/nvm.sh\"\" && pnpm --filter @venture-forest/web dev 2>&1 &\" sleep 5)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(for pkg:*)",
+      "Bash(do echo:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

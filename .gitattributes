@@ -1,0 +1,57 @@
+# Auto detect text files and normalise line endings to LF
+* text=auto eol=lf
+
+# Source code
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.sql text eol=lf
+*.graphql text eol=lf
+*.toml text eol=lf
+
+# Config
+*.editorconfig text eol=lf
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.prettierrc text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Batch files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+*.glb binary
+*.gltf binary
+*.hdr binary
+*.exr binary
+
+# Linguist overrides
+pnpm-lock.yaml linguist-generated
+*.min.js linguist-generated
+*.min.css linguist-generated
+dist/** linguist-generated
+coverage/** linguist-generated

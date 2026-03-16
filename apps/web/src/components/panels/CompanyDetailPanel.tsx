@@ -1,0 +1,266 @@
+import { useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ExternalLink, GitCompare, Bookmark, Link2, Building2, MapPin, Calendar, Users, TrendingUp, Info } from 'lucide-react';
+import { useForestStore } from '@/stores/forest-store';
+import { useSnapshot } from '@/hooks/useSnapshot';
+import { getCompanyInvestors } from '@/lib/snapshot-loader';
+import { getSpecies } from '@/lib/species-config';
+import type { Company, CompanyPlacement } from '@/lib/types';
+
+export function CompanyDetailPanel() {
+  const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
+  const selectCompany = useForestStore((s) => s.selectCompany);
+  const addToCompare = useForestStore((s) => s.addToCompare);
+  const { data: snapshot } = useSnapshot();
+
+  const company = useMemo(() => {
+    if (!snapshot || !selectedCompanyId) return null;
+    return snapshot.companies.find((c) => c.id === selectedCompanyId) || null;
+  }, [snapshot, selectedCompanyId]);
+
+  const placement = useMemo(() => {
+    if (!snapshot || !selectedCompanyId) return null;
+    return snapshot.placements.find((p) => p.company_id === selectedCompanyId) || null;
+  }, [snapshot, selectedCompanyId]);
+
+  const investors = useMemo(() => {
+    if (!snapshot || !selectedCompanyId) return [];
+    return getCompanyInvestors(snapshot, selectedCompanyId);
+  }, [snapshot, selectedCompanyId]);
+
+  return (
+    <AnimatePresence>
+      {company && placement && (
+        <motion.div
+          key={company.id}
+          initial={{ x: 400, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 400, opacity: 0 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          className="fixed right-0 top-0 bottom-0 w-[380px] z-40 pointer-events-auto"
+        >
+          <div className="h-full glass-panel-solid rounded-none rounded-l-xl overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-[rgba(10,12,16,0.98)] backdrop-blur-lg border-b border-overlay-border p-4">
+              <div className="flex items-start justify-between">
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-lg font-semibold text-overlay-text truncate">
+                    {company.name}
+                  </h2>
+                  <p className="text-xs text-overlay-accent mt-0.5">
+                    {getSpecies(company.sector).label}
+                    {company.subsector && ` / ${company.subsector}`}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 ml-2">
+                  <button
+                    onClick={() => addToCompare(company.id)}
+                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
+                    title="Compare"
+                  >
+                    <GitCompare size={14} />
+                  </button>
+                  <button
+                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
+                    title="Bookmark"
+                  >
+                    <Bookmark size={14} />
+                  </button>
+                  <button
+                    onClick={() => selectCompany(null)}
+                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 space-y-5">
+              {/* Description */}
+              {company.description && (
+                <p className="text-sm text-overlay-muted leading-relaxed">
+                  {company.description}
+                </p>
+              )}
+
+              {/* Key metrics */}
+              <div className="grid grid-cols-2 gap-3">
+                <MetricCard
+                  icon={<TrendingUp size={13} />}
+                  label="Total Funding"
+                  value={formatFunding(company.total_funding_usd)}
+                />
+                <MetricCard
+                  icon={<Users size={13} />}
+                  label="Headcount"
+                  value={company.headcount_display || company.headcount_bucket || 'Unknown'}
+                />
+                <MetricCard
+                  icon={<Calendar size={13} />}
+                  label="Founded"
+                  value={company.founded_year?.toString() || 'Unknown'}
+                />
+                <MetricCard
+                  icon={<Building2 size={13} />}
+                  label="Status"
+                  value={company.status.charAt(0).toUpperCase() + company.status.slice(1)}
+                />
+                {company.latest_round_type && (
+                  <MetricCard
+                    icon={<TrendingUp size={13} />}
+                    label="Latest Round"
+                    value={formatRoundType(company.latest_round_type)}
+                  />
+                )}
+                {company.hq_city && (
+                  <MetricCard
+                    icon={<MapPin size={13} />}
+                    label="Location"
+                    value={`${company.hq_city}${company.hq_country ? `, ${company.hq_country}` : ''}`}
+                  />
+                )}
+              </div>
+
+              {/* Tags */}
+              {company.tags && company.tags.length > 0 && (
+                <div>
+                  <SectionTitle>Tags</SectionTitle>
+                  <div className="flex flex-wrap gap-1.5">
+                    {company.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 text-[10px] rounded-full bg-white/5 text-overlay-muted border border-overlay-border"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Investors */}
+              {investors.length > 0 && (
+                <div>
+                  <SectionTitle>Investors</SectionTitle>
+                  <div className="space-y-1.5">
+                    {investors.map(({ investor, edge }) => (
+                      <div
+                        key={investor!.id}
+                        className="flex items-center justify-between px-2 py-1.5 rounded-lg bg-white/3 hover:bg-white/5 transition-colors cursor-pointer text-sm"
+                      >
+                        <span className="text-overlay-text/80">{investor!.name}</span>
+                        <span className="text-[10px] text-overlay-muted/60 uppercase">
+                          {edge.role}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Visual explainer */}
+              <VisualExplainer company={company} placement={placement} />
+
+              {/* Actions */}
+              <div className="flex flex-col gap-2">
+                {company.website && (
+                  <a
+                    href={company.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-overlay-accent/10 text-overlay-accent text-sm hover:bg-overlay-accent/20 transition-colors"
+                  >
+                    <ExternalLink size={14} />
+                    Visit website
+                  </a>
+                )}
+                <button className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-overlay-muted text-sm hover:bg-white/8 transition-colors">
+                  <Link2 size={14} />
+                  Copy link
+                </button>
+              </div>
+
+              {/* Data confidence */}
+              <div className="pt-2 border-t border-overlay-border">
+                <div className="flex items-center gap-1.5 text-[10px] text-overlay-muted/40">
+                  <Info size={10} />
+                  <span>Data completeness: {Math.round(company.completeness_score * 100)}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function MetricCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="p-2.5 rounded-lg bg-white/3 border border-overlay-border">
+      <div className="flex items-center gap-1.5 text-overlay-muted/60 mb-1">
+        {icon}
+        <span className="text-[10px] uppercase tracking-wider">{label}</span>
+      </div>
+      <p className="text-sm font-medium text-overlay-text">{value}</p>
+    </div>
+  );
+}
+
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="text-[10px] uppercase tracking-widest text-overlay-muted/50 mb-2">
+      {children}
+    </h3>
+  );
+}
+
+function VisualExplainer({ company, placement }: { company: Company; placement: CompanyPlacement }) {
+  const species = getSpecies(company.sector);
+
+  return (
+    <div className="p-3 rounded-lg bg-white/3 border border-overlay-border space-y-2">
+      <h3 className="text-[10px] uppercase tracking-widest text-overlay-accent/60 flex items-center gap-1.5">
+        <Info size={10} />
+        Why this tree looks like this
+      </h3>
+      <div className="space-y-1.5 text-xs text-overlay-muted/70">
+        <p>
+          <span className="text-overlay-text/60">Height:</span>{' '}
+          {formatFunding(company.total_funding_usd)} in total funding
+        </p>
+        <p>
+          <span className="text-overlay-text/60">Trunk width:</span>{' '}
+          {company.headcount_display || company.headcount_bucket || 'estimated'} employees
+        </p>
+        <p>
+          <span className="text-overlay-text/60">Species:</span>{' '}
+          {species.label} ({species.description.toLowerCase()})
+        </p>
+        <p>
+          <span className="text-overlay-text/60">Bark maturity:</span>{' '}
+          {company.age_years ? `${company.age_years} years old` : 'age unknown'}
+        </p>
+        <p>
+          <span className="text-overlay-text/60">Position:</span>{' '}
+          Near {placement.radial_rank <= 10 ? 'center' : placement.radial_rank <= 30 ? 'mid-range' : 'edge'} (ranked #{placement.radial_rank} by funding)
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function formatFunding(amount: number): string {
+  if (amount >= 1_000_000_000) return `$${(amount / 1_000_000_000).toFixed(1)}B`;
+  if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(1)}M`;
+  if (amount >= 1_000) return `$${(amount / 1_000).toFixed(0)}K`;
+  return `$${amount}`;
+}
+
+function formatRoundType(type: string): string {
+  return type
+    .split('_')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
