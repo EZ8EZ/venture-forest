@@ -11,8 +11,8 @@ export function ForestPostProcessing() {
         mipmapBlur
       />
       <Vignette
-        darkness={0.25}
-        offset={0.35}
+        darkness={0.15}
+        offset={0.45}
       />
       <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
     </EffectComposer>

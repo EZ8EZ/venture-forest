@@ -13,34 +13,46 @@ export function ForestCamera() {
 
   const idleTime = useRef(0);
   const isAnimating = useRef(false);
-  const animTarget = useRef(new THREE.Vector3());
-  const animLookAt = useRef(new THREE.Vector3());
   const animProgress = useRef(1);
-  const preSelectPos = useRef(new THREE.Vector3(DEFAULT_CAMERA.x, DEFAULT_CAMERA.y, DEFAULT_CAMERA.z));
-  const preSelectLook = useRef(new THREE.Vector3(0, 5, 0));
+
+  // Start and end positions for proper interpolation
+  const startPos = useRef(new THREE.Vector3());
+  const endPos = useRef(new THREE.Vector3());
+  const startLook = useRef(new THREE.Vector3());
+  const endLook = useRef(new THREE.Vector3());
+
+  // Saved overview position for return
+  const savedOverviewPos = useRef(new THREE.Vector3(DEFAULT_CAMERA.x, DEFAULT_CAMERA.y, DEFAULT_CAMERA.z));
+  const savedOverviewLook = useRef(new THREE.Vector3(0, 5, 0));
 
   // Camera animation on selection change
   useEffect(() => {
     if (!cameraTarget) return;
 
+    // Capture current position as animation start
+    startPos.current.copy(camera.position);
+    if (controlsRef.current) {
+      startLook.current.copy(controlsRef.current.target);
+    }
+
     if (selectedCompanyId) {
-      // Zooming in to a selected tree: save current position first
-      preSelectPos.current.copy(camera.position);
+      // Save current overview position before zooming in
+      savedOverviewPos.current.copy(camera.position);
       if (controlsRef.current) {
-        preSelectLook.current.copy(controlsRef.current.target);
+        savedOverviewLook.current.copy(controlsRef.current.target);
       }
 
       // Feature the tree: close, slightly above, offset to the side
-      animTarget.current.set(
+      endPos.current.set(
         cameraTarget.x + 8,
         cameraTarget.y + 6,
         cameraTarget.z + 10,
       );
-      animLookAt.current.set(cameraTarget.x, cameraTarget.y * 0.5, cameraTarget.z);
+      endLook.current.set(cameraTarget.x, cameraTarget.y * 0.4, cameraTarget.z);
     } else {
       // Returning to overview: animate back to saved position
-      animTarget.current.copy(preSelectPos.current);
-      animLookAt.current.copy(preSelectLook.current);
+      endPos.current.copy(savedOverviewPos.current);
+      endLook.current.copy(savedOverviewLook.current);
     }
 
     isAnimating.current = true;
@@ -51,23 +63,30 @@ export function ForestCamera() {
     if (!controlsRef.current) return;
 
     if (isAnimating.current && animProgress.current < 1) {
-      const speed = reducedMotion ? 3.5 : 1.8;
+      const speed = reducedMotion ? 3.0 : 1.4;
       animProgress.current = Math.min(1, animProgress.current + delta * speed);
       const t = easeInOutCubic(animProgress.current);
 
-      camera.position.lerp(animTarget.current, t * 0.12);
-      controlsRef.current.target.lerp(animLookAt.current, t * 0.12);
+      // Proper interpolation: blend from start to end
+      camera.position.lerpVectors(startPos.current, endPos.current, t);
+      controlsRef.current.target.lerpVectors(startLook.current, endLook.current, t);
       controlsRef.current.update();
 
-      if (animProgress.current >= 1) isAnimating.current = false;
+      if (animProgress.current >= 1) {
+        isAnimating.current = false;
+        // Snap to exact final position
+        camera.position.copy(endPos.current);
+        controlsRef.current.target.copy(endLook.current);
+        controlsRef.current.update();
+      }
       return;
     }
 
     // Gentle idle breathing
     if (!reducedMotion && !isAnimating.current) {
       idleTime.current += delta * 0.12;
-      camera.position.x += Math.sin(idleTime.current) * 0.008;
-      camera.position.z += Math.cos(idleTime.current * 0.7) * 0.006;
+      camera.position.x += Math.sin(idleTime.current) * 0.006;
+      camera.position.z += Math.cos(idleTime.current * 0.7) * 0.004;
       controlsRef.current.update();
     }
   });

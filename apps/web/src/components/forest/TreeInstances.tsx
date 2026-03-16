@@ -15,8 +15,8 @@ interface TreeInstancesProps {
 const tempObject = new THREE.Object3D();
 const tempColor = new THREE.Color();
 
-// Height multiplier: makes trees taller and more tree-like
-const HEIGHT_SCALE = 1.5;
+// Height multiplier: taller than default but proportional
+const HEIGHT_SCALE = 1.4;
 
 // -- Sector-specific canopy geometries (all must read as tree canopies) --
 
@@ -33,9 +33,9 @@ function createCanopyGeometry(shape: string): THREE.BufferGeometry {
       return geo;
     }
     case 'broad': {
-      // Broad oak: wide but still has height
+      // Broad oak: moderately wide with real height
       const geo = new THREE.SphereGeometry(1, 10, 8);
-      geo.scale(1.3, 0.7, 1.3);
+      geo.scale(1.15, 0.85, 1.15);
       return geo;
     }
     case 'organic': {
@@ -71,9 +71,9 @@ function createCanopyGeometry(shape: string): THREE.BufferGeometry {
       return geo;
     }
     case 'spreading': {
-      // Wide canopy, but still reads as tree (not ultra-flat)
+      // Spreading canopy with real height, like a mature oak
       const geo = new THREE.SphereGeometry(1, 12, 8);
-      geo.scale(1.25, 0.7, 1.25);
+      geo.scale(1.1, 0.85, 1.1);
       return geo;
     }
     case 'weeping': {
@@ -125,7 +125,7 @@ export function TreeInstances({ placements, companyIds, filteredIds, highlighted
   const count = placements.length;
 
   // Shared tapered trunk geometry
-  const trunkGeo = useMemo(() => new THREE.CylinderGeometry(0.55, 0.9, 1, 8), []);
+  const trunkGeo = useMemo(() => new THREE.CylinderGeometry(0.5, 0.85, 1, 8), []);
 
   // Build per-sector canopy geometry map
   const canopyGeos = useMemo(() => {
@@ -218,8 +218,8 @@ export function TreeInstances({ placements, companyIds, filteredIds, highlighted
           roughness={0.85}
           metalness={0.02}
           vertexColors
-          emissive="#4a3828"
-          emissiveIntensity={0.1}
+          emissive="#6a5040"
+          emissiveIntensity={0.2}
         />
       </instancedMesh>
 
@@ -295,8 +295,8 @@ function SectorCanopies({
       colors[i * 3 + 2] = tempColor.b;
 
       const h = p.tree_height * HEIGHT_SCALE;
-      // Canopy size: smaller, proportional to tree
-      const baseR = p.trunk_radius * 2.0 + h * 0.1 + 0.8;
+      // Canopy size: compact crown proportional to trunk
+      const baseR = p.trunk_radius * 1.8 + h * 0.08 + 0.7;
       const hRatio = canopyHeightRatio(species.canopyShape);
       const wRatio = canopyWidthRatio(species.canopyShape);
       const cH = baseR * hRatio;
@@ -400,7 +400,7 @@ function SectorCanopies({
         vertexColors
         side={THREE.DoubleSide}
         emissive={species.canopyColor}
-        emissiveIntensity={0.18}
+        emissiveIntensity={0.3}
       />
     </instancedMesh>
   );
@@ -410,31 +410,31 @@ function SectorCanopies({
 
 function canopyHeightRatio(shape: string): number {
   switch (shape) {
-    case 'cone':      return 1.4;
-    case 'dome':      return 0.85;
-    case 'broad':     return 0.7;
-    case 'organic':   return 0.95;
-    case 'round':     return 0.9;
-    case 'spire':     return 1.6;
-    case 'columnar':  return 1.5;
-    case 'spreading': return 0.7;
-    case 'weeping':   return 1.0;
-    default:          return 0.9;
+    case 'cone':      return 1.5;
+    case 'dome':      return 0.9;
+    case 'broad':     return 0.85;
+    case 'organic':   return 1.0;
+    case 'round':     return 0.95;
+    case 'spire':     return 1.8;
+    case 'columnar':  return 1.6;
+    case 'spreading': return 0.85;
+    case 'weeping':   return 1.05;
+    default:          return 0.95;
   }
 }
 
 function canopyWidthRatio(shape: string): number {
   switch (shape) {
-    case 'cone':      return 0.75;
-    case 'dome':      return 1.05;
-    case 'broad':     return 1.25;
-    case 'organic':   return 1.0;
-    case 'round':     return 1.0;
-    case 'spire':     return 0.65;
-    case 'columnar':  return 0.55;
-    case 'spreading': return 1.25;
-    case 'weeping':   return 1.1;
-    default:          return 1.0;
+    case 'cone':      return 0.7;
+    case 'dome':      return 0.9;
+    case 'broad':     return 1.0;
+    case 'organic':   return 0.85;
+    case 'round':     return 0.85;
+    case 'spire':     return 0.55;
+    case 'columnar':  return 0.5;
+    case 'spreading': return 1.0;
+    case 'weeping':   return 0.95;
+    default:          return 0.85;
   }
 }
 

@@ -16,9 +16,9 @@ export function Terrain() {
 
     const pos = geo.attributes.position;
     const colors = new Float32Array(pos.count * 3);
-    const c1 = new THREE.Color('#142a10');
-    const c2 = new THREE.Color('#0c1e0a');
-    const c3 = new THREE.Color('#1c3214');
+    const c1 = new THREE.Color('#1e3818');
+    const c2 = new THREE.Color('#152a12');
+    const c3 = new THREE.Color('#264020');
     const tc = new THREE.Color();
 
     for (let i = 0; i < pos.count; i++) {
@@ -39,7 +39,7 @@ export function Terrain() {
       // Vertex color variation for forest-floor richness
       const n = pr(x * 0.05, z * 0.05);
       tc.copy(n < 0.3 ? c2 : n < 0.7 ? c1 : c3);
-      tc.lerp(new THREE.Color('#081408'), Math.min(1, dist / 350) * 0.3);
+      tc.lerp(new THREE.Color('#0e200e'), Math.min(1, dist / 350) * 0.25);
       colors[i * 3] = tc.r;
       colors[i * 3 + 1] = tc.g;
       colors[i * 3 + 2] = tc.b;
@@ -57,8 +57,8 @@ export function Terrain() {
           vertexColors
           roughness={0.95}
           metalness={0}
-          emissive="#0a1606"
-          emissiveIntensity={0.1}
+          emissive="#142810"
+          emissiveIntensity={0.15}
         />
       </mesh>
       <GroundCover />

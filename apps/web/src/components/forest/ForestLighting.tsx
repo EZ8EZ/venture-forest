@@ -13,17 +13,17 @@ export function ForestLighting() {
 
   return (
     <>
-      {/* Ambient: strong enough that no tree is invisible */}
-      <ambientLight intensity={0.9} color="#9aaccc" />
+      {/* Ambient: strong base so no tree is invisible */}
+      <ambientLight intensity={1.1} color="#a0b8dd" />
 
       {/* Hemisphere: warm sky, green ground (lifts canopy underside) */}
-      <hemisphereLight args={['#7766bb', '#2a4a2a', 1.0]} />
+      <hemisphereLight args={['#8877cc', '#3a5a3a', 1.2]} />
 
       {/* Main sun: warm golden hour, high angle for broad coverage */}
       <directionalLight
         ref={sunRef}
         position={[100, 100, -30]}
-        intensity={2.2}
+        intensity={2.5}
         color="#ffd088"
         castShadow
         shadow-mapSize={[2048, 2048]}
@@ -38,21 +38,21 @@ export function ForestLighting() {
       {/* Strong cool fill from opposite side */}
       <directionalLight
         position={[-80, 60, 70]}
-        intensity={0.8}
+        intensity={1.0}
         color="#7799ee"
       />
 
       {/* Back-rim light: separates trees from background */}
       <directionalLight
         position={[0, 50, -140]}
-        intensity={0.5}
-        color="#bb77ee"
+        intensity={0.6}
+        color="#bb88ee"
       />
 
       {/* Overhead fill: prevents dark canopy tops */}
       <directionalLight
         position={[0, 140, 0]}
-        intensity={0.4}
+        intensity={0.6}
         color="#99bbdd"
       />
 
