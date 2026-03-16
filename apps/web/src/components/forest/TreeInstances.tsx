@@ -14,8 +14,8 @@ interface TreeInstancesProps {
 const tempObject = new THREE.Object3D();
 const tempColor = new THREE.Color();
 
-// Canopy geometry generators by shape
-function createCanopyGeometry(shape: string): THREE.BufferGeometry {
+// Canopy geometry generators by shape (used for future per-species instancing)
+export function createCanopyGeometry(shape: string): THREE.BufferGeometry {
   switch (shape) {
     case 'cone':
       return new THREE.ConeGeometry(1, 1.6, 8);

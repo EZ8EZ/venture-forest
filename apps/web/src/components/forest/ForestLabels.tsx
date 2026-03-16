@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Html } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
 import type { CompanyPlacement, Company } from '@/lib/types';
 import { useForestStore } from '@/stores/forest-store';
 
@@ -12,7 +11,6 @@ interface ForestLabelsProps {
 export function ForestLabels({ placements, companies }: ForestLabelsProps) {
   const showLabels = useForestStore((s) => s.showLabels);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
-  const { camera } = useThree();
 
   // Only show labels for top companies by visual importance, plus selected
   const visibleLabels = useMemo(() => {

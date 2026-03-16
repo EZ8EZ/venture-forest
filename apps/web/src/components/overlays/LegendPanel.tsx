@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, TreePine, ArrowUpDown, Maximize2, Palette, Clock, GitBranch } from 'lucide-react';
+import { X, TreePine, ArrowUpDown, Maximize2, Clock, GitBranch } from 'lucide-react';
 import { useForestStore } from '@/stores/forest-store';
 import { SPECIES_MAP, SECTOR_ORDER } from '@/lib/species-config';
 

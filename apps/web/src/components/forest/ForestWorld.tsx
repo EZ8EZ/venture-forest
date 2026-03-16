@@ -7,7 +7,7 @@ import { ForestLabels } from './ForestLabels';
 import { GroveMarkers } from './GroveMarkers';
 import { InvestorRoots } from './InvestorRoots';
 import { EnvironmentParticles } from './EnvironmentParticles';
-import type { Company, CompanyPlacement } from '@/lib/types';
+import type { Company } from '@/lib/types';
 
 export function ForestWorld() {
   const { data: snapshot, isLoading } = useSnapshot();
