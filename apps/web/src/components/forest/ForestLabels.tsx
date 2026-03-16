@@ -65,7 +65,7 @@ export function ForestLabels({ placements, companies }: ForestLabelsProps) {
             key={c.id}
             position={[
               p.world_x,
-              p.elevation + p.tree_height + p.trunk_radius * 3.5 + 5,
+              p.elevation + p.tree_height * 1.5 + p.trunk_radius * 2.5 + 4,
               p.world_z,
             ]}
             center

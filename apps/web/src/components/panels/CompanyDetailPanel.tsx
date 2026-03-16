@@ -1,15 +1,17 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, GitCompare, Bookmark, Link2, Building2, MapPin, Calendar, Users, TrendingUp, Info } from 'lucide-react';
+import { X, ExternalLink, GitCompare, Link2, Building2, MapPin, Calendar, Users, TrendingUp, Info, User } from 'lucide-react';
 import { useForestStore } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
 import { getCompanyInvestors } from '@/lib/snapshot-loader';
 import { getSpecies } from '@/lib/species-config';
-import type { Company, CompanyPlacement } from '@/lib/types';
+import type { Company } from '@/lib/types';
 
 export function CompanyDetailPanel() {
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
   const selectCompany = useForestStore((s) => s.selectCompany);
+  const selectInvestor = useForestStore((s) => s.selectInvestor);
+  const setCameraTarget = useForestStore((s) => s.setCameraTarget);
   const addToCompare = useForestStore((s) => s.addToCompare);
   const { data: snapshot } = useSnapshot();
 
@@ -27,6 +29,32 @@ export function CompanyDetailPanel() {
     if (!snapshot || !selectedCompanyId) return [];
     return getCompanyInvestors(snapshot, selectedCompanyId);
   }, [snapshot, selectedCompanyId]);
+
+  // Click an investor in the panel -> trigger portfolio highlight mode
+  const handleInvestorClick = useCallback(
+    (investorId: string) => {
+      selectInvestor(investorId);
+      // Center camera on portfolio
+      if (snapshot) {
+        const companyIds = new Set(
+          snapshot.edges.filter((e) => e.investor_id === investorId).map((e) => e.company_id),
+        );
+        const portfolioPlacements = snapshot.placements.filter((p) => companyIds.has(p.company_id));
+        if (portfolioPlacements.length > 0) {
+          const avgX = portfolioPlacements.reduce((s, p) => s + p.world_x, 0) / portfolioPlacements.length;
+          const avgZ = portfolioPlacements.reduce((s, p) => s + p.world_z, 0) / portfolioPlacements.length;
+          setCameraTarget({ x: avgX, y: 18, z: avgZ });
+        }
+      }
+    },
+    [selectInvestor, setCameraTarget, snapshot],
+  );
+
+  // Handle close: deselect and trigger camera return
+  const handleClose = useCallback(() => {
+    selectCompany(null);
+    setCameraTarget({ x: 40, y: 25, z: 60 });
+  }, [selectCompany, setCameraTarget]);
 
   return (
     <AnimatePresence>
@@ -61,13 +89,7 @@ export function CompanyDetailPanel() {
                     <GitCompare size={14} />
                   </button>
                   <button
-                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
-                    title="Bookmark"
-                  >
-                    <Bookmark size={14} />
-                  </button>
-                  <button
-                    onClick={() => selectCompany(null)}
+                    onClick={handleClose}
                     className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
                   >
                     <X size={14} />
@@ -82,6 +104,24 @@ export function CompanyDetailPanel() {
                 <p className="text-sm text-overlay-muted leading-relaxed">
                   {company.description}
                 </p>
+              )}
+
+              {/* Founders */}
+              {company.founders && company.founders.length > 0 && (
+                <div>
+                  <SectionTitle>Founders</SectionTitle>
+                  <div className="flex flex-wrap gap-2">
+                    {company.founders.map((f) => (
+                      <div
+                        key={f}
+                        className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/3 border border-overlay-border text-sm text-overlay-text/80"
+                      >
+                        <User size={12} className="text-overlay-muted/50" />
+                        {f}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
 
               {/* Key metrics */}
@@ -139,21 +179,26 @@ export function CompanyDetailPanel() {
                 </div>
               )}
 
-              {/* Investors */}
+              {/* Investors - clickable to trigger portfolio highlighting */}
               {investors.length > 0 && (
                 <div>
                   <SectionTitle>Investors</SectionTitle>
+                  <p className="text-[10px] text-overlay-muted/40 mb-2">Click to explore portfolio</p>
                   <div className="space-y-1.5">
                     {investors.map(({ investor, edge }) => (
-                      <div
+                      <button
                         key={investor!.id}
-                        className="flex items-center justify-between px-2 py-1.5 rounded-lg bg-white/3 hover:bg-white/5 transition-colors cursor-pointer text-sm"
+                        onClick={() => handleInvestorClick(investor!.id)}
+                        className="w-full flex items-center justify-between px-2 py-1.5 rounded-lg bg-white/3 hover:bg-overlay-accent/10 hover:border-overlay-accent/20 border border-transparent transition-colors cursor-pointer text-sm text-left"
                       >
-                        <span className="text-overlay-text/80">{investor!.name}</span>
-                        <span className="text-[10px] text-overlay-muted/60 uppercase">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <User size={12} className="text-overlay-muted/40 flex-shrink-0" />
+                          <span className="text-overlay-text/80 truncate">{investor!.name}</span>
+                        </div>
+                        <span className="text-[10px] text-overlay-muted/60 uppercase flex-shrink-0 ml-2">
                           {edge.role}
                         </span>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -216,7 +261,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-function VisualExplainer({ company, placement }: { company: Company; placement: CompanyPlacement }) {
+function VisualExplainer({ company }: { company: Company; placement?: unknown }) {
   const species = getSpecies(company.sector);
 
   return (
@@ -241,10 +286,6 @@ function VisualExplainer({ company, placement }: { company: Company; placement: 
         <p>
           <span className="text-overlay-text/60">Bark maturity:</span>{' '}
           {company.age_years ? `${company.age_years} years old` : 'age unknown'}
-        </p>
-        <p>
-          <span className="text-overlay-text/60">Position:</span>{' '}
-          Near {placement.radial_rank <= 10 ? 'center' : placement.radial_rank <= 30 ? 'mid-range' : 'edge'} (ranked #{placement.radial_rank} by funding)
         </p>
       </div>
     </div>

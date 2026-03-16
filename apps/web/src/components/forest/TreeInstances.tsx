@@ -9,70 +9,84 @@ interface TreeInstancesProps {
   placements: CompanyPlacement[];
   companyIds: string[];
   filteredIds?: Set<string>;
+  highlightedIds?: Set<string>;
 }
 
 const tempObject = new THREE.Object3D();
 const tempColor = new THREE.Color();
 
-// -- Sector-specific canopy geometries --
+// Height multiplier: makes trees taller and more tree-like
+const HEIGHT_SCALE = 1.5;
+
+// -- Sector-specific canopy geometries (all must read as tree canopies) --
 
 function createCanopyGeometry(shape: string): THREE.BufferGeometry {
   switch (shape) {
     case 'cone': {
-      const geo = new THREE.ConeGeometry(1, 2.0, 8);
-      return geo;
+      // Classic conifer: tall narrow cone
+      return new THREE.ConeGeometry(1, 2.2, 8);
     }
     case 'dome': {
+      // Deciduous dome: half-sphere cap
       const geo = new THREE.SphereGeometry(1, 10, 8, 0, Math.PI * 2, 0, Math.PI * 0.55);
-      geo.scale(1.05, 0.9, 1.05);
+      geo.scale(1.05, 0.95, 1.05);
       return geo;
     }
     case 'broad': {
+      // Broad oak: wide but still has height
       const geo = new THREE.SphereGeometry(1, 10, 8);
-      geo.scale(1.45, 0.6, 1.45);
+      geo.scale(1.3, 0.7, 1.3);
       return geo;
     }
     case 'organic': {
+      // Biotech: irregular bumpy canopy
       const geo = new THREE.IcosahedronGeometry(1, 1);
       const pos = geo.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const x = pos.getX(i);
         const y = pos.getY(i);
         const z = pos.getZ(i);
-        const n = 1 + Math.sin(x * 4.5) * Math.cos(z * 3.7) * 0.22;
-        pos.setXYZ(i, x * n, y * (0.85 + Math.abs(Math.sin(x * 2)) * 0.25), z * n);
+        const n = 1 + Math.sin(x * 4.5) * Math.cos(z * 3.7) * 0.18;
+        pos.setXYZ(i, x * n, y * (0.9 + Math.abs(Math.sin(x * 2)) * 0.2), z * n);
       }
       geo.computeVertexNormals();
       return geo;
     }
     case 'round': {
+      // Full rounded canopy
       const geo = new THREE.SphereGeometry(1, 12, 10);
-      geo.scale(1.1, 0.95, 1.1);
+      geo.scale(1.05, 0.95, 1.05);
       return geo;
     }
-    case 'angular': {
-      const geo = new THREE.OctahedronGeometry(1, 1);
-      geo.scale(1.0, 0.85, 1.0);
+    case 'spire': {
+      // Tall pointed spire (like a spruce) - replaces old angular octahedron
+      const geo = new THREE.ConeGeometry(1, 2.8, 6);
+      geo.scale(0.85, 1.0, 0.85);
       return geo;
     }
     case 'columnar': {
-      return new THREE.CylinderGeometry(0.6, 0.85, 2.2, 8);
+      // Tall narrow canopy like a cypress/poplar
+      const geo = new THREE.ConeGeometry(0.7, 2.4, 8);
+      geo.scale(0.75, 1.0, 0.75);
+      return geo;
     }
     case 'spreading': {
+      // Wide canopy, but still reads as tree (not ultra-flat)
       const geo = new THREE.SphereGeometry(1, 12, 8);
-      geo.scale(1.55, 0.42, 1.55);
+      geo.scale(1.25, 0.7, 1.25);
       return geo;
     }
     case 'weeping': {
+      // Drooping willow-like canopy
       const geo = new THREE.SphereGeometry(1, 10, 10);
       const pos = geo.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const y = pos.getY(i);
         if (y < -0.15) {
-          const droop = 1 + Math.abs(y) * 0.55;
+          const droop = 1 + Math.abs(y) * 0.45;
           pos.setX(i, pos.getX(i) * droop);
           pos.setZ(i, pos.getZ(i) * droop);
-          pos.setY(i, y * 1.45);
+          pos.setY(i, y * 1.3);
         }
       }
       geo.computeVertexNormals();
@@ -101,16 +115,17 @@ function groupBySector(placements: CompanyPlacement[], companyIds: string[]) {
 
 // -- Main component --
 
-export function TreeInstances({ placements, companyIds, filteredIds }: TreeInstancesProps) {
+export function TreeInstances({ placements, companyIds, filteredIds, highlightedIds }: TreeInstancesProps) {
   const selectCompany = useForestStore((s) => s.selectCompany);
   const hoverCompany = useForestStore((s) => s.hoverCompany);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
   const hoveredCompanyId = useForestStore((s) => s.hoveredCompanyId);
+  const setCameraTarget = useForestStore((s) => s.setCameraTarget);
 
   const count = placements.length;
 
   // Shared tapered trunk geometry
-  const trunkGeo = useMemo(() => new THREE.CylinderGeometry(0.65, 1.0, 1, 8), []);
+  const trunkGeo = useMemo(() => new THREE.CylinderGeometry(0.55, 0.9, 1, 8), []);
 
   // Build per-sector canopy geometry map
   const canopyGeos = useMemo(() => {
@@ -136,9 +151,10 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
       colors[i * 3 + 1] = tempColor.g;
       colors[i * 3 + 2] = tempColor.b;
 
-      const radius = p.trunk_radius * 1.3;
-      tempObject.position.set(p.world_x, p.elevation + p.tree_height * 0.5, p.world_z);
-      tempObject.scale.set(radius, p.tree_height, radius);
+      const h = p.tree_height * HEIGHT_SCALE;
+      const radius = p.trunk_radius * 1.2;
+      tempObject.position.set(p.world_x, p.elevation + h * 0.5, p.world_z);
+      tempObject.scale.set(radius, h, radius);
       tempObject.rotation.set(0, pseudoRandom(p.world_x, p.world_z) * Math.PI * 2, 0);
       tempObject.updateMatrix();
       mesh.setMatrixAt(i, tempObject.matrix);
@@ -149,15 +165,22 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
     mesh.computeBoundingSphere();
   }, [placements, count]);
 
-  // Trunk click/hover
+  // Trunk click: select + camera target
   const handleTrunkClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
       e.stopPropagation();
       if (e.instanceId !== undefined && e.instanceId < companyIds.length) {
-        selectCompany(companyIds[e.instanceId]);
+        const id = companyIds[e.instanceId];
+        const p = placements[e.instanceId];
+        selectCompany(id);
+        setCameraTarget({
+          x: p.world_x,
+          y: p.elevation + p.tree_height * HEIGHT_SCALE,
+          z: p.world_z,
+        });
       }
     },
-    [companyIds, selectCompany],
+    [companyIds, placements, selectCompany, setCameraTarget],
   );
 
   const handleTrunkOver = useCallback(
@@ -192,11 +215,11 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
         frustumCulled
       >
         <meshStandardMaterial
-          roughness={0.88}
+          roughness={0.85}
           metalness={0.02}
           vertexColors
-          emissive="#3a2820"
-          emissiveIntensity={0.08}
+          emissive="#4a3828"
+          emissiveIntensity={0.1}
         />
       </instancedMesh>
 
@@ -212,10 +235,13 @@ export function TreeInstances({ placements, companyIds, filteredIds }: TreeInsta
             placements={g.placements}
             ids={g.ids}
             filteredIds={filteredIds}
+            highlightedIds={highlightedIds}
             selectedCompanyId={selectedCompanyId}
             hoveredCompanyId={hoveredCompanyId}
             onSelect={selectCompany}
             onHover={hoverCompany}
+            allPlacements={placements}
+            setCameraTarget={setCameraTarget}
           />
         );
       })}
@@ -231,20 +257,25 @@ function SectorCanopies({
   placements,
   ids,
   filteredIds,
+  highlightedIds,
   selectedCompanyId,
   hoveredCompanyId,
   onSelect,
   onHover,
+  setCameraTarget,
 }: {
   sector: Sector;
   geometry: THREE.BufferGeometry;
   placements: CompanyPlacement[];
   ids: string[];
   filteredIds?: Set<string>;
+  highlightedIds?: Set<string>;
   selectedCompanyId: string | null;
   hoveredCompanyId: string | null;
   onSelect: (id: string | null) => void;
   onHover: (id: string | null) => void;
+  allPlacements: CompanyPlacement[];
+  setCameraTarget: (target: { x: number; y: number; z: number } | null) => void;
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const species = getSpecies(sector);
@@ -263,13 +294,14 @@ function SectorCanopies({
       colors[i * 3 + 1] = tempColor.g;
       colors[i * 3 + 2] = tempColor.b;
 
-      // Canopy size: generous, proportional to importance
-      const baseR = p.trunk_radius * 3.2 + p.tree_height * 0.22 + 1.2;
+      const h = p.tree_height * HEIGHT_SCALE;
+      // Canopy size: smaller, proportional to tree
+      const baseR = p.trunk_radius * 2.0 + h * 0.1 + 0.8;
       const hRatio = canopyHeightRatio(species.canopyShape);
       const wRatio = canopyWidthRatio(species.canopyShape);
       const cH = baseR * hRatio;
       const cW = baseR * wRatio;
-      const cY = p.elevation + p.tree_height * 0.82 + cH * 0.38;
+      const cY = p.elevation + h * 0.85 + cH * 0.35;
 
       tempObject.position.set(p.world_x, cY, p.world_z);
       tempObject.scale.set(cW, cH, cW);
@@ -283,7 +315,7 @@ function SectorCanopies({
     mesh.computeBoundingSphere();
   }, [placements, n, species]);
 
-  // Animate selection/hover/filter colors
+  // Animate selection/hover/filter/highlight colors
   useFrame(() => {
     const mesh = meshRef.current;
     if (!mesh || !mesh.instanceColor) return;
@@ -295,13 +327,21 @@ function SectorCanopies({
       const p = placements[i];
 
       if (id === selectedCompanyId) {
-        tempColor.set(species.canopyColorHighlight).multiplyScalar(1.7);
+        tempColor.set(species.canopyColorHighlight).multiplyScalar(1.8);
         dirty = true;
       } else if (id === hoveredCompanyId) {
-        tempColor.set(species.canopyColorHighlight).multiplyScalar(1.35);
+        tempColor.set(species.canopyColorHighlight).multiplyScalar(1.4);
+        dirty = true;
+      } else if (highlightedIds && highlightedIds.size > 0) {
+        // Investor portfolio mode: bright for portfolio, dim for others
+        if (highlightedIds.has(id)) {
+          tempColor.set(species.canopyColorHighlight).multiplyScalar(1.5);
+        } else {
+          tempColor.set(species.canopyColorDark).multiplyScalar(0.25);
+        }
         dirty = true;
       } else if (filteredIds && !filteredIds.has(id)) {
-        tempColor.set(species.canopyColorDark).multiplyScalar(0.2);
+        tempColor.set(species.canopyColorDark).multiplyScalar(0.25);
         dirty = true;
       } else {
         tempColor
@@ -316,9 +356,17 @@ function SectorCanopies({
   const onClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
       e.stopPropagation();
-      if (e.instanceId !== undefined && e.instanceId < ids.length) onSelect(ids[e.instanceId]);
+      if (e.instanceId !== undefined && e.instanceId < ids.length) {
+        const p = placements[e.instanceId];
+        onSelect(ids[e.instanceId]);
+        setCameraTarget({
+          x: p.world_x,
+          y: p.elevation + p.tree_height * HEIGHT_SCALE,
+          z: p.world_z,
+        });
+      }
     },
-    [ids, onSelect],
+    [ids, placements, onSelect, setCameraTarget],
   );
   const onPointerOver = useCallback(
     (e: ThreeEvent<PointerEvent>) => {
@@ -347,12 +395,12 @@ function SectorCanopies({
       frustumCulled
     >
       <meshStandardMaterial
-        roughness={0.68}
+        roughness={0.65}
         metalness={0.03}
         vertexColors
         side={THREE.DoubleSide}
         emissive={species.canopyColor}
-        emissiveIntensity={0.15}
+        emissiveIntensity={0.18}
       />
     </instancedMesh>
   );
@@ -362,30 +410,30 @@ function SectorCanopies({
 
 function canopyHeightRatio(shape: string): number {
   switch (shape) {
-    case 'cone':      return 1.6;
-    case 'dome':      return 0.9;
-    case 'broad':     return 0.6;
-    case 'organic':   return 1.0;
-    case 'round':     return 1.0;
-    case 'angular':   return 1.1;
-    case 'columnar':  return 1.7;
-    case 'spreading': return 0.45;
-    case 'weeping':   return 1.1;
-    default:          return 1.0;
+    case 'cone':      return 1.4;
+    case 'dome':      return 0.85;
+    case 'broad':     return 0.7;
+    case 'organic':   return 0.95;
+    case 'round':     return 0.9;
+    case 'spire':     return 1.6;
+    case 'columnar':  return 1.5;
+    case 'spreading': return 0.7;
+    case 'weeping':   return 1.0;
+    default:          return 0.9;
   }
 }
 
 function canopyWidthRatio(shape: string): number {
   switch (shape) {
-    case 'cone':      return 0.8;
-    case 'dome':      return 1.15;
-    case 'broad':     return 1.5;
-    case 'organic':   return 1.1;
-    case 'round':     return 1.15;
-    case 'angular':   return 0.9;
+    case 'cone':      return 0.75;
+    case 'dome':      return 1.05;
+    case 'broad':     return 1.25;
+    case 'organic':   return 1.0;
+    case 'round':     return 1.0;
+    case 'spire':     return 0.65;
     case 'columnar':  return 0.55;
-    case 'spreading': return 1.6;
-    case 'weeping':   return 1.25;
+    case 'spreading': return 1.25;
+    case 'weeping':   return 1.1;
     default:          return 1.0;
   }
 }

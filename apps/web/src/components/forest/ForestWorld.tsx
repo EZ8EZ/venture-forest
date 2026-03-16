@@ -6,31 +6,95 @@ import { TreeInstances } from './TreeInstances';
 import { BackgroundTrees } from './BackgroundTrees';
 import { ForestLabels } from './ForestLabels';
 import { GroveMarkers } from './GroveMarkers';
-import { InvestorRoots } from './InvestorRoots';
 import { EnvironmentParticles } from './EnvironmentParticles';
-import type { Company } from '@/lib/types';
+import type { Company, Grove } from '@/lib/types';
+
+// Vintage grove centers for year-based grouping
+const VINTAGE_GROVES: Record<number, { cx: number; cz: number }> = {
+  2020: { cx: -55, cz: -45 },
+  2021: { cx: 0, cz: -55 },
+  2022: { cx: 55, cz: -45 },
+  2023: { cx: -55, cz: 10 },
+  2024: { cx: 0, cz: 0 },
+  2025: { cx: 55, cz: 10 },
+  2026: { cx: 0, cz: 55 },
+};
+
+function pseudoRandom(a: number, b: number): number {
+  const s = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453;
+  return s - Math.floor(s);
+}
 
 export function ForestWorld() {
   const { data: snapshot, isLoading } = useSnapshot();
   const filters = useForestStore((s) => s.filters);
+  const selectedInvestorId = useForestStore((s) => s.selectedInvestorId);
+  const viewMode = useForestStore((s) => s.viewMode);
+  const groupingMode = useForestStore((s) => s.groupingMode);
 
-  const { companyIds, placementIndex, companiesOrdered } = useMemo(() => {
-    if (!snapshot) return { companyIds: [], placementIndex: new Map(), companiesOrdered: [] };
+  // Compute placements based on grouping mode
+  const effectivePlacements = useMemo(() => {
+    if (!snapshot) return [];
+    if (groupingMode === 'sector') return snapshot.placements;
 
-    const index = new Map<string, number>();
+    // Vintage mode: reposition trees into year-based groves
+    return snapshot.placements.map((p) => {
+      const company = snapshot.companies.find((c) => c.id === p.company_id);
+      const year = company?.founded_year || 2023;
+      const grove = VINTAGE_GROVES[year] || VINTAGE_GROVES[2023];
+
+      // Deterministic scatter within vintage grove
+      const hash1 = pseudoRandom(p.world_x * 1.1, p.world_z * 0.9);
+      const hash2 = pseudoRandom(p.world_z * 1.3, p.world_x * 0.7);
+      const angle = hash1 * Math.PI * 2;
+      const radius = 5 + hash2 * 22;
+
+      return {
+        ...p,
+        world_x: grove.cx + Math.cos(angle) * radius,
+        world_z: grove.cz + Math.sin(angle) * radius,
+      };
+    });
+  }, [snapshot, groupingMode]);
+
+  // Vintage groves for GroveMarkers
+  const vintageGroves = useMemo((): Grove[] => {
+    if (!snapshot || groupingMode !== 'vintage') return [];
+    const yearSet = new Set<number>();
+    snapshot.companies.forEach((c) => {
+      if (c.founded_year) yearSet.add(c.founded_year);
+    });
+    return Array.from(yearSet)
+      .sort()
+      .map((year) => {
+        const grove = VINTAGE_GROVES[year] || VINTAGE_GROVES[2023];
+        return {
+          id: `vintage-${year}`,
+          sector: 'OTHER' as const,
+          center_x: grove.cx,
+          center_z: grove.cz,
+          radius: 30,
+          label: `${year}`,
+        };
+      });
+  }, [snapshot, groupingMode]);
+
+  const { companyIds, companiesOrdered } = useMemo(() => {
+    if (!snapshot) return { companyIds: [], companiesOrdered: [] };
+
     const ids: string[] = [];
     const ordered: Company[] = [];
 
-    snapshot.placements.forEach((p, i) => {
-      index.set(p.company_id, i);
+    effectivePlacements.forEach((p) => {
       ids.push(p.company_id);
       const company = snapshot.companies.find((c) => c.id === p.company_id);
       if (company) ordered.push(company);
     });
 
-    return { companyIds: ids, placementIndex: index, companiesOrdered: ordered };
-  }, [snapshot]);
+    return { companyIds: ids, companiesOrdered: ordered };
+  }, [snapshot, effectivePlacements]);
 
+  // Filter logic
   const filteredIds = useMemo(() => {
     if (!snapshot) return undefined;
 
@@ -65,27 +129,35 @@ export function ForestWorld() {
     return matching;
   }, [snapshot, filters]);
 
+  // Investor portfolio highlighting
+  const highlightedIds = useMemo(() => {
+    if (!snapshot || !selectedInvestorId || viewMode !== 'investor') return undefined;
+    const portfolioIds = new Set<string>();
+    snapshot.edges
+      .filter((e) => e.investor_id === selectedInvestorId)
+      .forEach((e) => portfolioIds.add(e.company_id));
+    return portfolioIds.size > 0 ? portfolioIds : undefined;
+  }, [snapshot, selectedInvestorId, viewMode]);
+
   if (isLoading || !snapshot) return <Terrain />;
+
+  const groves = groupingMode === 'sector' ? snapshot.groves : vintageGroves;
 
   return (
     <group>
       <Terrain />
-      <BackgroundTrees placements={snapshot.placements} />
+      <BackgroundTrees placements={effectivePlacements} />
       <TreeInstances
-        placements={snapshot.placements}
+        placements={effectivePlacements}
         companyIds={companyIds}
         filteredIds={filteredIds}
+        highlightedIds={highlightedIds}
       />
       <ForestLabels
-        placements={snapshot.placements}
+        placements={effectivePlacements}
         companies={companiesOrdered}
       />
-      <GroveMarkers groves={snapshot.groves} />
-      <InvestorRoots
-        edges={snapshot.edges}
-        placements={snapshot.placements}
-        placementIndex={placementIndex}
-      />
+      <GroveMarkers groves={groves} />
       <EnvironmentParticles />
     </group>
   );

@@ -10,18 +10,18 @@ import { CompanyDetailPanel } from '@/components/panels/CompanyDetailPanel';
 import { useForestStore } from '@/stores/forest-store';
 
 export function App() {
-  const selectCompany = useForestStore((s) => s.selectCompany);
+  const resetCamera = useForestStore((s) => s.resetCamera);
 
   // Global keyboard shortcuts
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        selectCompany(null);
+        resetCamera();
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [selectCompany]);
+  }, [resetCamera]);
 
   return (
     <div className="w-full h-full relative">

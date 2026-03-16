@@ -24,9 +24,9 @@ export function ForestScene() {
       style={{ position: 'absolute', inset: 0 }}
       camera={{ fov: 50, near: 0.5, far: 1200, position: [40, 25, 60] }}
     >
-      {/* Dark forest twilight: visible but moody */}
-      <color attach="background" args={['#0e1a2a']} />
-      <fog attach="fog" args={['#0e1a2a', 80, 500]} />
+      {/* Dusk-blue atmosphere: moody but readable */}
+      <color attach="background" args={['#1a2d42']} />
+      <fog attach="fog" args={['#1a2d42', 100, 550]} />
 
       <Suspense fallback={null}>
         <ForestCamera />

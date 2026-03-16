@@ -54,6 +54,7 @@ export interface Company {
   logo_url?: string;
   external_source_url?: string;
   source_ids?: string[];
+  founders?: string[];
   completeness_score: number;
   confidence_flags?: Record<string, string>;
 }

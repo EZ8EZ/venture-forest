@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 export type ViewMode = 'explore' | 'investor' | 'compare';
 export type QualityPreset = 'low' | 'medium' | 'high';
+export type GroupingMode = 'sector' | 'vintage';
 
 export interface CameraTarget {
   x: number;
@@ -9,6 +10,8 @@ export interface CameraTarget {
   z: number;
   lookAt?: { x: number; y: number; z: number };
 }
+
+export const DEFAULT_CAMERA = { x: 40, y: 25, z: 60 };
 
 interface ForestState {
   // Loading
@@ -40,6 +43,11 @@ interface ForestState {
   // Camera
   cameraTarget: CameraTarget | null;
   setCameraTarget: (target: CameraTarget | null) => void;
+  resetCamera: () => void;
+
+  // Grouping
+  groupingMode: GroupingMode;
+  setGroupingMode: (mode: GroupingMode) => void;
 
   // Filters
   filters: FilterState;
@@ -103,7 +111,14 @@ export const useForestStore = create<ForestState>((set) => ({
   // Selection
   selectedCompanyId: null,
   hoveredCompanyId: null,
-  selectCompany: (id) => set({ selectedCompanyId: id }),
+  selectCompany: (id) =>
+    set(() => ({
+      selectedCompanyId: id,
+      // When deselecting, also clear investor mode
+      ...(id === null
+        ? { selectedInvestorId: null, viewMode: 'explore' as ViewMode }
+        : {}),
+    })),
   hoverCompany: (id) => set({ hoveredCompanyId: id }),
 
   // Compare
@@ -127,11 +142,26 @@ export const useForestStore = create<ForestState>((set) => ({
   // Investor
   selectedInvestorId: null,
   selectInvestor: (id) =>
-    set({ selectedInvestorId: id, viewMode: id ? 'investor' : 'explore' }),
+    set({
+      selectedInvestorId: id,
+      viewMode: id ? 'investor' : 'explore',
+      selectedCompanyId: null,
+    }),
 
   // Camera
   cameraTarget: null,
   setCameraTarget: (cameraTarget) => set({ cameraTarget }),
+  resetCamera: () =>
+    set({
+      cameraTarget: { x: DEFAULT_CAMERA.x, y: DEFAULT_CAMERA.y, z: DEFAULT_CAMERA.z },
+      selectedCompanyId: null,
+      selectedInvestorId: null,
+      viewMode: 'explore',
+    }),
+
+  // Grouping
+  groupingMode: 'sector',
+  setGroupingMode: (groupingMode) => set({ groupingMode }),
 
   // Filters
   filters: defaultFilters,
