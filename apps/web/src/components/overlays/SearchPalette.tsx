@@ -90,9 +90,40 @@ export function SearchPalette() {
   }, [snapshot, investorPortfolioCounts]);
 
   const results = useMemo(() => {
-    if (!fuse || !query.trim()) return [];
-    return fuse.search(query).slice(0, 8).map((r) => r.item);
-  }, [fuse, query]);
+    if (!fuse || !query.trim() || !snapshot) return [];
+    const raw = fuse.search(query).slice(0, 8).map((r) => r.item);
+
+    // If an investor result is in the list, inject its portfolio companies below it
+    const expanded: SearchResult[] = [];
+    const addedCompanyIds = new Set<string>();
+    for (const item of raw) {
+      expanded.push(item);
+      if (item.type === 'company') addedCompanyIds.add(item.id);
+
+      if (item.type === 'investor') {
+        // Find portfolio companies for this investor
+        const portfolioCompanyIds = snapshot.edges
+          .filter((e) => e.investor_id === item.id)
+          .map((e) => e.company_id);
+        const portfolioCompanies = portfolioCompanyIds
+          .map((cid) => snapshot.companies.find((c) => c.id === cid))
+          .filter(Boolean)
+          .slice(0, 5); // Show up to 5 portfolio companies
+        for (const c of portfolioCompanies) {
+          if (c && !addedCompanyIds.has(c.id)) {
+            addedCompanyIds.add(c.id);
+            expanded.push({
+              type: 'company',
+              id: c.id,
+              name: c.name,
+              detail: `${c.sector} | Portfolio of ${item.name}`,
+            });
+          }
+        }
+      }
+    }
+    return expanded.slice(0, 12);
+  }, [fuse, query, snapshot]);
 
   const handleSelect = useCallback(
     (result: SearchResult) => {
@@ -102,7 +133,7 @@ export function SearchPalette() {
         if (placement) {
           setCameraTarget({
             x: placement.world_x,
-            y: placement.elevation + placement.tree_height * 1.5,
+            y: placement.elevation + placement.tree_height,
             z: placement.world_z,
           });
         }

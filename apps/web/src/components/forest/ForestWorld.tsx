@@ -3,7 +3,7 @@ import { useSnapshot } from '@/hooks/useSnapshot';
 import { useForestStore } from '@/stores/forest-store';
 import { Terrain } from './Terrain';
 import { TreeInstances } from './TreeInstances';
-import { BackgroundTrees } from './BackgroundTrees';
+// Background trees removed per user request
 import { ForestLabels } from './ForestLabels';
 import { GroveMarkers } from './GroveMarkers';
 import { EnvironmentParticles } from './EnvironmentParticles';
@@ -146,7 +146,7 @@ export function ForestWorld() {
   return (
     <group>
       <Terrain />
-      <BackgroundTrees placements={effectivePlacements} />
+      {/* Background trees removed: only real company trees render */}
       <TreeInstances
         placements={effectivePlacements}
         companyIds={companyIds}

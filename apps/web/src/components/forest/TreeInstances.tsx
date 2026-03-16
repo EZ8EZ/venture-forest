@@ -15,8 +15,8 @@ interface TreeInstancesProps {
 const tempObject = new THREE.Object3D();
 const tempColor = new THREE.Color();
 
-// Height multiplier: taller than default but proportional
-const HEIGHT_SCALE = 1.4;
+// Height multiplier applied to data tree_height values
+const HEIGHT_SCALE = 1.0;
 
 // -- Sector-specific canopy geometries (all must read as tree canopies) --
 
@@ -281,6 +281,18 @@ function SectorCanopies({
   const species = getSpecies(sector);
   const n = placements.length;
 
+  // Refs to avoid stale closures in useFrame
+  const highlightedRef = useRef(highlightedIds);
+  highlightedRef.current = highlightedIds;
+  const filteredRef = useRef(filteredIds);
+  filteredRef.current = filteredIds;
+  const selectedRef = useRef(selectedCompanyId);
+  selectedRef.current = selectedCompanyId;
+  const hoveredRef = useRef(hoveredCompanyId);
+  hoveredRef.current = hoveredCompanyId;
+  // Track whether we were dirty last frame so we can reset colors
+  const wasDirty = useRef(false);
+
   useEffect(() => {
     const mesh = meshRef.current;
     if (!mesh) return;
@@ -315,32 +327,37 @@ function SectorCanopies({
     mesh.computeBoundingSphere();
   }, [placements, n, species]);
 
-  // Animate selection/hover/filter/highlight colors
+  // Animate selection/hover/filter/highlight colors using refs for freshness
   useFrame(() => {
     const mesh = meshRef.current;
     if (!mesh || !mesh.instanceColor) return;
     const c = mesh.instanceColor;
     let dirty = false;
 
+    const curHighlighted = highlightedRef.current;
+    const curFiltered = filteredRef.current;
+    const curSelected = selectedRef.current;
+    const curHovered = hoveredRef.current;
+
     for (let i = 0; i < n; i++) {
       const id = ids[i];
       const p = placements[i];
 
-      if (id === selectedCompanyId) {
+      if (id === curSelected) {
         tempColor.set(species.canopyColorHighlight).multiplyScalar(1.8);
         dirty = true;
-      } else if (id === hoveredCompanyId) {
+      } else if (id === curHovered) {
         tempColor.set(species.canopyColorHighlight).multiplyScalar(1.4);
         dirty = true;
-      } else if (highlightedIds && highlightedIds.size > 0) {
+      } else if (curHighlighted && curHighlighted.size > 0) {
         // Investor portfolio mode: bright for portfolio, dim for others
-        if (highlightedIds.has(id)) {
+        if (curHighlighted.has(id)) {
           tempColor.set(species.canopyColorHighlight).multiplyScalar(1.5);
         } else {
           tempColor.set(species.canopyColorDark).multiplyScalar(0.25);
         }
         dirty = true;
-      } else if (filteredIds && !filteredIds.has(id)) {
+      } else if (curFiltered && !curFiltered.has(id)) {
         tempColor.set(species.canopyColorDark).multiplyScalar(0.25);
         dirty = true;
       } else {
@@ -350,7 +367,12 @@ function SectorCanopies({
       }
       c.setXYZ(i, tempColor.r, tempColor.g, tempColor.b);
     }
-    if (dirty) c.needsUpdate = true;
+
+    // Always update if dirty, or if we WERE dirty last frame (to reset colors)
+    if (dirty || wasDirty.current) {
+      c.needsUpdate = true;
+    }
+    wasDirty.current = dirty;
   });
 
   const onClick = useCallback(
