@@ -110,13 +110,13 @@ export const companies = pgTable(
     created_at: timestamp("created_at").defaultNow(),
     updated_at: timestamp("updated_at").defaultNow(),
   },
-  (table) => [
-    uniqueIndex("companies_slug_idx").on(table.slug),
-    index("companies_sector_idx").on(table.sector),
-    index("companies_status_idx").on(table.status),
-    index("companies_total_funding_idx").on(table.total_funding_usd),
-    index("companies_founded_year_idx").on(table.founded_year),
-  ]
+  (table) => ({
+    slugIdx: uniqueIndex("companies_slug_idx").on(table.slug),
+    sectorIdx: index("companies_sector_idx").on(table.sector),
+    statusIdx: index("companies_status_idx").on(table.status),
+    totalFundingIdx: index("companies_total_funding_idx").on(table.total_funding_usd),
+    foundedYearIdx: index("companies_founded_year_idx").on(table.founded_year),
+  })
 );
 
 export const investors = pgTable(
@@ -133,10 +133,10 @@ export const investors = pgTable(
     created_at: timestamp("created_at").defaultNow(),
     updated_at: timestamp("updated_at").defaultNow(),
   },
-  (table) => [
-    uniqueIndex("investors_slug_idx").on(table.slug),
-    index("investors_type_idx").on(table.type),
-  ]
+  (table) => ({
+    slugIdx: uniqueIndex("investors_slug_idx").on(table.slug),
+    typeIdx: index("investors_type_idx").on(table.type),
+  })
 );
 
 export const fundingRounds = pgTable(
@@ -153,11 +153,11 @@ export const fundingRounds = pgTable(
     investor_ids: jsonb("investor_ids").$type<string[]>().default([]),
     created_at: timestamp("created_at").defaultNow(),
   },
-  (table) => [
-    index("funding_rounds_company_idx").on(table.company_id),
-    index("funding_rounds_type_idx").on(table.round_type),
-    index("funding_rounds_date_idx").on(table.announced_date),
-  ]
+  (table) => ({
+    companyIdx: index("funding_rounds_company_idx").on(table.company_id),
+    typeIdx: index("funding_rounds_type_idx").on(table.round_type),
+    dateIdx: index("funding_rounds_date_idx").on(table.announced_date),
+  })
 );
 
 export const companyInvestorEdges = pgTable(
@@ -173,10 +173,10 @@ export const companyInvestorEdges = pgTable(
     role: edgeRoleEnum("role").notNull().default("unknown"),
     source: text("source"),
   },
-  (table) => [
-    index("edges_company_idx").on(table.company_id),
-    index("edges_investor_idx").on(table.investor_id),
-  ]
+  (table) => ({
+    companyIdx: index("edges_company_idx").on(table.company_id),
+    investorIdx: index("edges_investor_idx").on(table.investor_id),
+  })
 );
 
 export const companyPlacements = pgTable(
@@ -200,10 +200,10 @@ export const companyPlacements = pgTable(
     bark_variant: integer("bark_variant").notNull().default(0),
     visual_importance_score: real("visual_importance_score").notNull().default(0),
   },
-  (table) => [
-    index("placements_grove_idx").on(table.grove_id),
-    index("placements_species_idx").on(table.species_type),
-  ]
+  (table) => ({
+    groveIdx: index("placements_grove_idx").on(table.grove_id),
+    speciesIdx: index("placements_species_idx").on(table.species_type),
+  })
 );
 
 export const groves = pgTable("groves", {
