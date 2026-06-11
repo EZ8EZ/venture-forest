@@ -4,9 +4,6 @@
 
 Venture Forest transforms raw company and investor data into a spatial, explorable world. Instead of spreadsheets and dashboards, you navigate a living forest where tree height encodes funding, trunk thickness represents headcount, species correspond to sectors, and underground root networks reveal investor relationships.
 
-![Venture Forest](docs/assets/screenshot-placeholder.png)
-<!-- Replace with actual screenshot once the first forest scene is polished -->
-
 ## Why a Forest?
 
 Startups are often described as ecosystems, yet we analyze them in flat tables. Venture Forest makes the ecosystem spatial and legible:
@@ -29,8 +26,8 @@ The result is a data sculpture you want to wander through, not just query.
 - **Sector filtering** that dims non-matching trees while preserving spatial context.
 - **Investor root visualization**: select a company to reveal underground investor connections.
 - **Investor mode**: highlight an entire portfolio to see sector concentration at a glance.
-- **Compare mode**: select up to four companies side-by-side.
-- **Minimap** for orientation in the forest.
+- **URL deep links**: share a direct link to any company or investor view.
+- **Minimap** with live camera position for orientation in the forest.
 - **Visual legend** explaining every encoding: height, width, species, bark, roots.
 - **Quality presets** and reduced motion mode for accessibility.
 
@@ -181,10 +178,10 @@ pnpm build        # Build all packages
 |-----------|--------|-------------|
 | M1: Scaffolding | Done | Monorepo, types, docs, CI |
 | M2: First Forest | Done | 3D scene, trees, terrain, camera |
-| M3: World Logic | In Progress | Layout engine, groves, clustering |
-| M4: Product Layer | In Progress | Detail panel, search, filters |
-| M5: Investor Systems | Planned | Root visualization, portfolio mode |
-| M6: Polish | Planned | Materials, lighting, performance, testing |
+| M3: World Logic | In Progress | Layout engine, groves, clustering (database integration pending) |
+| M4: Product Layer | In Progress | Detail panel, search, filters, deep links (LOD tiers pending) |
+| M5: Investor Systems | In Progress | Root visualization and portfolio mode shipped (investor panel pending) |
+| M6: Polish | In Progress | Golden hour lighting, shaders, wind, cinematic intro shipped |
 
 See [roadmap.md](roadmap.md) for the full plan.
 

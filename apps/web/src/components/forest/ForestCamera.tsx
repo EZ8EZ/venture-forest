@@ -3,7 +3,10 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useForestStore, DEFAULT_CAMERA } from '@/stores/forest-store';
 import { hasDeepLink } from '@/hooks/useDeepLink';
+import { cameraTracker } from '@/lib/camera-tracker';
 import * as THREE from 'three';
+
+const tempDir = new THREE.Vector3();
 
 // Cinematic intro path: the camera starts high above the canopy, far out,
 // and sweeps down into the default overview while orbiting about 60 degrees.
@@ -125,6 +128,13 @@ export function ForestCamera() {
 
   useFrame((_, delta) => {
     if (!controlsRef.current) return;
+
+    // Publish ground position and heading for the minimap (mutable
+    // tracker, no React state)
+    camera.getWorldDirection(tempDir);
+    cameraTracker.x = camera.position.x;
+    cameraTracker.z = camera.position.z;
+    cameraTracker.heading = Math.atan2(tempDir.x, tempDir.z);
 
     // -- Cinematic intro --
     if (introPhase.current === 'running') {

@@ -42,10 +42,20 @@ agreement instead of fixing them off-track. Each item should become a task.
   Product decision needed: replace fictional entries with real ones, or keep
   the demo flavor.
 
+## Product
+
+- Compare mode exists in the store (compareIds, add/remove/clear) but has
+  no UI. The detail panel's compare button was removed as a dead end;
+  build the compare view before reintroducing the affordance.
+- Investor detail panel (M5) not built: selecting an investor highlights
+  the portfolio and shows roots, but there is no panel with portfolio
+  summary stats.
+
 ## Rendering
 
 - Quality preset auto-detection (hardwareConcurrency plus GPU tier) from
   `.claude/rules/performance.md` is not implemented; quality starts at high
   for everyone.
-- No `?stats` hidden panel for FPS, draw calls, and triangles as specified in
-  the performance rules.
+- LOD tiers and billboard impostors (rendering-strategy.md) are not
+  implemented; the current instanced primitives are cheap enough at 110
+  trees, but LOD becomes necessary if the dataset grows toward 1000.
