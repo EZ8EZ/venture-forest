@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForestStore } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
-import { Search, SlidersHorizontal, HelpCircle, Map, Settings, X, Trees, Calendar } from 'lucide-react';
+import { Search, SlidersHorizontal, HelpCircle, Map, Settings, X, Trees, Calendar, Home, Keyboard } from 'lucide-react';
 import type { GroupingMode } from '@/stores/forest-store';
 
 export function HUD() {
@@ -16,6 +16,7 @@ export function HUD() {
   const resetCamera = useForestStore((s) => s.resetCamera);
   const groupingMode = useForestStore((s) => s.groupingMode);
   const setGroupingMode = useForestStore((s) => s.setGroupingMode);
+  const toggleHelp = useForestStore((s) => s.toggleHelp);
   const { data: snapshot } = useSnapshot();
 
   const investorName = selectedInvestorId && snapshot
@@ -38,11 +39,13 @@ export function HUD() {
           <div className="pointer-events-auto flex items-center gap-1">
             <GroupingToggle mode={groupingMode} onChange={setGroupingMode} />
             <div className="w-px h-5 bg-overlay-border mx-1" />
-            <HUDButton icon={<Search size={16} />} label="Search" onClick={toggleSearch} shortcut="/" />
+            <HUDButton icon={<Home size={16} />} label="Reset view" onClick={resetCamera} shortcut="Esc" />
+            <HUDButton icon={<Search size={16} />} label="Search" onClick={toggleSearch} shortcut="/ or Cmd+K" />
             <HUDButton icon={<SlidersHorizontal size={16} />} label="Filters" onClick={toggleFilters} />
             <HUDButton icon={<HelpCircle size={16} />} label="Legend" onClick={toggleLegend} />
             <HUDButton icon={<Map size={16} />} label="Map" onClick={toggleMinimap} />
             <HUDButton icon={<Settings size={16} />} label="Settings" onClick={toggleSettings} />
+            <HUDButton icon={<Keyboard size={16} />} label="Controls help" onClick={toggleHelp} />
           </div>
         </div>
       </div>
@@ -54,9 +57,11 @@ export function HUD() {
             <span className="text-xs text-overlay-accent font-medium">
               Viewing portfolio: {investorName}
             </span>
+            <span className="text-[10px] text-overlay-muted/40">Esc to exit</span>
             <button
               onClick={resetCamera}
-              className="text-overlay-muted/60 hover:text-overlay-text transition-colors"
+              aria-label="Exit investor view"
+              className="text-overlay-muted/60 hover:text-overlay-text transition-colors focus-ring"
             >
               <X size={14} />
             </button>
@@ -77,8 +82,8 @@ export function HUD() {
         </div>
       )}
 
-      {/* First visit hint */}
-      <FirstVisitHint />
+      {/* Controls card: first-visit onboarding, reopenable via help button */}
+      <ControlsCard />
     </>
   );
 }
@@ -138,34 +143,94 @@ function GroupingToggle({ mode, onChange }: { mode: GroupingMode; onChange: (m: 
   );
 }
 
-function FirstVisitHint() {
-  // Shows after loading, then fades out: a hint should not become furniture
+const CONTROLS_DISMISSED_KEY = 'vf:controls-dismissed';
+
+function readDismissed(): boolean {
+  try {
+    return window.localStorage.getItem(CONTROLS_DISMISSED_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function persistDismissed() {
+  try {
+    window.localStorage.setItem(CONTROLS_DISMISSED_KEY, '1');
+  } catch {
+    // Private mode or storage disabled: dismissal stays session-only
+  }
+}
+
+// First-visit controls card. Explicit dismissal (X) and the timeout persist
+// to localStorage; a plain first click only hides it for the session, since
+// one click is not informed dismissal. The Controls help button in the
+// toolbar reopens it at any time.
+function ControlsCard() {
   const isLoading = useForestStore((s) => s.isLoading);
-  const [dismissed, setDismissed] = useState(false);
+  const showHelp = useForestStore((s) => s.showHelp);
+  const toggleHelp = useForestStore((s) => s.toggleHelp);
+  const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
+  const selectedInvestorId = useForestStore((s) => s.selectedInvestorId);
+
+  const [dismissed, setDismissed] = useState(readDismissed);
+  const [sessionHidden, setSessionHidden] = useState(false);
 
   useEffect(() => {
-    if (isLoading) return;
-    const timer = window.setTimeout(() => setDismissed(true), 14000);
-    const onInteract = () => setDismissed(true);
+    if (isLoading || dismissed || sessionHidden) return;
+    const timer = window.setTimeout(() => {
+      setDismissed(true);
+      persistDismissed();
+    }, 14000);
+    const onInteract = () => setSessionHidden(true);
     window.addEventListener('pointerdown', onInteract, { once: true });
     return () => {
       window.clearTimeout(timer);
       window.removeEventListener('pointerdown', onInteract);
     };
-  }, [isLoading]);
+  }, [isLoading, dismissed, sessionHidden]);
 
-  if (isLoading || dismissed) return null;
+  const handleClose = () => {
+    if (showHelp) {
+      toggleHelp();
+      return;
+    }
+    setDismissed(true);
+    persistDismissed();
+  };
+
+  // The bottom-center region is shared with the Esc-to-deselect pill
+  const somethingSelected = !!selectedCompanyId || !!selectedInvestorId;
+  const firstVisitVisible = !isLoading && !dismissed && !sessionHidden && !somethingSelected;
+  if (!firstVisitVisible && !showHelp) return null;
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20 animate-fade-in-up pointer-events-none">
-      <div className="glass-panel px-4 py-2 text-xs text-overlay-muted/50 flex items-center gap-4">
-        <span>Click to select</span>
-        <span className="w-px h-3 bg-overlay-border" />
-        <span>Scroll to zoom</span>
-        <span className="w-px h-3 bg-overlay-border" />
-        <span>Drag to orbit</span>
-        <span className="w-px h-3 bg-overlay-border" />
-        <span>/ to search</span>
+    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20 animate-fade-in-up pointer-events-auto">
+      <div className="glass-panel px-4 py-2.5 text-xs text-overlay-muted/60">
+        <div className="flex items-start gap-3">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-4 flex-wrap">
+              <span>Click a tree to select</span>
+              <span className="w-px h-3 bg-overlay-border" />
+              <span>Scroll to zoom</span>
+              <span className="w-px h-3 bg-overlay-border" />
+              <span>Drag to orbit</span>
+            </div>
+            <div className="flex items-center gap-4 flex-wrap text-overlay-muted/45">
+              <span>/ or Cmd+K to search</span>
+              <span className="w-px h-3 bg-overlay-border" />
+              <span>Esc resets the view</span>
+              <span className="w-px h-3 bg-overlay-border" />
+              <span>Click an investor to reveal its roots</span>
+            </div>
+          </div>
+          <button
+            onClick={handleClose}
+            aria-label="Dismiss controls help"
+            className="text-overlay-muted/40 hover:text-overlay-text transition-colors focus-ring mt-0.5"
+          >
+            <X size={12} />
+          </button>
+        </div>
       </div>
     </div>
   );

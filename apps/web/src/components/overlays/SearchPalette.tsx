@@ -25,10 +25,23 @@ export function SearchPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Keyboard shortcut to open search
+  // Keyboard shortcuts to open search: "/" (unless typing in an input)
+  // and Cmd+K / Ctrl+K (preventDefault: browsers claim the combo)
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === '/' && !showSearch) {
+      const target = e.target as HTMLElement | null;
+      const isTyping =
+        !!target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.isContentEditable);
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (!showSearch) toggleSearch();
+        return;
+      }
+      if (e.key === '/' && !showSearch && !isTyping) {
         e.preventDefault();
         toggleSearch();
       }

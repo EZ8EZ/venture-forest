@@ -60,11 +60,13 @@ interface ForestState {
   showLegend: boolean;
   showMinimap: boolean;
   showSettings: boolean;
+  showHelp: boolean;
   toggleSearch: () => void;
   toggleFilters: () => void;
   toggleLegend: () => void;
   toggleMinimap: () => void;
   toggleSettings: () => void;
+  toggleHelp: () => void;
 
   // Settings
   quality: QualityPreset;
@@ -175,11 +177,13 @@ export const useForestStore = create<ForestState>((set) => ({
   showLegend: false,
   showMinimap: true,
   showSettings: false,
+  showHelp: false,
   toggleSearch: () => set((s) => ({ showSearch: !s.showSearch })),
   toggleFilters: () => set((s) => ({ showFilters: !s.showFilters })),
   toggleLegend: () => set((s) => ({ showLegend: !s.showLegend })),
   toggleMinimap: () => set((s) => ({ showMinimap: !s.showMinimap })),
   toggleSettings: () => set((s) => ({ showSettings: !s.showSettings })),
+  toggleHelp: () => set((s) => ({ showHelp: !s.showHelp })),
 
   // Settings
   quality: 'high',
