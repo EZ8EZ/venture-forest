@@ -1,6 +1,6 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, GitCompare, Link2, Building2, MapPin, Calendar, Users, TrendingUp, Info, User } from 'lucide-react';
+import { X, ExternalLink, Link2, Check, Building2, MapPin, Calendar, Users, TrendingUp, Info, User } from 'lucide-react';
 import { useForestStore, DEFAULT_CAMERA } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
 import { getCompanyInvestors } from '@/lib/snapshot-loader';
@@ -12,7 +12,6 @@ export function CompanyDetailPanel() {
   const selectCompany = useForestStore((s) => s.selectCompany);
   const selectInvestor = useForestStore((s) => s.selectInvestor);
   const setCameraTarget = useForestStore((s) => s.setCameraTarget);
-  const addToCompare = useForestStore((s) => s.addToCompare);
   const { data: snapshot } = useSnapshot();
 
   const company = useMemo(() => {
@@ -81,16 +80,12 @@ export function CompanyDetailPanel() {
                   </p>
                 </div>
                 <div className="flex items-center gap-1 ml-2">
-                  <button
-                    onClick={() => addToCompare(company.id)}
-                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
-                    title="Compare"
-                  >
-                    <GitCompare size={14} />
-                  </button>
+                  {/* Compare affordance removed until compare mode ships a
+                      real UI; the store plumbing remains for that feature */}
                   <button
                     onClick={handleClose}
-                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors"
+                    aria-label="Close company details"
+                    className="p-1.5 text-overlay-muted hover:text-overlay-text transition-colors focus-ring"
                   >
                     <X size={14} />
                   </button>
@@ -220,10 +215,7 @@ export function CompanyDetailPanel() {
                     Visit website
                   </a>
                 )}
-                <button className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-overlay-muted text-sm hover:bg-white/8 transition-colors">
-                  <Link2 size={14} />
-                  Copy link
-                </button>
+                <CopyLinkButton />
               </div>
 
               {/* Data confidence */}
@@ -238,6 +230,34 @@ export function CompanyDetailPanel() {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function CopyLinkButton() {
+  const [copied, setCopied] = useState(false);
+
+  // The URL always carries ?company=<slug> for the open panel (useDeepLink
+  // mirrors selection into the address bar), so copying the current URL is
+  // copying a stable link to this company
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard can be unavailable (permissions, insecure context);
+      // silently keep the button in its default state
+    }
+  }, []);
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-overlay-muted text-sm hover:bg-white/8 transition-colors focus-ring"
+    >
+      {copied ? <Check size={14} className="text-overlay-accent" /> : <Link2 size={14} />}
+      {copied ? 'Link copied' : 'Copy link'}
+    </button>
   );
 }
 

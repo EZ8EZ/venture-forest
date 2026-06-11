@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useForestStore, DEFAULT_CAMERA } from '@/stores/forest-store';
+import { hasDeepLink } from '@/hooks/useDeepLink';
 import * as THREE from 'three';
 
 // Cinematic intro path: the camera starts high above the canopy, far out,
@@ -48,10 +49,11 @@ export function ForestCamera() {
   const savedOverviewPos = useRef(new THREE.Vector3(DEFAULT_CAMERA.x, DEFAULT_CAMERA.y, DEFAULT_CAMERA.z));
   const savedOverviewLook = useRef(new THREE.Vector3(0, 5, 0));
 
-  // Kick off the intro once loading finishes
+  // Kick off the intro once loading finishes. A deep link skips it: the
+  // link's subject is the destination, not the forest reveal.
   useEffect(() => {
     if (isLoading || introPhase.current !== 'pending') return;
-    if (reducedMotion) {
+    if (reducedMotion || hasDeepLink()) {
       introPhase.current = 'done';
       return;
     }

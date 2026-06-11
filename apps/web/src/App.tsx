@@ -9,9 +9,13 @@ import { Minimap } from '@/components/overlays/Minimap';
 import { SettingsPanel } from '@/components/overlays/SettingsPanel';
 import { CompanyDetailPanel } from '@/components/panels/CompanyDetailPanel';
 import { useForestStore } from '@/stores/forest-store';
+import { useDeepLink } from '@/hooks/useDeepLink';
 
 export function App() {
   const resetCamera = useForestStore((s) => s.resetCamera);
+
+  // ?company= and ?investor= deep links, synced both ways
+  useDeepLink();
 
   // Global keyboard shortcuts
   useEffect(() => {
