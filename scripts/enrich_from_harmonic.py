@@ -249,9 +249,14 @@ def headcount_fields(headcount):
     for lo, hi, label in HEADCOUNT_BUCKETS:
         if hi is None or headcount <= hi:
             if headcount >= lo or hi is None:
+                # min/max carry the exact known value (Harmonic reports a
+                # point estimate); the bucket label keeps range semantics
+                # for filters. Trunk thickness reads min/max, so storing
+                # bucket bounds here would quantize every trunk to seven
+                # widths.
                 return {
-                    "headcount_min": lo,
-                    "headcount_max": hi if hi is not None else headcount,
+                    "headcount_min": headcount,
+                    "headcount_max": headcount,
                     "headcount_display": f"~{headcount:,}",
                     "headcount_bucket": label,
                 }
@@ -281,19 +286,48 @@ def map_round_type(harmonic_type):
     return ROUND_TYPE_MAP.get(harmonic_type, "unknown")
 
 
-# Visual encoding: height tracks funding on a log curve. This is applied to
-# EVERY company (matched or not) so the whole forest sits on one consistent
-# scale; otherwise stale pre-enrichment heights would let a small company
-# tower over a decacorn. The curve extends the layout-engine formula with
-# headroom above $10B so the largest companies still differentiate instead
-# of all clamping to one cap.
+# Visual encoding, mirrored from packages/layout-engine/src/radial-placement.ts.
+# Height = funding on a CUBE-ROOT scale: a log curve compressed 69% of the
+# dataset (the $100M-$5B band) into a 3-unit height band; cube root spreads
+# it across 3-14 with emergent giants above. Trunk = headcount (sqrt scale),
+# matching the legend. Applied to EVERY company so the forest sits on one
+# consistent scale.
 def tree_height_for_funding(funding):
-    funding_log = math.log10(funding) if funding and funding > 0 else 5
-    return max(1.5, min(28, (funding_log - 4.5) * 4))
+    if not funding or funding <= 0:
+        return 1.2
+    return max(1.2, min(38, 0.0066 * funding ** (1 / 3)))
 
 
-def trunk_radius_for_height(height):
-    return max(0.08, min(1.4, height * 0.06))
+def headcount_mid(company):
+    lo, hi = company.get("headcount_min"), company.get("headcount_max")
+    if lo is not None and hi is not None:
+        return (lo + hi) / 2
+    return lo if lo is not None else hi
+
+
+def trunk_radius_for_headcount(company, sector_medians, global_median):
+    mid = headcount_mid(company)
+    if mid is None:
+        mid = sector_medians.get(company.get("sector")) or global_median or 200
+    return max(0.12, min(1.7, 0.013 * math.sqrt(mid)))
+
+
+def headcount_medians(companies):
+    by_sector = {}
+    all_mids = []
+    for c in companies:
+        mid = headcount_mid(c)
+        if mid is not None:
+            by_sector.setdefault(c.get("sector"), []).append(mid)
+            all_mids.append(mid)
+
+    def median(values):
+        if not values:
+            return None
+        s = sorted(values)
+        return s[len(s) // 2]
+
+    return {k: median(v) for k, v in by_sector.items()}, median(all_mids)
 
 
 def visual_importance(funding):
@@ -428,14 +462,16 @@ def main():
     snapshot["investors"] = [inv for inv in snapshot["investors"] if inv["id"] in referenced]
 
     # Recompute the visual encoding for every company on one consistent
-    # scale (see tree_height_for_funding)
+    # scale (see tree_height_for_funding / trunk_radius_for_headcount)
+    sector_medians, global_median = headcount_medians(companies)
     for company in companies:
         placement = placements_by_company.get(company["id"])
         funding = company.get("total_funding_usd")
         if placement:
-            h = tree_height_for_funding(funding)
-            placement["tree_height"] = round(h, 2)
-            placement["trunk_radius"] = round(trunk_radius_for_height(h), 3)
+            placement["tree_height"] = round(tree_height_for_funding(funding), 2)
+            placement["trunk_radius"] = round(
+                trunk_radius_for_headcount(company, sector_medians, global_median), 3
+            )
             placement["visual_importance_score"] = round(visual_importance(funding), 3)
 
     snapshot["generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

@@ -22,10 +22,10 @@ export function ForestLighting() {
         shadow-mapSize={[2048, 2048]}
         shadow-camera-near={20}
         shadow-camera-far={520}
-        shadow-camera-left={-150}
-        shadow-camera-right={150}
-        shadow-camera-top={150}
-        shadow-camera-bottom={-150}
+        shadow-camera-left={-190}
+        shadow-camera-right={190}
+        shadow-camera-top={190}
+        shadow-camera-bottom={-190}
         shadow-bias={-0.0003}
         shadow-normalBias={0.6}
       />

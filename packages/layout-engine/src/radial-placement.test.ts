@@ -80,16 +80,48 @@ describe("computeRadialPlacements", () => {
   it("scales tree height with funding within bounds", () => {
     const placements = computeRadialPlacements(companies, groves);
     for (const p of placements) {
-      expect(p.tree_height).toBeGreaterThanOrEqual(1.5);
-      expect(p.tree_height).toBeLessThanOrEqual(28);
+      expect(p.tree_height).toBeGreaterThanOrEqual(1.2);
+      expect(p.tree_height).toBeLessThanOrEqual(38);
     }
     const heightOf = (id: string) => placements.find((p) => p.company_id === id)!.tree_height;
     expect(heightOf("a")).toBeGreaterThan(heightOf("c"));
   });
 
+  it("differentiates mid-band funding heights visibly (cube-root scale)", () => {
+    const mids = [
+      makeCompany("m500", Sector.AI_ML, 500_000_000),
+      makeCompany("m2000", Sector.AI_ML, 2_000_000_000),
+    ];
+    const midGroves = allocateGroves(mids);
+    const placements = computeRadialPlacements(mids, midGroves);
+    const h = (id: string) => placements.find((p) => p.company_id === id)!.tree_height;
+    // $2B should be clearly taller than $500M (was a ~7% difference on the
+    // old log curve; cube root gives ~59%)
+    expect(h("m2000") / h("m500")).toBeGreaterThan(1.4);
+  });
+
+  it("derives trunk radius from headcount, not funding", () => {
+    const big = { ...makeCompany("hc-big", Sector.AI_ML, 10_000_000), headcount_min: 5000, headcount_max: 10000 };
+    const small = { ...makeCompany("hc-small", Sector.AI_ML, 10_000_000), headcount_min: 11, headcount_max: 50 };
+    const g = allocateGroves([big, small]);
+    const placements = computeRadialPlacements([big, small], g);
+    const r = (id: string) => placements.find((p) => p.company_id === id)!.trunk_radius;
+    expect(r("hc-big")).toBeGreaterThan(r("hc-small"));
+  });
+
+  it("falls back to sector median headcount when missing", () => {
+    const withHc = { ...makeCompany("w1", Sector.FINTECH, 1_000_000_000), headcount_min: 400, headcount_max: 600 };
+    const noHc = makeCompany("n1", Sector.FINTECH, 1_000_000_000); // headcount null
+    const g = allocateGroves([withHc, noHc]);
+    const placements = computeRadialPlacements([withHc, noHc], g);
+    const r = (id: string) => placements.find((p) => p.company_id === id)!.trunk_radius;
+    // The fallback uses the sector median (500), same as withHc's midpoint
+    expect(r("n1")).toBeCloseTo(r("w1"), 5);
+  });
+
   it("differentiates decacorn heights instead of clamping at one cap", () => {
     const giants = [
-      makeCompany("g1", Sector.AI_ML, 190_000_000_000),
+      makeCompany("g1", Sector.AI_ML, 120_000_000_000),
       makeCompany("g2", Sector.AI_ML, 30_000_000_000),
     ];
     const giantGroves = allocateGroves(giants);

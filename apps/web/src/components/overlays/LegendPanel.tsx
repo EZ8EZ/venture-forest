@@ -33,7 +33,7 @@ export function LegendPanel() {
               <LegendRow
                 icon={<ArrowUpDown size={13} />}
                 label="Tree height"
-                description="Total funding raised"
+                description="Total funding raised: $100M sapling, $1B mid-canopy, $10B+ giant"
               />
               <LegendRow
                 icon={<Maximize2 size={13} />}

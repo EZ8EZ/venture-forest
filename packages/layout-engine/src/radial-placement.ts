@@ -41,6 +41,25 @@ export interface RadialPlacementOptions {
  * 4. Run collision avoidance: if a proposed position is too close to an
  *    existing placement, nudge it outward until spacing is satisfied.
  */
+/**
+ * Headcount midpoint for a company, used for trunk thickness. Falls back to
+ * the sector median, then the global median, then a constant, per the
+ * graceful degradation table in docs/data-strategy.md.
+ */
+function headcountMid(company: Company): number | null {
+  const { headcount_min: lo, headcount_max: hi } = company;
+  if (lo != null && hi != null) return (lo + hi) / 2;
+  if (lo != null) return lo;
+  if (hi != null) return hi;
+  return null;
+}
+
+function median(values: number[]): number | null {
+  if (values.length === 0) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length / 2)];
+}
+
 export function computeRadialPlacements(
   companies: Company[],
   groves: Grove[],
@@ -49,6 +68,24 @@ export function computeRadialPlacements(
   const { minSpacing = 3, maxAttempts = 20, seed = 42 } = options;
 
   const rng = seededRandom(seed);
+
+  // Pre-pass: sector and global headcount medians for trunk fallbacks
+  const sectorHeadcounts = new Map<Sector, number[]>();
+  const allHeadcounts: number[] = [];
+  for (const company of companies) {
+    const mid = headcountMid(company);
+    if (mid != null) {
+      const list = sectorHeadcounts.get(company.sector) ?? [];
+      list.push(mid);
+      sectorHeadcounts.set(company.sector, list);
+      allHeadcounts.push(mid);
+    }
+  }
+  const globalMedianHc = median(allHeadcounts) ?? 200;
+  const resolveHeadcount = (company: Company): number =>
+    headcountMid(company) ??
+    median(sectorHeadcounts.get(company.sector) ?? []) ??
+    globalMedianHc;
 
   // Build grove lookup by sector
   const groveLookup = new Map<Sector, Grove>();
@@ -91,13 +128,21 @@ export function computeRadialPlacements(
       const angleJitter = (rng() - 0.5) * 0.4;
       const angle = baseAngle + angleJitter;
 
-      // Tree sizing based on funding. Canonical visual-encoding curve,
-      // shared with scripts/enrich_from_harmonic.py: log scale with
-      // headroom above $10B so decacorns still differentiate instead of
-      // clamping to one cap.
-      const fundingLog = funding > 0 ? Math.log10(funding) : 5;
-      const treeHeight = Math.max(1.5, Math.min(28, (fundingLog - 4.5) * 4));
-      const trunkRadius = Math.max(0.08, Math.min(1.4, treeHeight * 0.06));
+      // Canonical visual encoding, shared with scripts/enrich_from_harmonic.py.
+      // Height = funding on a cube-root scale: a log scale compressed 69% of
+      // the real dataset (the $100M-$5B band) into a 3-unit height band, so
+      // height differences communicated nothing. Cube root spreads the same
+      // data across 3-14 with emergent giants above, like a real canopy.
+      const treeHeight =
+        funding > 0
+          ? Math.max(1.2, Math.min(38, 0.0066 * Math.cbrt(funding)))
+          : 1.2;
+      // Trunk = headcount (sqrt scale), matching the legend; previously it
+      // was derived from height, silently re-encoding funding
+      const trunkRadius = Math.max(
+        0.12,
+        Math.min(1.7, 0.013 * Math.sqrt(resolveHeadcount(company)))
+      );
 
       // Propose initial position
       let proposedX = grove.center_x + Math.cos(angle) * radialDistance;

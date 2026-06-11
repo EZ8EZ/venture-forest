@@ -301,8 +301,10 @@ function SectorCanopies({
       colors[i * 3 + 2] = tempColor.b;
 
       const h = p.tree_height * HEIGHT_SCALE;
-      // Canopy size: compact crown proportional to trunk
-      const baseR = p.trunk_radius * 1.8 + h * 0.08 + 0.7;
+      // Canopy size: height-dominant now that trunk encodes headcount
+      // rather than funding; a small trunk term keeps thick-trunked squat
+      // trees (large team, little funding) reading as full bushes
+      const baseR = 0.55 + h * 0.13 + p.trunk_radius * 0.6;
       const hRatio = canopyHeightRatio(species.canopyShape);
       const wRatio = canopyWidthRatio(species.canopyShape);
       const cH = baseR * hRatio;

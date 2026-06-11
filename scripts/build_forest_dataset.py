@@ -224,7 +224,7 @@ def validate(snapshot):
             errors.append(f"placement order mismatch at index {i}")
             break
     for p in placements:
-        if not (1.5 <= p["tree_height"] <= 28):
+        if not (1.2 <= p["tree_height"] <= 38):
             errors.append(f"height out of range: {p['company_id']} {p['tree_height']}")
         if abs(p["world_x"]) > 250 or abs(p["world_z"]) > 250:
             errors.append(f"placement outside world bounds: {p['company_id']}")
