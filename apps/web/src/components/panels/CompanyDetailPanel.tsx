@@ -6,7 +6,8 @@ import { useSnapshot } from '@/hooks/useSnapshot';
 import { getCompanyInvestors } from '@/lib/snapshot-loader';
 import { getSpecies } from '@/lib/species-config';
 import { formatFunding, formatRoundType } from '@/lib/format';
-import type { Company } from '@/lib/types';
+import { getCompanyRankLine } from '@/lib/sector-stats';
+import type { Company, ForestSnapshot } from '@/lib/types';
 
 export function CompanyDetailPanel() {
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
@@ -201,7 +202,7 @@ export function CompanyDetailPanel() {
               )}
 
               {/* Visual explainer */}
-              <VisualExplainer company={company} placement={placement} />
+              <VisualExplainer company={company} snapshot={snapshot} />
 
               {/* Actions */}
               <div className="flex flex-col gap-2">
@@ -282,8 +283,9 @@ export function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-function VisualExplainer({ company }: { company: Company; placement?: unknown }) {
+function VisualExplainer({ company, snapshot }: { company: Company; snapshot?: ForestSnapshot }) {
   const species = getSpecies(company.sector);
+  const rankLine = snapshot ? getCompanyRankLine(snapshot, company) : null;
 
   return (
     <div className="p-3 rounded-lg bg-white/3 border border-overlay-border space-y-2">
@@ -296,6 +298,9 @@ function VisualExplainer({ company }: { company: Company; placement?: unknown })
           <span className="text-overlay-text/60">Height:</span>{' '}
           {formatFunding(company.total_funding_usd)} in total funding
         </p>
+        {rankLine && (
+          <p className="text-overlay-accent/70">{rankLine}</p>
+        )}
         <p>
           <span className="text-overlay-text/60">Trunk width:</span>{' '}
           {company.headcount_display || company.headcount_bucket || 'estimated'} employees

@@ -3,6 +3,7 @@ import { useForestStore } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
 import { getSpecies } from '@/lib/species-config';
 import { formatFunding, formatRoundType } from '@/lib/format';
+import { getCompanyRankLine } from '@/lib/sector-stats';
 
 // Rich hover tooltip for trees. A screen-space DOM card (not drei Html):
 // it costs nothing in the render loop and never scales with camera
@@ -114,6 +115,12 @@ export function HoverTooltip() {
             />
           )}
         </div>
+        {(() => {
+          const rankLine = getCompanyRankLine(snapshot, company);
+          return rankLine ? (
+            <p className="text-[10px] text-overlay-accent/70">{rankLine}</p>
+          ) : null;
+        })()}
         <p className="text-[9px] text-overlay-muted/40 pt-1 border-t border-overlay-border">
           Click to explore
         </p>
