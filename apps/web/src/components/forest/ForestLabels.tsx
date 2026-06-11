@@ -69,7 +69,7 @@ export function ForestLabels({ placements, companies }: ForestLabelsProps) {
               p.world_z,
             ]}
             center
-            distanceFactor={isSelected ? 60 : isHovered ? 70 : 120}
+            distanceFactor={isSelected ? 55 : isHovered ? 60 : 80}
             occlude={false}
             style={{ pointerEvents: 'none', userSelect: 'none' }}
           >

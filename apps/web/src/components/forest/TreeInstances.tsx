@@ -3,6 +3,7 @@ import { useFrame, ThreeEvent } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { CompanyPlacement, Sector } from '@/lib/types';
 import { getSpecies, SECTOR_ORDER } from '@/lib/species-config';
+import { barkMaterial, canopyMaterial } from '@/lib/forest-shaders';
 import { useForestStore } from '@/stores/forest-store';
 
 interface TreeInstancesProps {
@@ -203,25 +204,18 @@ export function TreeInstances({ placements, companyIds, filteredIds, highlighted
 
   return (
     <group>
-      {/* All trunks: single instanced mesh */}
+      {/* All trunks: single instanced mesh with the procedural bark shader */}
       <instancedMesh
         ref={trunkRef}
         args={[trunkGeo, undefined, count]}
+        material={barkMaterial}
         castShadow
         receiveShadow
         onClick={handleTrunkClick}
         onPointerOver={handleTrunkOver}
         onPointerOut={handlePointerOut}
         frustumCulled
-      >
-        <meshStandardMaterial
-          roughness={0.85}
-          metalness={0.02}
-          vertexColors
-          emissive="#6a5040"
-          emissiveIntensity={0.2}
-        />
-      </instancedMesh>
+      />
 
       {/* Per-sector canopy meshes with distinct shapes */}
       {SECTOR_ORDER.map((sector) => {
@@ -405,26 +399,20 @@ function SectorCanopies({
     document.body.style.cursor = 'default';
   }, [onHover]);
 
+  // Shared wind + translucency canopy material; per-tree color comes from
+  // instanceColor so one material (one shader program) covers all sectors.
   return (
     <instancedMesh
       ref={meshRef}
       args={[geometry, undefined, n]}
+      material={canopyMaterial}
       castShadow
       receiveShadow
       onClick={onClick}
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
       frustumCulled
-    >
-      <meshStandardMaterial
-        roughness={0.65}
-        metalness={0.03}
-        vertexColors
-        side={THREE.DoubleSide}
-        emissive={species.canopyColor}
-        emissiveIntensity={0.3}
-      />
-    </instancedMesh>
+    />
   );
 }
 

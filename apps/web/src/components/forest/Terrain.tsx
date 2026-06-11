@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
+import type { CompanyPlacement } from '@/lib/types';
+import { terrainMaterial } from '@/lib/forest-shaders';
 
 const SIZE = 800;
 const SEGS = 200;
@@ -9,17 +11,53 @@ function pr(a: number, b: number): number {
   return s - Math.floor(s);
 }
 
-export function Terrain() {
+interface TerrainProps {
+  placements?: CompanyPlacement[];
+}
+
+export function Terrain({ placements }: TerrainProps) {
   const geometry = useMemo(() => {
     const geo = new THREE.PlaneGeometry(SIZE, SIZE, SEGS, SEGS);
     geo.rotateX(-Math.PI / 2);
 
     const pos = geo.attributes.position;
     const colors = new Float32Array(pos.count * 3);
-    const c1 = new THREE.Color('#1e3818');
-    const c2 = new THREE.Color('#152a12');
-    const c3 = new THREE.Color('#264020');
+    const c1 = new THREE.Color('#27431f');
+    const c2 = new THREE.Color('#1c3517');
+    const c3 = new THREE.Color('#314c27');
+    const trunkShade = new THREE.Color('#14260f');
     const tc = new THREE.Color();
+
+    // Spatial hash of tree positions so the darken-near-trunks pass stays
+    // O(verts) instead of O(verts * trees)
+    const CELL = 8;
+    const treeGrid = new Map<string, Array<[number, number]>>();
+    if (placements) {
+      for (const p of placements) {
+        const key = `${Math.floor(p.world_x / CELL)},${Math.floor(p.world_z / CELL)}`;
+        const list = treeGrid.get(key) || [];
+        list.push([p.world_x, p.world_z]);
+        treeGrid.set(key, list);
+      }
+    }
+
+    const nearestTreeDist = (x: number, z: number): number => {
+      if (!placements || placements.length === 0) return Infinity;
+      const cx = Math.floor(x / CELL);
+      const cz = Math.floor(z / CELL);
+      let best = Infinity;
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dz = -1; dz <= 1; dz++) {
+          const list = treeGrid.get(`${cx + dx},${cz + dz}`);
+          if (!list) continue;
+          for (const [tx, tz] of list) {
+            const d = Math.hypot(x - tx, z - tz);
+            if (d < best) best = d;
+          }
+        }
+      }
+      return best;
+    };
 
     for (let i = 0; i < pos.count; i++) {
       const x = pos.getX(i);
@@ -36,10 +74,19 @@ export function Terrain() {
       const centerDip = Math.max(0, 1 - dist / 50) * -1.5;
       pos.setY(i, y + centerDip);
 
-      // Vertex color variation for forest-floor richness
+      // Base forest-floor variation
       const n = pr(x * 0.05, z * 0.05);
       tc.copy(n < 0.3 ? c2 : n < 0.7 ? c1 : c3);
-      tc.lerp(new THREE.Color('#0e200e'), Math.min(1, dist / 350) * 0.25);
+
+      // Darker soil under and around trees, lighter in clearings
+      const treeDist = nearestTreeDist(x, z);
+      if (treeDist < 7) {
+        tc.lerp(trunkShade, (1 - treeDist / 7) * 0.65);
+      }
+
+      // Fade toward the horizon so the ground recedes with the fog
+      tc.lerp(new THREE.Color('#15240f'), Math.min(1, dist / 350) * 0.3);
+
       colors[i * 3] = tc.r;
       colors[i * 3 + 1] = tc.g;
       colors[i * 3 + 2] = tc.b;
@@ -48,19 +95,11 @@ export function Terrain() {
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     geo.computeVertexNormals();
     return geo;
-  }, []);
+  }, [placements]);
 
   return (
     <group>
-      <mesh geometry={geometry} receiveShadow>
-        <meshStandardMaterial
-          vertexColors
-          roughness={0.95}
-          metalness={0}
-          emissive="#142810"
-          emissiveIntensity={0.15}
-        />
-      </mesh>
+      <mesh geometry={geometry} material={terrainMaterial} receiveShadow />
       <GroundCover />
     </group>
   );
@@ -94,8 +133,8 @@ function GroundCover() {
       obj.updateMatrix();
       obj.matrix.toArray(m, i * 16);
 
-      const b = 0.015 + pr(i * 0.83, i * 0.41) * 0.035;
-      tc.setRGB(b * 0.6, b, b * 0.45);
+      const b = 0.03 + pr(i * 0.83, i * 0.41) * 0.05;
+      tc.setRGB(b * 0.7, b, b * 0.45);
       c[i * 3] = tc.r;
       c[i * 3 + 1] = tc.g;
       c[i * 3 + 2] = tc.b;
@@ -112,7 +151,7 @@ function GroundCover() {
         roughness={1}
         metalness={0}
         transparent
-        opacity={0.3}
+        opacity={0.4}
         depthWrite={false}
         side={THREE.DoubleSide}
       />

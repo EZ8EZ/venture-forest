@@ -4,10 +4,12 @@ import { ToneMappingMode } from 'postprocessing';
 export function ForestPostProcessing() {
   return (
     <EffectComposer multisampling={0}>
+      {/* Conservative threshold: only the sky near the sun and the brightest
+          canopy highlights bloom; the forest itself stays crisp */}
       <Bloom
-        intensity={0.25}
-        luminanceThreshold={0.4}
-        luminanceSmoothing={0.7}
+        intensity={0.45}
+        luminanceThreshold={0.85}
+        luminanceSmoothing={0.4}
         mipmapBlur
       />
       <Vignette

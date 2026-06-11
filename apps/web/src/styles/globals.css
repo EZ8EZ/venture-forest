@@ -33,4 +33,9 @@
   .glass-panel-solid {
     @apply bg-[rgba(10,12,16,0.95)] backdrop-blur-lg border border-overlay-border rounded-xl;
   }
+
+  /* Shared visible focus ring for keyboard navigation (WCAG 2.4.7) */
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-overlay-accent/70 focus-visible:ring-offset-1 focus-visible:ring-offset-black/50 rounded-md;
+  }
 }

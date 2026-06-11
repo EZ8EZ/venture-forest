@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useForestStore } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
 import { Search, SlidersHorizontal, HelpCircle, Map, Settings, X, Trees, Calendar } from 'lucide-react';
@@ -96,8 +97,9 @@ function HUDButton({
   return (
     <button
       onClick={onClick}
-      className="glass-panel p-2 text-overlay-muted hover:text-overlay-text hover:bg-white/5 transition-all duration-200 group relative"
+      className="glass-panel p-2 text-overlay-muted hover:text-overlay-text hover:bg-white/5 transition-all duration-200 group relative focus-ring"
       title={`${label}${shortcut ? ` (${shortcut})` : ''}`}
+      aria-label={label}
     >
       {icon}
     </button>
@@ -137,10 +139,22 @@ function GroupingToggle({ mode, onChange }: { mode: GroupingMode; onChange: (m: 
 }
 
 function FirstVisitHint() {
-  // Show hint briefly on first visit
+  // Shows after loading, then fades out: a hint should not become furniture
   const isLoading = useForestStore((s) => s.isLoading);
+  const [dismissed, setDismissed] = useState(false);
 
-  if (isLoading) return null;
+  useEffect(() => {
+    if (isLoading) return;
+    const timer = window.setTimeout(() => setDismissed(true), 14000);
+    const onInteract = () => setDismissed(true);
+    window.addEventListener('pointerdown', onInteract, { once: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('pointerdown', onInteract);
+    };
+  }, [isLoading]);
+
+  if (isLoading || dismissed) return null;
 
   return (
     <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20 animate-fade-in-up pointer-events-none">

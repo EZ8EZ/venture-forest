@@ -145,8 +145,8 @@ export function ForestWorld() {
 
   return (
     <group>
-      <Terrain />
-      {/* Background trees removed: only real company trees render */}
+      {/* Placements feed the terrain so soil darkens under trunks */}
+      <Terrain placements={effectivePlacements} />
       <TreeInstances
         placements={effectivePlacements}
         companyIds={companyIds}

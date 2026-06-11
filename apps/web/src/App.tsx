@@ -6,6 +6,7 @@ import { SearchPalette } from '@/components/overlays/SearchPalette';
 import { LegendPanel } from '@/components/overlays/LegendPanel';
 import { FilterPanel } from '@/components/overlays/FilterPanel';
 import { Minimap } from '@/components/overlays/Minimap';
+import { SettingsPanel } from '@/components/overlays/SettingsPanel';
 import { CompanyDetailPanel } from '@/components/panels/CompanyDetailPanel';
 import { useForestStore } from '@/stores/forest-store';
 
@@ -35,6 +36,7 @@ export function App() {
       <LegendPanel />
       <FilterPanel />
       <Minimap />
+      <SettingsPanel />
       <CompanyDetailPanel />
 
       {/* WebGL fallback */}

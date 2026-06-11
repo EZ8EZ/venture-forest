@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, GitCompare, Link2, Building2, MapPin, Calendar, Users, TrendingUp, Info, User } from 'lucide-react';
-import { useForestStore } from '@/stores/forest-store';
+import { useForestStore, DEFAULT_CAMERA } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
 import { getCompanyInvestors } from '@/lib/snapshot-loader';
 import { getSpecies } from '@/lib/species-config';
@@ -53,7 +53,7 @@ export function CompanyDetailPanel() {
   // Handle close: deselect and trigger camera return
   const handleClose = useCallback(() => {
     selectCompany(null);
-    setCameraTarget({ x: 40, y: 25, z: 60 });
+    setCameraTarget({ x: DEFAULT_CAMERA.x, y: DEFAULT_CAMERA.y, z: DEFAULT_CAMERA.z });
   }, [selectCompany, setCameraTarget]);
 
   return (
@@ -65,7 +65,7 @@ export function CompanyDetailPanel() {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 400, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed right-0 top-0 bottom-0 w-[380px] z-40 pointer-events-auto"
+          className="fixed right-0 top-0 bottom-0 w-full sm:w-[380px] z-40 pointer-events-auto"
         >
           <div className="h-full glass-panel-solid rounded-none rounded-l-xl overflow-y-auto">
             {/* Header */}

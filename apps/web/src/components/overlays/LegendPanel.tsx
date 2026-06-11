@@ -6,6 +6,7 @@ import { SPECIES_MAP, SECTOR_ORDER } from '@/lib/species-config';
 export function LegendPanel() {
   const showLegend = useForestStore((s) => s.showLegend);
   const toggleLegend = useForestStore((s) => s.toggleLegend);
+  const groupingMode = useForestStore((s) => s.groupingMode);
 
   return (
     <AnimatePresence>
@@ -83,9 +84,9 @@ export function LegendPanel() {
                 Position Logic
               </h4>
               <p className="text-[11px] text-overlay-muted/50 leading-relaxed">
-                Companies with more funding appear closer to the center.
-                Sector clusters form natural groves. Companies near each
-                other share investors or similar characteristics.
+                {groupingMode === 'sector'
+                  ? 'Sector clusters form natural groves. Within each grove, companies with more funding stand closer to the grove center.'
+                  : 'Trees are grouped by founding year. Each clearing holds one vintage, from 2020 through 2026.'}
               </p>
             </div>
           </div>
