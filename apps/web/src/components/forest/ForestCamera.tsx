@@ -23,6 +23,7 @@ export function ForestCamera() {
   const controlsRef = useRef<any>(null);
   const cameraTarget = useForestStore((s) => s.cameraTarget);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
+  const selectedInvestorId = useForestStore((s) => s.selectedInvestorId);
   const reducedMotion = useForestStore((s) => s.reducedMotion);
   const isLoading = useForestStore((s) => s.isLoading);
   const { camera } = useThree();
@@ -98,13 +99,18 @@ export function ForestCamera() {
         savedOverviewLook.current.copy(controlsRef.current.target);
       }
 
-      // Feature the tree: close, slightly above, offset to the side
+      // Feature the tree with room to read the surrounding root network
       endPos.current.set(
-        cameraTarget.x + 8,
-        cameraTarget.y + 6,
-        cameraTarget.z + 10,
+        cameraTarget.x + 13,
+        cameraTarget.y + 9,
+        cameraTarget.z + 17,
       );
-      endLook.current.set(cameraTarget.x, cameraTarget.y * 0.4, cameraTarget.z);
+      endLook.current.set(cameraTarget.x, cameraTarget.y * 0.35, cameraTarget.z);
+    } else if (selectedInvestorId) {
+      // Investor mode: elevated wide view over the portfolio centroid so
+      // the highlighted trees and the root network read together
+      endPos.current.set(cameraTarget.x + 35, cameraTarget.y + 55, cameraTarget.z + 50);
+      endLook.current.set(cameraTarget.x, 0, cameraTarget.z);
     } else {
       // Returning to overview: animate back to saved position
       endPos.current.copy(savedOverviewPos.current);
@@ -113,7 +119,7 @@ export function ForestCamera() {
 
     isAnimating.current = true;
     animProgress.current = 0;
-  }, [cameraTarget, selectedCompanyId, camera]);
+  }, [cameraTarget, selectedCompanyId, selectedInvestorId, camera]);
 
   useFrame((_, delta) => {
     if (!controlsRef.current) return;

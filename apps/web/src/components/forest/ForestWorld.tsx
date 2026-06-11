@@ -3,11 +3,11 @@ import { useSnapshot } from '@/hooks/useSnapshot';
 import { useForestStore } from '@/stores/forest-store';
 import { Terrain } from './Terrain';
 import { TreeInstances } from './TreeInstances';
-// Background trees removed per user request
+import { InvestorRoots } from './InvestorRoots';
 import { ForestLabels } from './ForestLabels';
 import { GroveMarkers } from './GroveMarkers';
 import { EnvironmentParticles } from './EnvironmentParticles';
-import type { Company, Grove } from '@/lib/types';
+import type { Company, Grove, Investor } from '@/lib/types';
 
 // Vintage grove centers for year-based grouping
 const VINTAGE_GROVES: Record<number, { cx: number; cz: number }> = {
@@ -129,6 +129,19 @@ export function ForestWorld() {
     return matching;
   }, [snapshot, filters]);
 
+  // Lookup maps for the root network
+  const placementIndex = useMemo(() => {
+    const m = new Map<string, number>();
+    effectivePlacements.forEach((p, i) => m.set(p.company_id, i));
+    return m;
+  }, [effectivePlacements]);
+
+  const investorsById = useMemo(() => {
+    const m = new Map<string, Investor>();
+    snapshot?.investors.forEach((inv) => m.set(inv.id, inv));
+    return m;
+  }, [snapshot]);
+
   // Investor portfolio highlighting
   const highlightedIds = useMemo(() => {
     if (!snapshot || !selectedInvestorId || viewMode !== 'investor') return undefined;
@@ -152,6 +165,13 @@ export function ForestWorld() {
         companyIds={companyIds}
         filteredIds={filteredIds}
         highlightedIds={highlightedIds}
+      />
+      {/* Underground investor network, revealed on selection */}
+      <InvestorRoots
+        edges={snapshot.edges}
+        placements={effectivePlacements}
+        placementIndex={placementIndex}
+        investorsById={investorsById}
       />
       <ForestLabels
         placements={effectivePlacements}
