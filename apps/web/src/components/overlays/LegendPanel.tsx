@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, TreePine, ArrowUpDown, Maximize2, Clock, GitBranch } from 'lucide-react';
+import { X, TreePine, ArrowUpDown, Maximize2, Clock, GitBranch, Sparkles } from 'lucide-react';
 import { useForestStore } from '@/stores/forest-store';
 import { SPECIES_MAP, SECTOR_ORDER } from '@/lib/species-config';
 
@@ -54,6 +54,11 @@ export function LegendPanel() {
                 icon={<GitBranch size={13} />}
                 label="Underground roots"
                 description="Investor relationships"
+              />
+              <LegendRow
+                icon={<Sparkles size={13} />}
+                label="Glowing canopy"
+                description="Raised funding in the last 6 months"
               />
             </div>
 

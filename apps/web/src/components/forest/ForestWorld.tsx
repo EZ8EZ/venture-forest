@@ -136,6 +136,19 @@ export function ForestWorld() {
     return matching;
   }, [snapshot, filters]);
 
+  // Companies that raised within the last 6 months get a gentle canopy
+  // pulse ("what's hot"). 12 months would cover over half the forest and
+  // dilute the signal.
+  const recentIds = useMemo(() => {
+    if (!snapshot) return new Set<string>();
+    const cutoff = Date.now() - 183 * 24 * 3600 * 1000;
+    return new Set(
+      snapshot.companies
+        .filter((c) => c.latest_round_date && Date.parse(c.latest_round_date) > cutoff)
+        .map((c) => c.id),
+    );
+  }, [snapshot]);
+
   // Lookup maps for the root network
   const placementIndex = useMemo(() => {
     const m = new Map<string, number>();
@@ -172,6 +185,7 @@ export function ForestWorld() {
         companyIds={companyIds}
         filteredIds={filteredIds}
         highlightedIds={highlightedIds}
+        recentIds={recentIds}
       />
       {/* Underground investor network, revealed on selection */}
       <InvestorRoots

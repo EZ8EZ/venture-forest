@@ -11,6 +11,8 @@ interface TreeInstancesProps {
   companyIds: string[];
   filteredIds?: Set<string>;
   highlightedIds?: Set<string>;
+  // Companies that raised recently; their canopies pulse gently
+  recentIds?: Set<string>;
 }
 
 const tempObject = new THREE.Object3D();
@@ -116,7 +118,7 @@ function groupBySector(placements: CompanyPlacement[], companyIds: string[]) {
 
 // -- Main component --
 
-export function TreeInstances({ placements, companyIds, filteredIds, highlightedIds }: TreeInstancesProps) {
+export function TreeInstances({ placements, companyIds, filteredIds, highlightedIds, recentIds }: TreeInstancesProps) {
   const selectCompany = useForestStore((s) => s.selectCompany);
   const hoverCompany = useForestStore((s) => s.hoverCompany);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
@@ -233,6 +235,7 @@ export function TreeInstances({ placements, companyIds, filteredIds, highlighted
             ids={g.ids}
             filteredIds={filteredIds}
             highlightedIds={highlightedIds}
+            recentIds={recentIds}
             selectedCompanyId={selectedCompanyId}
             hoveredCompanyId={hoveredCompanyId}
             onSelect={selectCompany}
@@ -255,6 +258,7 @@ function SectorCanopies({
   ids,
   filteredIds,
   highlightedIds,
+  recentIds,
   selectedCompanyId,
   hoveredCompanyId,
   onSelect,
@@ -267,6 +271,7 @@ function SectorCanopies({
   ids: string[];
   filteredIds?: Set<string>;
   highlightedIds?: Set<string>;
+  recentIds?: Set<string>;
   selectedCompanyId: string | null;
   hoveredCompanyId: string | null;
   onSelect: (id: string | null) => void;
@@ -277,6 +282,21 @@ function SectorCanopies({
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const species = getSpecies(sector);
   const n = placements.length;
+  const reducedMotion = useForestStore((s) => s.reducedMotion);
+
+  // Per-instance pulse phase for recently funded companies; -1 disables.
+  // Phase derives from world position so neighbors never blink in sync.
+  const pulsePhases = useMemo(() => {
+    const phases = new Float32Array(n).fill(-1);
+    if (recentIds) {
+      placements.forEach((p, i) => {
+        if (recentIds.has(ids[i])) {
+          phases[i] = pseudoRandom(p.world_x, p.world_z) * Math.PI * 2;
+        }
+      });
+    }
+    return phases;
+  }, [placements, ids, recentIds, n]);
 
   // Refs to avoid stale closures in useFrame
   const highlightedRef = useRef(highlightedIds);
@@ -287,6 +307,8 @@ function SectorCanopies({
   selectedRef.current = selectedCompanyId;
   const hoveredRef = useRef(hoveredCompanyId);
   hoveredRef.current = hoveredCompanyId;
+  const reducedMotionRef = useRef(reducedMotion);
+  reducedMotionRef.current = reducedMotion;
   // Track whether we were dirty last frame so we can reset colors
   const wasDirty = useRef(false);
 
@@ -327,7 +349,7 @@ function SectorCanopies({
   }, [placements, n, species]);
 
   // Animate selection/hover/filter/highlight colors using refs for freshness
-  useFrame(() => {
+  useFrame((state) => {
     const mesh = meshRef.current;
     if (!mesh || !mesh.instanceColor) return;
     const c = mesh.instanceColor;
@@ -337,6 +359,8 @@ function SectorCanopies({
     const curFiltered = filteredRef.current;
     const curSelected = selectedRef.current;
     const curHovered = hoveredRef.current;
+    const t = state.clock.elapsedTime;
+    const pulseActive = !reducedMotionRef.current;
 
     for (let i = 0; i < n; i++) {
       const id = ids[i];
@@ -363,6 +387,13 @@ function SectorCanopies({
         tempColor
           .set(species.canopyColor)
           .lerp(new THREE.Color(species.canopyColorHighlight), p.canopy_variant / 5);
+        // Recency pulse: companies that raised in the last 6 months
+        // shimmer gently. Only in the base state, so selection, hover,
+        // filtering, and portfolio highlighting always win.
+        if (pulseActive && pulsePhases[i] >= 0) {
+          tempColor.multiplyScalar(1.12 + Math.sin(t * 2 + pulsePhases[i]) * 0.12);
+          dirty = true;
+        }
       }
       c.setXYZ(i, tempColor.r, tempColor.g, tempColor.b);
     }
