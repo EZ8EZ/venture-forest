@@ -51,11 +51,27 @@ agreement instead of fixing them off-track. Each item should become a task.
   the portfolio and shows roots, but there is no panel with portfolio
   summary stats.
 
+## Data quality (post-expansion)
+
+- Four roster entries cannot be sourced from Harmonic and were dropped
+  (see data/enrichment-unmatched.json): Revolut and SHEIN have junk
+  records at their domains, Heirloom and Bolt (EU) fail name/domain
+  agreement. Adding them requires manual data entry or another provider.
+- Some Harmonic funding totals diverge from public knowledge (example:
+  Kairos Power shows $3M against publicly reported hundreds of millions
+  plus DOE awards). The pipeline is source-honest by design; corrections
+  belong in a manual-override layer if they matter.
+- JetBrains shows $0 funding, which is factually correct (bootstrapped),
+  so it renders as the smallest tree despite being a large company.
+  Height encodes funding raised, not company size; the legend says so.
+
 ## Rendering
 
 - Quality preset auto-detection (hardwareConcurrency plus GPU tier) from
   `.claude/rules/performance.md` is not implemented; quality starts at high
   for everyone.
 - LOD tiers and billboard impostors (rendering-strategy.md) are not
-  implemented; the current instanced primitives are cheap enough at 110
-  trees, but LOD becomes necessary if the dataset grows toward 1000.
+  implemented; the current instanced primitives are cheap at 271 trees,
+  but LOD becomes necessary if the dataset grows toward 1000.
+- The minimap always shows sector-mode placements; in vintage grouping
+  the dots do not follow the regrouped trees (pre-existing behavior).
