@@ -5,6 +5,7 @@ import { useForestStore, DEFAULT_CAMERA } from '@/stores/forest-store';
 import { useSnapshot } from '@/hooks/useSnapshot';
 import { getCompanyInvestors } from '@/lib/snapshot-loader';
 import { getSpecies } from '@/lib/species-config';
+import { formatFunding, formatRoundType } from '@/lib/format';
 import type { Company } from '@/lib/types';
 
 export function CompanyDetailPanel() {
@@ -261,7 +262,7 @@ function CopyLinkButton() {
   );
 }
 
-function MetricCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+export function MetricCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="p-2.5 rounded-lg bg-white/3 border border-overlay-border">
       <div className="flex items-center gap-1.5 text-overlay-muted/60 mb-1">
@@ -273,7 +274,7 @@ function MetricCard({ icon, label, value }: { icon: React.ReactNode; label: stri
   );
 }
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
+export function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <h3 className="text-[10px] uppercase tracking-widest text-overlay-muted/50 mb-2">
       {children}
@@ -312,16 +313,3 @@ function VisualExplainer({ company }: { company: Company; placement?: unknown })
   );
 }
 
-function formatFunding(amount: number): string {
-  if (amount >= 1_000_000_000) return `$${(amount / 1_000_000_000).toFixed(1)}B`;
-  if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(1)}M`;
-  if (amount >= 1_000) return `$${(amount / 1_000).toFixed(0)}K`;
-  return `$${amount}`;
-}
-
-function formatRoundType(type: string): string {
-  return type
-    .split('_')
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-}

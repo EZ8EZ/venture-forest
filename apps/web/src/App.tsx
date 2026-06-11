@@ -7,6 +7,7 @@ import { LegendPanel } from '@/components/overlays/LegendPanel';
 import { FilterPanel } from '@/components/overlays/FilterPanel';
 import { Minimap } from '@/components/overlays/Minimap';
 import { SettingsPanel } from '@/components/overlays/SettingsPanel';
+import { InvestorDetailPanel } from '@/components/panels/InvestorDetailPanel';
 import { CompanyDetailPanel } from '@/components/panels/CompanyDetailPanel';
 import { useForestStore } from '@/stores/forest-store';
 import { useDeepLink } from '@/hooks/useDeepLink';
@@ -41,6 +42,10 @@ export function App() {
       <FilterPanel />
       <Minimap />
       <SettingsPanel />
+      {/* Mounted before CompanyDetailPanel: both are fixed right-0 z-40,
+          so DOM order lets the company panel paint on top during the
+          swap animation */}
+      <InvestorDetailPanel />
       <CompanyDetailPanel />
 
       {/* WebGL fallback */}
