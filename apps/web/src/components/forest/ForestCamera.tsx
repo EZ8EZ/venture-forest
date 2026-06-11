@@ -38,6 +38,7 @@ export function ForestCamera() {
   const cameraTarget = useForestStore((s) => s.cameraTarget);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
   const selectedInvestorId = useForestStore((s) => s.selectedInvestorId);
+  const selectedGroveId = useForestStore((s) => s.selectedGroveId);
   const reducedMotion = useForestStore((s) => s.reducedMotion);
   const isLoading = useForestStore((s) => s.isLoading);
   const { camera } = useThree();
@@ -158,6 +159,11 @@ export function ForestCamera() {
       // the highlighted trees and the root network read together
       endPos.current.set(cameraTarget.x + 35, cameraTarget.y + 55, cameraTarget.z + 50);
       endLook.current.set(cameraTarget.x, 0, cameraTarget.z);
+    } else if (selectedGroveId) {
+      // Grove view: ~40 degree elevated framing scaled to the grove radius
+      const r = cameraTarget.radius ?? 30;
+      endPos.current.set(cameraTarget.x, r * 1.5, cameraTarget.z + r * 1.8);
+      endLook.current.set(cameraTarget.x, 0, cameraTarget.z);
     } else {
       // Returning to overview: animate back to saved position
       endPos.current.copy(savedOverviewPos.current);
@@ -166,7 +172,7 @@ export function ForestCamera() {
 
     isAnimating.current = true;
     animProgress.current = 0;
-  }, [cameraTarget, selectedCompanyId, selectedInvestorId, camera]);
+  }, [cameraTarget, selectedCompanyId, selectedInvestorId, selectedGroveId, camera]);
 
   useFrame((_, delta) => {
     if (!controlsRef.current) return;

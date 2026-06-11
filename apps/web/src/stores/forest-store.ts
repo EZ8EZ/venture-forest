@@ -9,6 +9,8 @@ export interface CameraTarget {
   y: number;
   z: number;
   lookAt?: { x: number; y: number; z: number };
+  // Grove views use the grove radius to derive an elevated framing
+  radius?: number;
 }
 
 export const DEFAULT_CAMERA = { x: 116, y: 80, z: 184 };
@@ -39,6 +41,10 @@ interface ForestState {
   // Investor mode
   selectedInvestorId: string | null;
   selectInvestor: (id: string | null) => void;
+
+  // Grove (sector) selection
+  selectedGroveId: string | null;
+  selectGrove: (id: string | null) => void;
 
   // Camera
   cameraTarget: CameraTarget | null;
@@ -116,10 +122,11 @@ export const useForestStore = create<ForestState>((set) => ({
   selectCompany: (id) =>
     set(() => ({
       selectedCompanyId: id,
-      // When deselecting, also clear investor mode
+      // Selecting a company leaves any grove context; deselecting also
+      // clears investor mode
       ...(id === null
         ? { selectedInvestorId: null, viewMode: 'explore' as ViewMode }
-        : {}),
+        : { selectedGroveId: null }),
     })),
   hoverCompany: (id) => set({ hoveredCompanyId: id }),
 
@@ -148,6 +155,21 @@ export const useForestStore = create<ForestState>((set) => ({
       selectedInvestorId: id,
       viewMode: id ? 'investor' : 'explore',
       selectedCompanyId: null,
+      ...(id ? { selectedGroveId: null } : {}),
+    }),
+
+  // Grove: mutually exclusive with company and investor selection
+  selectedGroveId: null,
+  selectGrove: (id) =>
+    set({
+      selectedGroveId: id,
+      ...(id
+        ? {
+            selectedCompanyId: null,
+            selectedInvestorId: null,
+            viewMode: 'explore' as ViewMode,
+          }
+        : {}),
     }),
 
   // Camera
@@ -158,6 +180,7 @@ export const useForestStore = create<ForestState>((set) => ({
       cameraTarget: { x: DEFAULT_CAMERA.x, y: DEFAULT_CAMERA.y, z: DEFAULT_CAMERA.z },
       selectedCompanyId: null,
       selectedInvestorId: null,
+      selectedGroveId: null,
       viewMode: 'explore',
     }),
 

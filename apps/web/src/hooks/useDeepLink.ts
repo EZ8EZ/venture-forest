@@ -13,16 +13,18 @@ import { useForestStore } from '@/stores/forest-store';
 export function hasDeepLink(): boolean {
   if (typeof window === 'undefined') return false;
   const params = new URLSearchParams(window.location.search);
-  return params.has('company') || params.has('investor');
+  return params.has('company') || params.has('investor') || params.has('sector');
 }
 
 export function useDeepLink() {
   const { data: snapshot } = useSnapshot();
   const selectCompany = useForestStore((s) => s.selectCompany);
   const selectInvestor = useForestStore((s) => s.selectInvestor);
+  const selectGrove = useForestStore((s) => s.selectGrove);
   const setCameraTarget = useForestStore((s) => s.setCameraTarget);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
   const selectedInvestorId = useForestStore((s) => s.selectedInvestorId);
+  const selectedGroveId = useForestStore((s) => s.selectedGroveId);
   const appliedInitial = useRef(false);
 
   // Apply the inbound link once the snapshot is available
@@ -64,8 +66,23 @@ export function useDeepLink() {
           setCameraTarget({ x: avgX, y: 18, z: avgZ });
         }
       }
+      return;
     }
-  }, [snapshot, selectCompany, selectInvestor, setCameraTarget]);
+
+    const sectorParam = params.get('sector');
+    if (sectorParam) {
+      const grove = snapshot.groves.find((g) => g.sector === sectorParam.toUpperCase());
+      if (grove) {
+        selectGrove(grove.id);
+        setCameraTarget({
+          x: grove.center_x,
+          y: 0,
+          z: grove.center_z,
+          radius: grove.radius,
+        });
+      }
+    }
+  }, [snapshot, selectCompany, selectInvestor, selectGrove, setCameraTarget]);
 
   // Mirror the live selection into the URL (preserving unrelated params)
   useEffect(() => {
@@ -73,6 +90,7 @@ export function useDeepLink() {
     const params = new URLSearchParams(window.location.search);
     params.delete('company');
     params.delete('investor');
+    params.delete('sector');
 
     if (selectedCompanyId) {
       const company = snapshot.companies.find((c) => c.id === selectedCompanyId);
@@ -80,10 +98,13 @@ export function useDeepLink() {
     } else if (selectedInvestorId) {
       const investor = snapshot.investors.find((i) => i.id === selectedInvestorId);
       if (investor) params.set('investor', investor.slug);
+    } else if (selectedGroveId) {
+      const grove = snapshot.groves.find((g) => g.id === selectedGroveId);
+      if (grove) params.set('sector', grove.sector.toLowerCase());
     }
 
     const query = params.toString();
     const next = `${window.location.pathname}${query ? `?${query}` : ''}`;
     window.history.replaceState(null, '', next);
-  }, [snapshot, selectedCompanyId, selectedInvestorId]);
+  }, [snapshot, selectedCompanyId, selectedInvestorId, selectedGroveId]);
 }

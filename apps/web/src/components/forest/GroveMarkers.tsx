@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Html } from '@react-three/drei';
 import type { Grove } from '@/lib/types';
 import { SPECIES_MAP } from '@/lib/species-config';
+import { useForestStore } from '@/stores/forest-store';
 import * as THREE from 'three';
 
 interface GroveMarkersProps {
@@ -9,10 +10,16 @@ interface GroveMarkersProps {
 }
 
 export function GroveMarkers({ groves }: GroveMarkersProps) {
+  const selectGrove = useForestStore((s) => s.selectGrove);
+  const setCameraTarget = useForestStore((s) => s.setCameraTarget);
+
   return (
     <group>
       {groves.map((grove) => {
         const species = SPECIES_MAP[grove.sector];
+        // Vintage groupings are synthetic groves; only real sector groves
+        // open the analytics panel
+        const clickable = !grove.id.startsWith('vintage-');
         return (
           <group key={grove.id}>
             {/* Subtle ground tint under each grove */}
@@ -23,16 +30,34 @@ export function GroveMarkers({ groves }: GroveMarkersProps) {
               color={species?.canopyColor || '#333'}
             />
 
-            {/* Grove sector label: very subtle, far-distance only */}
+            {/* Grove sector label; clickable to open sector analytics */}
             <Html
               position={[grove.center_x, 0.5, grove.center_z + grove.radius * 0.6]}
               center
               distanceFactor={300}
-              style={{ pointerEvents: 'none', userSelect: 'none' }}
+              style={{ pointerEvents: clickable ? 'auto' : 'none', userSelect: 'none' }}
             >
-              <div className="whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.25em] text-overlay-muted/25">
-                {grove.label}
-              </div>
+              {clickable ? (
+                <button
+                  onClick={() => {
+                    selectGrove(grove.id);
+                    setCameraTarget({
+                      x: grove.center_x,
+                      y: 0,
+                      z: grove.center_z,
+                      radius: grove.radius,
+                    });
+                  }}
+                  aria-label={`View ${grove.label} sector`}
+                  className="whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.25em] text-overlay-muted/25 hover:text-overlay-accent/80 transition-colors cursor-pointer bg-transparent"
+                >
+                  {grove.label}
+                </button>
+              ) : (
+                <div className="whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.25em] text-overlay-muted/25">
+                  {grove.label}
+                </div>
+              )}
             </Html>
           </group>
         );
