@@ -211,11 +211,15 @@ function ControlsCard() {
             <div className="flex items-center gap-4 flex-wrap">
               <span>Click a tree to select</span>
               <span className="w-px h-3 bg-overlay-border" />
+              <span>Drag to move</span>
+              <span className="w-px h-3 bg-overlay-border" />
               <span>Scroll to zoom</span>
               <span className="w-px h-3 bg-overlay-border" />
-              <span>Drag to orbit</span>
+              <span>Right-drag to orbit</span>
             </div>
             <div className="flex items-center gap-4 flex-wrap text-overlay-muted/45">
+              <span>WASD or arrows to move</span>
+              <span className="w-px h-3 bg-overlay-border" />
               <span>/ or Cmd+K to search</span>
               <span className="w-px h-3 bg-overlay-border" />
               <span>Esc resets the view</span>

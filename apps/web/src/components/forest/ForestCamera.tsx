@@ -7,6 +7,16 @@ import { cameraTracker } from '@/lib/camera-tracker';
 import * as THREE from 'three';
 
 const tempDir = new THREE.Vector3();
+const tempRight = new THREE.Vector3();
+const UP = new THREE.Vector3(0, 1, 0);
+
+// How far the user can pan from the world origin
+const PAN_BOUND = 200;
+
+const PAN_KEYS = new Set([
+  'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+  'KeyW', 'KeyA', 'KeyS', 'KeyD',
+]);
 
 // Cinematic intro path: the camera starts high above the canopy, far out,
 // and sweeps down into the default overview while orbiting about 60 degrees.
@@ -69,6 +79,38 @@ export function ForestCamera() {
       Math.sin(INTRO_START.azimuth) * INTRO_START.radius,
     );
   }, [isLoading, reducedMotion, camera]);
+
+  // Keyboard panning (WASD / arrows). drei's keyEvents prop is a silent
+  // no-op with this three-stdlib version (connect() never registers
+  // keydown), so this is a custom handler. Keys held in a ref set; the
+  // movement itself happens in useFrame.
+  const pressedKeys = useRef(new Set<string>());
+  useEffect(() => {
+    const isTyping = (target: EventTarget | null) => {
+      const el = target as HTMLElement | null;
+      return (
+        !!el &&
+        (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)
+      );
+    };
+    const down = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
+      if (PAN_KEYS.has(e.code)) {
+        pressedKeys.current.add(e.code);
+        e.preventDefault();
+      }
+    };
+    const up = (e: KeyboardEvent) => pressedKeys.current.delete(e.code);
+    const clear = () => pressedKeys.current.clear();
+    window.addEventListener('keydown', down);
+    window.addEventListener('keyup', up);
+    window.addEventListener('blur', clear);
+    return () => {
+      window.removeEventListener('keydown', down);
+      window.removeEventListener('keyup', up);
+      window.removeEventListener('blur', clear);
+    };
+  }, []);
 
   // Any input skips the intro
   useEffect(() => {
@@ -179,8 +221,49 @@ export function ForestCamera() {
       return;
     }
 
+    // Keyboard panning along the camera's ground-plane axes; speed scales
+    // with zoom distance like a map
+    const keys = pressedKeys.current;
+    if (keys.size > 0) {
+      const controls = controlsRef.current;
+      camera.getWorldDirection(tempDir);
+      tempDir.y = 0;
+      tempDir.normalize();
+      tempRight.crossVectors(tempDir, UP).normalize();
+      const dist = camera.position.distanceTo(controls.target);
+      const speed = THREE.MathUtils.clamp(dist * 0.6, 8, 80) * delta;
+      let dx = 0;
+      let dz = 0;
+      if (keys.has('ArrowUp') || keys.has('KeyW')) { dx += tempDir.x; dz += tempDir.z; }
+      if (keys.has('ArrowDown') || keys.has('KeyS')) { dx -= tempDir.x; dz -= tempDir.z; }
+      if (keys.has('ArrowRight') || keys.has('KeyD')) { dx += tempRight.x; dz += tempRight.z; }
+      if (keys.has('ArrowLeft') || keys.has('KeyA')) { dx -= tempRight.x; dz -= tempRight.z; }
+      if (dx !== 0 || dz !== 0) {
+        controls.target.x += dx * speed;
+        controls.target.z += dz * speed;
+        camera.position.x += dx * speed;
+        camera.position.z += dz * speed;
+        controls.update();
+      }
+    }
+
+    // Pan bounds: clamp the target and shift the camera by the same
+    // correction (the exact inverse of a pan step), so hitting the edge
+    // stops the view dead without fighting rotation damping
+    {
+      const t = controlsRef.current.target;
+      const cx = THREE.MathUtils.clamp(t.x, -PAN_BOUND, PAN_BOUND);
+      const cz = THREE.MathUtils.clamp(t.z, -PAN_BOUND, PAN_BOUND);
+      if (cx !== t.x || cz !== t.z) {
+        camera.position.x += cx - t.x;
+        camera.position.z += cz - t.z;
+        t.x = cx;
+        t.z = cz;
+      }
+    }
+
     // Gentle idle breathing
-    if (!reducedMotion && !isAnimating.current) {
+    if (!reducedMotion && !isAnimating.current && pressedKeys.current.size === 0) {
       idleTime.current += delta * 0.12;
       camera.position.x += Math.sin(idleTime.current) * 0.006;
       camera.position.z += Math.cos(idleTime.current * 0.7) * 0.004;
@@ -188,6 +271,10 @@ export function ForestCamera() {
     }
   });
 
+  // Map-style controls: left-drag (and one-finger drag) PANS across the
+  // ground plane so users slide to other trees without orbit-tilting;
+  // rotate moves to right-drag / two-finger. screenSpacePanning must be
+  // false or pan would move vertically in screen space.
   return (
     <OrbitControls
       ref={controlsRef}
@@ -201,7 +288,15 @@ export function ForestCamera() {
       minPolarAngle={0.15}
       rotateSpeed={0.5}
       zoomSpeed={0.8}
-      panSpeed={0.5}
+      panSpeed={1}
+      screenSpacePanning={false}
+      mouseButtons={{ LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE }}
+      touches={{ ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_ROTATE }}
+      onStart={() => {
+        // User input takes over from any in-flight camera animation
+        // instead of fighting the target lerp
+        isAnimating.current = false;
+      }}
       target={[0, 5, 0]}
     />
   );

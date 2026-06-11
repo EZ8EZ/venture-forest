@@ -169,6 +169,9 @@ export function TreeInstances({ placements, companyIds, filteredIds, highlighted
   // Trunk click: select + camera target
   const handleTrunkClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
+      // R3F does not gate click by pointer travel; without this a
+      // drag-to-pan that starts and ends on tree meshes selects a tree
+      if (e.delta > 4) return;
       e.stopPropagation();
       if (e.instanceId !== undefined && e.instanceId < companyIds.length) {
         const id = companyIds[e.instanceId];
@@ -373,6 +376,8 @@ function SectorCanopies({
 
   const onClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
+      // Same drag guard as the trunk handler (see handleTrunkClick)
+      if (e.delta > 4) return;
       e.stopPropagation();
       if (e.instanceId !== undefined && e.instanceId < ids.length) {
         const p = placements[e.instanceId];
