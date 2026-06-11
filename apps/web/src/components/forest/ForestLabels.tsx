@@ -8,6 +8,13 @@ interface ForestLabelsProps {
   companies: Company[];
 }
 
+// On fine-pointer devices the HoverTooltip carries the hovered company's
+// name and stats, so the plain hover label would duplicate it. Touch
+// devices keep the hover label (no tooltip there).
+const FINE_POINTER =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 export function ForestLabels({ placements, companies }: ForestLabelsProps) {
   const showLabels = useForestStore((s) => s.showLabels);
   const selectedCompanyId = useForestStore((s) => s.selectedCompanyId);
@@ -30,8 +37,8 @@ export function ForestLabels({ placements, companies }: ForestLabelsProps) {
       if (sel) { result.push(sel); shown.add(sel.company.id); }
     }
 
-    // Hovered company
-    if (hoveredCompanyId && !shown.has(hoveredCompanyId)) {
+    // Hovered company (touch devices only; see FINE_POINTER note)
+    if (!FINE_POINTER && hoveredCompanyId && !shown.has(hoveredCompanyId)) {
       const hov = items.find((t) => t.company.id === hoveredCompanyId);
       if (hov) { result.push(hov); shown.add(hov.company.id); }
     }

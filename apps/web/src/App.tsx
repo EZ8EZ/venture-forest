@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { ForestScene } from '@/components/forest/ForestScene';
 import { LoadingScreen } from '@/components/overlays/LoadingScreen';
 import { HUD } from '@/components/overlays/HUD';
+import { HoverTooltip } from '@/components/overlays/HoverTooltip';
 import { SearchPalette } from '@/components/overlays/SearchPalette';
 import { LegendPanel } from '@/components/overlays/LegendPanel';
 import { FilterPanel } from '@/components/overlays/FilterPanel';
@@ -37,6 +38,7 @@ export function App() {
       {/* Overlay layers */}
       <LoadingScreen />
       <HUD />
+      <HoverTooltip />
       <SearchPalette />
       <LegendPanel />
       <FilterPanel />
