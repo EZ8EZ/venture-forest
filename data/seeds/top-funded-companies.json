@@ -1,0 +1,1655 @@
+{
+  "description": "Canonical company roster for the forest. Each entry resolves through the high-confidence Harmonic matcher in scripts/build_forest_dataset.py; entries that fail to resolve are dropped and logged, never guessed.",
+  "companies": [
+    {
+      "name": "OpenAI",
+      "website": "https://openai.com",
+      "sector": "AI_ML",
+      "subsector": "foundation-models"
+    },
+    {
+      "name": "Anthropic",
+      "website": "https://anthropic.com",
+      "sector": "AI_ML",
+      "subsector": "ai-safety"
+    },
+    {
+      "name": "xAI",
+      "website": "https://x.ai",
+      "sector": "AI_ML",
+      "subsector": "foundation-models"
+    },
+    {
+      "name": "Mistral AI",
+      "website": "https://mistral.ai",
+      "sector": "AI_ML",
+      "subsector": "foundation-models"
+    },
+    {
+      "name": "Perplexity",
+      "website": "https://perplexity.ai",
+      "sector": "AI_ML",
+      "subsector": "search"
+    },
+    {
+      "name": "Cohere",
+      "website": "https://cohere.com",
+      "sector": "AI_ML",
+      "subsector": "enterprise-ai"
+    },
+    {
+      "name": "Scale AI",
+      "website": "https://scale.com",
+      "sector": "AI_ML",
+      "subsector": "data-labeling"
+    },
+    {
+      "name": "Databricks",
+      "website": "https://databricks.com",
+      "sector": "AI_ML",
+      "subsector": "data-platform"
+    },
+    {
+      "name": "CoreWeave",
+      "website": "https://coreweave.com",
+      "sector": "AI_ML",
+      "subsector": "cloud-gpu"
+    },
+    {
+      "name": "Cerebras",
+      "website": "https://cerebras.ai",
+      "sector": "AI_ML",
+      "subsector": "ai-chips"
+    },
+    {
+      "name": "Groq",
+      "website": "https://groq.com",
+      "sector": "AI_ML",
+      "subsector": "ai-chips"
+    },
+    {
+      "name": "Tenstorrent",
+      "website": "https://tenstorrent.com",
+      "sector": "AI_ML",
+      "subsector": "ai-chips"
+    },
+    {
+      "name": "Character.AI",
+      "website": "https://character.ai",
+      "sector": "AI_ML",
+      "subsector": "consumer-ai"
+    },
+    {
+      "name": "Runway",
+      "website": "https://runwayml.com",
+      "sector": "AI_ML",
+      "subsector": "generative-video"
+    },
+    {
+      "name": "ElevenLabs",
+      "website": "https://elevenlabs.io",
+      "sector": "AI_ML",
+      "subsector": "voice-ai"
+    },
+    {
+      "name": "Suno",
+      "website": "https://suno.com",
+      "sector": "AI_ML",
+      "subsector": "generative-audio"
+    },
+    {
+      "name": "Pika",
+      "website": "https://pika.art",
+      "sector": "AI_ML",
+      "subsector": "generative-video"
+    },
+    {
+      "name": "Safe Superintelligence",
+      "website": "https://ssi.inc",
+      "sector": "AI_ML",
+      "subsector": "ai-safety"
+    },
+    {
+      "name": "Cognition",
+      "website": "https://cognition.ai",
+      "sector": "AI_ML",
+      "subsector": "ai-agents"
+    },
+    {
+      "name": "Hebbia",
+      "website": "https://hebbia.com",
+      "sector": "AI_ML",
+      "subsector": "enterprise-ai"
+    },
+    {
+      "name": "Applied Intuition",
+      "website": "https://appliedintuition.com",
+      "sector": "AI_ML",
+      "subsector": "autonomous-vehicles"
+    },
+    {
+      "name": "Together AI",
+      "website": "https://together.ai",
+      "sector": "AI_ML",
+      "subsector": "ai-cloud"
+    },
+    {
+      "name": "Hugging Face",
+      "website": "https://huggingface.co",
+      "sector": "AI_ML",
+      "subsector": "model-hub"
+    },
+    {
+      "name": "Sakana AI",
+      "website": "https://sakana.ai",
+      "sector": "AI_ML",
+      "subsector": "foundation-models"
+    },
+    {
+      "name": "World Labs",
+      "website": "https://worldlabs.ai",
+      "sector": "AI_ML",
+      "subsector": "spatial-intelligence"
+    },
+    {
+      "name": "Thinking Machines Lab",
+      "website": "https://thinkingmachines.ai",
+      "sector": "AI_ML",
+      "subsector": "foundation-models"
+    },
+    {
+      "name": "Luma AI",
+      "website": "https://lumalabs.ai",
+      "sector": "AI_ML",
+      "subsector": "generative-video"
+    },
+    {
+      "name": "Black Forest Labs",
+      "website": "https://blackforestlabs.ai",
+      "sector": "AI_ML",
+      "subsector": "generative-image"
+    },
+    {
+      "name": "Physical Intelligence",
+      "website": "https://physicalintelligence.company",
+      "sector": "AI_ML",
+      "subsector": "robotics-foundation-models"
+    },
+    {
+      "name": "Figure",
+      "website": "https://figure.ai",
+      "sector": "AI_ML",
+      "subsector": "humanoid-robotics"
+    },
+    {
+      "name": "Stripe",
+      "website": "https://stripe.com",
+      "sector": "FINTECH",
+      "subsector": "payments"
+    },
+    {
+      "name": "Plaid",
+      "website": "https://plaid.com",
+      "sector": "FINTECH",
+      "subsector": "data-infra"
+    },
+    {
+      "name": "Mercury",
+      "website": "https://mercury.com",
+      "sector": "FINTECH",
+      "subsector": "business-banking"
+    },
+    {
+      "name": "Ramp",
+      "website": "https://ramp.com",
+      "sector": "FINTECH",
+      "subsector": "spend-management"
+    },
+    {
+      "name": "Monzo",
+      "website": "https://monzo.com",
+      "sector": "FINTECH",
+      "subsector": "neobanking"
+    },
+    {
+      "name": "Revolut",
+      "website": "https://revolut.com",
+      "sector": "FINTECH",
+      "subsector": "neobanking"
+    },
+    {
+      "name": "Chime",
+      "website": "https://chime.com",
+      "sector": "FINTECH",
+      "subsector": "neobanking"
+    },
+    {
+      "name": "Klarna",
+      "website": "https://klarna.com",
+      "sector": "FINTECH",
+      "subsector": "bnpl"
+    },
+    {
+      "name": "Brex",
+      "website": "https://brex.com",
+      "sector": "FINTECH",
+      "subsector": "corporate-cards"
+    },
+    {
+      "name": "Deel",
+      "website": "https://deel.com",
+      "sector": "FINTECH",
+      "subsector": "global-payroll"
+    },
+    {
+      "name": "Gusto",
+      "website": "https://gusto.com",
+      "sector": "FINTECH",
+      "subsector": "payroll"
+    },
+    {
+      "name": "Checkout.com",
+      "website": "https://checkout.com",
+      "sector": "FINTECH",
+      "subsector": "payments"
+    },
+    {
+      "name": "N26",
+      "website": "https://n26.com",
+      "sector": "FINTECH",
+      "subsector": "neobanking"
+    },
+    {
+      "name": "Airwallex",
+      "website": "https://airwallex.com",
+      "sector": "FINTECH",
+      "subsector": "cross-border"
+    },
+    {
+      "name": "Current",
+      "website": "https://current.com",
+      "sector": "FINTECH",
+      "subsector": "neobanking"
+    },
+    {
+      "name": "Addepar",
+      "website": "https://addepar.com",
+      "sector": "FINTECH",
+      "subsector": "wealth-tech"
+    },
+    {
+      "name": "Carta",
+      "website": "https://carta.com",
+      "sector": "FINTECH",
+      "subsector": "equity-management"
+    },
+    {
+      "name": "Anchorage Digital",
+      "website": "https://anchorage.com",
+      "sector": "FINTECH",
+      "subsector": "digital-assets"
+    },
+    {
+      "name": "Fireblocks",
+      "website": "https://fireblocks.com",
+      "sector": "FINTECH",
+      "subsector": "digital-assets"
+    },
+    {
+      "name": "Circle",
+      "website": "https://circle.com",
+      "sector": "FINTECH",
+      "subsector": "stablecoins"
+    },
+    {
+      "name": "Kraken",
+      "website": "https://kraken.com",
+      "sector": "FINTECH",
+      "subsector": "crypto-exchange"
+    },
+    {
+      "name": "Chainalysis",
+      "website": "https://chainalysis.com",
+      "sector": "FINTECH",
+      "subsector": "blockchain-analytics"
+    },
+    {
+      "name": "Public",
+      "website": "https://public.com",
+      "sector": "FINTECH",
+      "subsector": "investing"
+    },
+    {
+      "name": "Acorns",
+      "website": "https://acorns.com",
+      "sector": "FINTECH",
+      "subsector": "investing"
+    },
+    {
+      "name": "Melio",
+      "website": "https://melio.com",
+      "sector": "FINTECH",
+      "subsector": "b2b-payments"
+    },
+    {
+      "name": "Rapyd",
+      "website": "https://rapyd.net",
+      "sector": "FINTECH",
+      "subsector": "payments"
+    },
+    {
+      "name": "Bolt",
+      "website": "https://bolt.com",
+      "sector": "FINTECH",
+      "subsector": "checkout"
+    },
+    {
+      "name": "Varo",
+      "website": "https://varomoney.com",
+      "sector": "FINTECH",
+      "subsector": "neobanking"
+    },
+    {
+      "name": "Bilt Rewards",
+      "website": "https://biltrewards.com",
+      "sector": "FINTECH",
+      "subsector": "rewards"
+    },
+    {
+      "name": "MoonPay",
+      "website": "https://moonpay.com",
+      "sector": "FINTECH",
+      "subsector": "crypto-payments"
+    },
+    {
+      "name": "Rippling",
+      "website": "https://rippling.com",
+      "sector": "ENTERPRISE",
+      "subsector": "hr-tech"
+    },
+    {
+      "name": "Navan",
+      "website": "https://navan.com",
+      "sector": "ENTERPRISE",
+      "subsector": "travel-expense"
+    },
+    {
+      "name": "Flexport",
+      "website": "https://flexport.com",
+      "sector": "ENTERPRISE",
+      "subsector": "logistics"
+    },
+    {
+      "name": "Glean",
+      "website": "https://glean.com",
+      "sector": "ENTERPRISE",
+      "subsector": "enterprise-search"
+    },
+    {
+      "name": "Notion",
+      "website": "https://notion.com",
+      "sector": "ENTERPRISE",
+      "subsector": "productivity"
+    },
+    {
+      "name": "Airtable",
+      "website": "https://airtable.com",
+      "sector": "ENTERPRISE",
+      "subsector": "no-code"
+    },
+    {
+      "name": "Miro",
+      "website": "https://miro.com",
+      "sector": "ENTERPRISE",
+      "subsector": "collaboration"
+    },
+    {
+      "name": "Workato",
+      "website": "https://workato.com",
+      "sector": "ENTERPRISE",
+      "subsector": "automation"
+    },
+    {
+      "name": "Celonis",
+      "website": "https://celonis.com",
+      "sector": "ENTERPRISE",
+      "subsector": "process-mining"
+    },
+    {
+      "name": "o9 Solutions",
+      "website": "https://o9solutions.com",
+      "sector": "ENTERPRISE",
+      "subsector": "supply-chain"
+    },
+    {
+      "name": "Gong",
+      "website": "https://gong.io",
+      "sector": "ENTERPRISE",
+      "subsector": "revenue-intelligence"
+    },
+    {
+      "name": "Ironclad",
+      "website": "https://ironcladapp.com",
+      "sector": "ENTERPRISE",
+      "subsector": "contracts"
+    },
+    {
+      "name": "Clari",
+      "website": "https://clari.com",
+      "sector": "ENTERPRISE",
+      "subsector": "revenue-operations"
+    },
+    {
+      "name": "Island",
+      "website": "https://island.io",
+      "sector": "ENTERPRISE",
+      "subsector": "enterprise-browser"
+    },
+    {
+      "name": "Abnormal Security",
+      "website": "https://abnormalsecurity.com",
+      "sector": "ENTERPRISE",
+      "subsector": "email-security"
+    },
+    {
+      "name": "Arctic Wolf",
+      "website": "https://arcticwolf.com",
+      "sector": "ENTERPRISE",
+      "subsector": "security-operations"
+    },
+    {
+      "name": "Tanium",
+      "website": "https://tanium.com",
+      "sector": "ENTERPRISE",
+      "subsector": "endpoint-security"
+    },
+    {
+      "name": "Illumio",
+      "website": "https://illumio.com",
+      "sector": "ENTERPRISE",
+      "subsector": "zero-trust"
+    },
+    {
+      "name": "Vanta",
+      "website": "https://vanta.com",
+      "sector": "ENTERPRISE",
+      "subsector": "compliance"
+    },
+    {
+      "name": "Drata",
+      "website": "https://drata.com",
+      "sector": "ENTERPRISE",
+      "subsector": "compliance"
+    },
+    {
+      "name": "1Password",
+      "website": "https://1password.com",
+      "sector": "ENTERPRISE",
+      "subsector": "identity-security"
+    },
+    {
+      "name": "Sigma Computing",
+      "website": "https://sigmacomputing.com",
+      "sector": "ENTERPRISE",
+      "subsector": "analytics"
+    },
+    {
+      "name": "Alation",
+      "website": "https://alation.com",
+      "sector": "ENTERPRISE",
+      "subsector": "data-catalog"
+    },
+    {
+      "name": "Collibra",
+      "website": "https://collibra.com",
+      "sector": "ENTERPRISE",
+      "subsector": "data-governance"
+    },
+    {
+      "name": "Dataiku",
+      "website": "https://dataiku.com",
+      "sector": "ENTERPRISE",
+      "subsector": "data-science"
+    },
+    {
+      "name": "Talkdesk",
+      "website": "https://talkdesk.com",
+      "sector": "ENTERPRISE",
+      "subsector": "contact-center"
+    },
+    {
+      "name": "Highspot",
+      "website": "https://highspot.com",
+      "sector": "ENTERPRISE",
+      "subsector": "sales-enablement"
+    },
+    {
+      "name": "Cribl",
+      "website": "https://cribl.io",
+      "sector": "ENTERPRISE",
+      "subsector": "observability-data"
+    },
+    {
+      "name": "Netskope",
+      "website": "https://netskope.com",
+      "sector": "ENTERPRISE",
+      "subsector": "cloud-security"
+    },
+    {
+      "name": "Lattice",
+      "website": "https://lattice.com",
+      "sector": "ENTERPRISE",
+      "subsector": "hr-tech"
+    },
+    {
+      "name": "Recursion Pharmaceuticals",
+      "website": "https://recursion.com",
+      "sector": "BIOTECH",
+      "subsector": "drug-discovery"
+    },
+    {
+      "name": "Insitro",
+      "website": "https://insitro.com",
+      "sector": "BIOTECH",
+      "subsector": "drug-discovery"
+    },
+    {
+      "name": "Cradle",
+      "website": "https://cradle.bio",
+      "sector": "BIOTECH",
+      "subsector": "protein-engineering"
+    },
+    {
+      "name": "Altos Labs",
+      "website": "https://altoslabs.com",
+      "sector": "BIOTECH",
+      "subsector": "cellular-rejuvenation"
+    },
+    {
+      "name": "Generate Biomedicines",
+      "website": "https://generatebiomedicines.com",
+      "sector": "BIOTECH",
+      "subsector": "protein-design"
+    },
+    {
+      "name": "Isomorphic Labs",
+      "website": "https://isomorphiclabs.com",
+      "sector": "BIOTECH",
+      "subsector": "ai-drug-discovery"
+    },
+    {
+      "name": "Xaira Therapeutics",
+      "website": "https://xaira.com",
+      "sector": "BIOTECH",
+      "subsector": "ai-drug-discovery"
+    },
+    {
+      "name": "EvolutionaryScale",
+      "website": "https://evolutionaryscale.ai",
+      "sector": "BIOTECH",
+      "subsector": "protein-language-models"
+    },
+    {
+      "name": "Inceptive",
+      "website": "https://inceptive.life",
+      "sector": "BIOTECH",
+      "subsector": "rna-design"
+    },
+    {
+      "name": "Benchling",
+      "website": "https://benchling.com",
+      "sector": "BIOTECH",
+      "subsector": "r-and-d-cloud"
+    },
+    {
+      "name": "Colossal Biosciences",
+      "website": "https://colossal.com",
+      "sector": "BIOTECH",
+      "subsector": "de-extinction"
+    },
+    {
+      "name": "Eikon Therapeutics",
+      "website": "https://eikontx.com",
+      "sector": "BIOTECH",
+      "subsector": "drug-discovery"
+    },
+    {
+      "name": "ElevateBio",
+      "website": "https://elevate.bio",
+      "sector": "BIOTECH",
+      "subsector": "cell-gene-therapy"
+    },
+    {
+      "name": "National Resilience",
+      "website": "https://resilience.com",
+      "sector": "BIOTECH",
+      "subsector": "biomanufacturing"
+    },
+    {
+      "name": "Arsenal Biosciences",
+      "website": "https://arsenalbio.com",
+      "sector": "BIOTECH",
+      "subsector": "cell-therapy"
+    },
+    {
+      "name": "Kallyope",
+      "website": "https://kallyope.com",
+      "sector": "BIOTECH",
+      "subsector": "gut-brain"
+    },
+    {
+      "name": "Insilico Medicine",
+      "website": "https://insilico.com",
+      "sector": "BIOTECH",
+      "subsector": "ai-drug-discovery"
+    },
+    {
+      "name": "Iambic Therapeutics",
+      "website": "https://iambic.ai",
+      "sector": "BIOTECH",
+      "subsector": "ai-drug-discovery"
+    },
+    {
+      "name": "Chai Discovery",
+      "website": "https://chaidiscovery.com",
+      "sector": "BIOTECH",
+      "subsector": "molecular-ai"
+    },
+    {
+      "name": "Formation Bio",
+      "website": "https://formation.bio",
+      "sector": "BIOTECH",
+      "subsector": "ai-pharma"
+    },
+    {
+      "name": "BigHat Biosciences",
+      "website": "https://bighatbio.com",
+      "sector": "BIOTECH",
+      "subsector": "antibody-design"
+    },
+    {
+      "name": "Terray Therapeutics",
+      "website": "https://terraytx.com",
+      "sector": "BIOTECH",
+      "subsector": "small-molecule-ai"
+    },
+    {
+      "name": "Enveda",
+      "website": "https://envedabio.com",
+      "sector": "BIOTECH",
+      "subsector": "natural-products"
+    },
+    {
+      "name": "Strand Therapeutics",
+      "website": "https://strandtx.com",
+      "sector": "BIOTECH",
+      "subsector": "mrna-therapeutics"
+    },
+    {
+      "name": "Umoja Biopharma",
+      "website": "https://umoja-biopharma.com",
+      "sector": "BIOTECH",
+      "subsector": "in-vivo-immunotherapy"
+    },
+    {
+      "name": "Orbital Therapeutics",
+      "website": "https://orbitaltx.com",
+      "sector": "BIOTECH",
+      "subsector": "rna-medicines"
+    },
+    {
+      "name": "Tome Biosciences",
+      "website": "https://tome.bio",
+      "sector": "BIOTECH",
+      "subsector": "genomic-integration"
+    },
+    {
+      "name": "Profluent",
+      "website": "https://profluent.bio",
+      "sector": "BIOTECH",
+      "subsector": "protein-language-models"
+    },
+    {
+      "name": "Watershed",
+      "website": "https://watershed.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "carbon-accounting"
+    },
+    {
+      "name": "Redwood Materials",
+      "website": "https://redwoodmaterials.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "battery-recycling"
+    },
+    {
+      "name": "Form Energy",
+      "website": "https://formenergy.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "energy-storage"
+    },
+    {
+      "name": "Electric Hydrogen",
+      "website": "https://eh2.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "green-hydrogen"
+    },
+    {
+      "name": "Helion Energy",
+      "website": "https://helionenergy.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "fusion"
+    },
+    {
+      "name": "Commonwealth Fusion Systems",
+      "website": "https://cfs.energy",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "fusion"
+    },
+    {
+      "name": "TAE Technologies",
+      "website": "https://tae.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "fusion"
+    },
+    {
+      "name": "Zap Energy",
+      "website": "https://zapenergy.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "fusion"
+    },
+    {
+      "name": "Pacific Fusion",
+      "website": "https://pacificfusion.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "fusion"
+    },
+    {
+      "name": "Crusoe",
+      "website": "https://crusoe.ai",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "energy-compute"
+    },
+    {
+      "name": "X-energy",
+      "website": "https://x-energy.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "nuclear-smr"
+    },
+    {
+      "name": "Kairos Power",
+      "website": "https://kairospower.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "nuclear-smr"
+    },
+    {
+      "name": "TerraPower",
+      "website": "https://terrapower.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "nuclear"
+    },
+    {
+      "name": "Fervo Energy",
+      "website": "https://fervoenergy.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "geothermal"
+    },
+    {
+      "name": "Base Power",
+      "website": "https://basepowercompany.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "home-batteries"
+    },
+    {
+      "name": "Twelve",
+      "website": "https://twelve.co",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "carbon-transformation"
+    },
+    {
+      "name": "Sublime Systems",
+      "website": "https://sublime-systems.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "clean-cement"
+    },
+    {
+      "name": "Heirloom",
+      "website": "https://heirloomcarbontech.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "direct-air-capture"
+    },
+    {
+      "name": "Charm Industrial",
+      "website": "https://charmindustrial.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "carbon-removal"
+    },
+    {
+      "name": "Climeworks",
+      "website": "https://climeworks.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "direct-air-capture"
+    },
+    {
+      "name": "Enpal",
+      "website": "https://enpal.de",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "residential-solar"
+    },
+    {
+      "name": "1KOMMA5",
+      "website": "https://1komma5grad.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "energy-systems"
+    },
+    {
+      "name": "Sunfire",
+      "website": "https://sunfire.de",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "electrolyzers"
+    },
+    {
+      "name": "Stegra",
+      "website": "https://stegra.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "green-steel"
+    },
+    {
+      "name": "Ascend Elements",
+      "website": "https://ascendelements.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "battery-materials"
+    },
+    {
+      "name": "Lilac Solutions",
+      "website": "https://lilacsolutions.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "lithium-extraction"
+    },
+    {
+      "name": "Antora Energy",
+      "website": "https://antoraenergy.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "thermal-storage"
+    },
+    {
+      "name": "Verkor",
+      "website": "https://verkor.com",
+      "sector": "CLIMATE_ENERGY",
+      "subsector": "battery-manufacturing"
+    },
+    {
+      "name": "Canva",
+      "website": "https://canva.com",
+      "sector": "CONSUMER",
+      "subsector": "design"
+    },
+    {
+      "name": "Zepto",
+      "website": "https://zeptonow.com",
+      "sector": "CONSUMER",
+      "subsector": "quick-commerce"
+    },
+    {
+      "name": "Impossible Foods",
+      "website": "https://impossiblefoods.com",
+      "sector": "CONSUMER",
+      "subsector": "food-tech"
+    },
+    {
+      "name": "Discord",
+      "website": "https://discord.com",
+      "sector": "CONSUMER",
+      "subsector": "community"
+    },
+    {
+      "name": "Epic Games",
+      "website": "https://epicgames.com",
+      "sector": "CONSUMER",
+      "subsector": "gaming"
+    },
+    {
+      "name": "Whatnot",
+      "website": "https://whatnot.com",
+      "sector": "CONSUMER",
+      "subsector": "live-commerce"
+    },
+    {
+      "name": "StockX",
+      "website": "https://stockx.com",
+      "sector": "CONSUMER",
+      "subsector": "resale-marketplace"
+    },
+    {
+      "name": "Faire",
+      "website": "https://faire.com",
+      "sector": "CONSUMER",
+      "subsector": "wholesale-marketplace"
+    },
+    {
+      "name": "SHEIN",
+      "website": "https://shein.com",
+      "sector": "CONSUMER",
+      "subsector": "fast-fashion"
+    },
+    {
+      "name": "Gopuff",
+      "website": "https://gopuff.com",
+      "sector": "CONSUMER",
+      "subsector": "quick-commerce"
+    },
+    {
+      "name": "Bolt Mobility",
+      "website": "https://bolt.eu",
+      "sector": "CONSUMER",
+      "subsector": "mobility"
+    },
+    {
+      "name": "Lime",
+      "website": "https://li.me",
+      "sector": "CONSUMER",
+      "subsector": "micromobility"
+    },
+    {
+      "name": "Telegram",
+      "website": "https://telegram.org",
+      "sector": "CONSUMER",
+      "subsector": "messaging"
+    },
+    {
+      "name": "Strava",
+      "website": "https://strava.com",
+      "sector": "CONSUMER",
+      "subsector": "fitness"
+    },
+    {
+      "name": "AllTrails",
+      "website": "https://alltrails.com",
+      "sector": "CONSUMER",
+      "subsector": "outdoors"
+    },
+    {
+      "name": "Substack",
+      "website": "https://substack.com",
+      "sector": "CONSUMER",
+      "subsector": "creator-economy"
+    },
+    {
+      "name": "Patreon",
+      "website": "https://patreon.com",
+      "sector": "CONSUMER",
+      "subsector": "creator-economy"
+    },
+    {
+      "name": "Calm",
+      "website": "https://calm.com",
+      "sector": "CONSUMER",
+      "subsector": "wellness"
+    },
+    {
+      "name": "Headspace",
+      "website": "https://headspace.com",
+      "sector": "CONSUMER",
+      "subsector": "wellness"
+    },
+    {
+      "name": "Skims",
+      "website": "https://skims.com",
+      "sector": "CONSUMER",
+      "subsector": "apparel"
+    },
+    {
+      "name": "Glossier",
+      "website": "https://glossier.com",
+      "sector": "CONSUMER",
+      "subsector": "beauty"
+    },
+    {
+      "name": "Liquid Death",
+      "website": "https://liquiddeath.com",
+      "sector": "CONSUMER",
+      "subsector": "beverages"
+    },
+    {
+      "name": "Athletic Brewing",
+      "website": "https://athleticbrewing.com",
+      "sector": "CONSUMER",
+      "subsector": "beverages"
+    },
+    {
+      "name": "Vuori",
+      "website": "https://vuoriclothing.com",
+      "sector": "CONSUMER",
+      "subsector": "apparel"
+    },
+    {
+      "name": "Rec Room",
+      "website": "https://recroom.com",
+      "sector": "CONSUMER",
+      "subsector": "gaming"
+    },
+    {
+      "name": "Dream Games",
+      "website": "https://dreamgames.com",
+      "sector": "CONSUMER",
+      "subsector": "mobile-gaming"
+    },
+    {
+      "name": "Voodoo",
+      "website": "https://voodoo.io",
+      "sector": "CONSUMER",
+      "subsector": "mobile-gaming"
+    },
+    {
+      "name": "Tonal",
+      "website": "https://tonal.com",
+      "sector": "CONSUMER",
+      "subsector": "fitness-hardware"
+    },
+    {
+      "name": "Figma",
+      "website": "https://figma.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "design-tools"
+    },
+    {
+      "name": "Vercel",
+      "website": "https://vercel.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "deployment"
+    },
+    {
+      "name": "Replit",
+      "website": "https://replit.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ai-coding"
+    },
+    {
+      "name": "Cursor",
+      "website": "https://cursor.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ai-coding"
+    },
+    {
+      "name": "Augment Code",
+      "website": "https://augmentcode.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ai-coding"
+    },
+    {
+      "name": "Postman",
+      "website": "https://postman.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "api-tools"
+    },
+    {
+      "name": "Docker",
+      "website": "https://docker.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "containers"
+    },
+    {
+      "name": "JetBrains",
+      "website": "https://jetbrains.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ide"
+    },
+    {
+      "name": "Grafana Labs",
+      "website": "https://grafana.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "observability"
+    },
+    {
+      "name": "dbt Labs",
+      "website": "https://getdbt.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "data-transformation"
+    },
+    {
+      "name": "Snyk",
+      "website": "https://snyk.io",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "security"
+    },
+    {
+      "name": "Sentry",
+      "website": "https://sentry.io",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "error-monitoring"
+    },
+    {
+      "name": "Temporal",
+      "website": "https://temporal.io",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "workflow-orchestration"
+    },
+    {
+      "name": "Supabase",
+      "website": "https://supabase.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "backend-as-a-service"
+    },
+    {
+      "name": "Neon",
+      "website": "https://neon.tech",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "serverless-postgres"
+    },
+    {
+      "name": "PlanetScale",
+      "website": "https://planetscale.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "databases"
+    },
+    {
+      "name": "Render",
+      "website": "https://render.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "cloud-platform"
+    },
+    {
+      "name": "Railway",
+      "website": "https://railway.app",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "cloud-platform"
+    },
+    {
+      "name": "Linear",
+      "website": "https://linear.app",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "project-management"
+    },
+    {
+      "name": "Retool",
+      "website": "https://retool.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "internal-tools"
+    },
+    {
+      "name": "Airbyte",
+      "website": "https://airbyte.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "data-integration"
+    },
+    {
+      "name": "Fivetran",
+      "website": "https://fivetran.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "data-pipelines"
+    },
+    {
+      "name": "LaunchDarkly",
+      "website": "https://launchdarkly.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "feature-flags"
+    },
+    {
+      "name": "CircleCI",
+      "website": "https://circleci.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ci-cd"
+    },
+    {
+      "name": "Chainguard",
+      "website": "https://chainguard.dev",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "supply-chain-security"
+    },
+    {
+      "name": "Lovable",
+      "website": "https://lovable.dev",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ai-app-builder"
+    },
+    {
+      "name": "StackBlitz",
+      "website": "https://stackblitz.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "ai-app-builder"
+    },
+    {
+      "name": "LangChain",
+      "website": "https://langchain.com",
+      "sector": "DEVELOPER_TOOLS",
+      "subsector": "llm-frameworks"
+    },
+    {
+      "name": "Abridge",
+      "website": "https://abridge.com",
+      "sector": "HEALTHCARE",
+      "subsector": "clinical-ai"
+    },
+    {
+      "name": "Tempus AI",
+      "website": "https://tempus.com",
+      "sector": "HEALTHCARE",
+      "subsector": "precision-medicine"
+    },
+    {
+      "name": "Devoted Health",
+      "website": "https://devoted.com",
+      "sector": "HEALTHCARE",
+      "subsector": "insurance"
+    },
+    {
+      "name": "Ro",
+      "website": "https://ro.co",
+      "sector": "HEALTHCARE",
+      "subsector": "telehealth"
+    },
+    {
+      "name": "Sword Health",
+      "website": "https://swordhealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "digital-msk"
+    },
+    {
+      "name": "Cityblock Health",
+      "website": "https://cityblock.com",
+      "sector": "HEALTHCARE",
+      "subsector": "value-based-care"
+    },
+    {
+      "name": "Lyra Health",
+      "website": "https://lyrahealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "mental-health"
+    },
+    {
+      "name": "Spring Health",
+      "website": "https://springhealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "mental-health"
+    },
+    {
+      "name": "Headway",
+      "website": "https://headway.co",
+      "sector": "HEALTHCARE",
+      "subsector": "mental-health"
+    },
+    {
+      "name": "Grow Therapy",
+      "website": "https://growtherapy.com",
+      "sector": "HEALTHCARE",
+      "subsector": "mental-health"
+    },
+    {
+      "name": "Maven Clinic",
+      "website": "https://mavenclinic.com",
+      "sector": "HEALTHCARE",
+      "subsector": "womens-health"
+    },
+    {
+      "name": "Carbon Health",
+      "website": "https://carbonhealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "primary-care"
+    },
+    {
+      "name": "Komodo Health",
+      "website": "https://komodohealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "health-data"
+    },
+    {
+      "name": "Datavant",
+      "website": "https://datavant.com",
+      "sector": "HEALTHCARE",
+      "subsector": "health-data"
+    },
+    {
+      "name": "Innovaccer",
+      "website": "https://innovaccer.com",
+      "sector": "HEALTHCARE",
+      "subsector": "health-data"
+    },
+    {
+      "name": "Alto Pharmacy",
+      "website": "https://alto.com",
+      "sector": "HEALTHCARE",
+      "subsector": "pharmacy"
+    },
+    {
+      "name": "Thirty Madison",
+      "website": "https://thirtymadison.com",
+      "sector": "HEALTHCARE",
+      "subsector": "specialty-care"
+    },
+    {
+      "name": "Function Health",
+      "website": "https://functionhealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "diagnostics"
+    },
+    {
+      "name": "K Health",
+      "website": "https://khealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "ai-primary-care"
+    },
+    {
+      "name": "Cedar",
+      "website": "https://cedar.com",
+      "sector": "HEALTHCARE",
+      "subsector": "billing"
+    },
+    {
+      "name": "Cleerly",
+      "website": "https://cleerlyhealth.com",
+      "sector": "HEALTHCARE",
+      "subsector": "cardiac-imaging"
+    },
+    {
+      "name": "Viz.ai",
+      "website": "https://viz.ai",
+      "sector": "HEALTHCARE",
+      "subsector": "clinical-ai"
+    },
+    {
+      "name": "Aidoc",
+      "website": "https://aidoc.com",
+      "sector": "HEALTHCARE",
+      "subsector": "radiology-ai"
+    },
+    {
+      "name": "OpenEvidence",
+      "website": "https://openevidence.com",
+      "sector": "HEALTHCARE",
+      "subsector": "clinical-ai"
+    },
+    {
+      "name": "Ambience Healthcare",
+      "website": "https://ambiencehealthcare.com",
+      "sector": "HEALTHCARE",
+      "subsector": "clinical-ai"
+    },
+    {
+      "name": "Suki",
+      "website": "https://suki.ai",
+      "sector": "HEALTHCARE",
+      "subsector": "clinical-ai"
+    },
+    {
+      "name": "Commure",
+      "website": "https://commure.com",
+      "sector": "HEALTHCARE",
+      "subsector": "provider-platform"
+    },
+    {
+      "name": "Transcarent",
+      "website": "https://transcarent.com",
+      "sector": "HEALTHCARE",
+      "subsector": "care-navigation"
+    },
+    {
+      "name": "ClassDojo",
+      "website": "https://classdojo.com",
+      "sector": "EDUCATION",
+      "subsector": "k12"
+    },
+    {
+      "name": "Handshake",
+      "website": "https://joinhandshake.com",
+      "sector": "EDUCATION",
+      "subsector": "career-platform"
+    },
+    {
+      "name": "Campuswire",
+      "website": "https://campuswire.com",
+      "sector": "EDUCATION",
+      "subsector": "higher-ed"
+    },
+    {
+      "name": "Guild",
+      "website": "https://guild.com",
+      "sector": "EDUCATION",
+      "subsector": "workforce-education"
+    },
+    {
+      "name": "MasterClass",
+      "website": "https://masterclass.com",
+      "sector": "EDUCATION",
+      "subsector": "online-learning"
+    },
+    {
+      "name": "Outschool",
+      "website": "https://outschool.com",
+      "sector": "EDUCATION",
+      "subsector": "k12-marketplace"
+    },
+    {
+      "name": "Brilliant",
+      "website": "https://brilliant.org",
+      "sector": "EDUCATION",
+      "subsector": "stem-learning"
+    },
+    {
+      "name": "Quizlet",
+      "website": "https://quizlet.com",
+      "sector": "EDUCATION",
+      "subsector": "study-tools"
+    },
+    {
+      "name": "IXL Learning",
+      "website": "https://ixl.com",
+      "sector": "EDUCATION",
+      "subsector": "k12"
+    },
+    {
+      "name": "Newsela",
+      "website": "https://newsela.com",
+      "sector": "EDUCATION",
+      "subsector": "k12-content"
+    },
+    {
+      "name": "GoStudent",
+      "website": "https://gostudent.org",
+      "sector": "EDUCATION",
+      "subsector": "tutoring"
+    },
+    {
+      "name": "Multiverse",
+      "website": "https://multiverse.io",
+      "sector": "EDUCATION",
+      "subsector": "apprenticeships"
+    },
+    {
+      "name": "Degreed",
+      "website": "https://degreed.com",
+      "sector": "EDUCATION",
+      "subsector": "workforce-learning"
+    },
+    {
+      "name": "360Learning",
+      "website": "https://360learning.com",
+      "sector": "EDUCATION",
+      "subsector": "corporate-learning"
+    },
+    {
+      "name": "Speak",
+      "website": "https://speak.com",
+      "sector": "EDUCATION",
+      "subsector": "language-learning"
+    },
+    {
+      "name": "Eruditus",
+      "website": "https://eruditus.com",
+      "sector": "EDUCATION",
+      "subsector": "executive-education"
+    },
+    {
+      "name": "upGrad",
+      "website": "https://upgrad.com",
+      "sector": "EDUCATION",
+      "subsector": "higher-ed"
+    },
+    {
+      "name": "Unacademy",
+      "website": "https://unacademy.com",
+      "sector": "EDUCATION",
+      "subsector": "test-prep"
+    },
+    {
+      "name": "Age of Learning",
+      "website": "https://ageoflearning.com",
+      "sector": "EDUCATION",
+      "subsector": "early-learning"
+    },
+    {
+      "name": "Physics Wallah",
+      "website": "https://pw.live",
+      "sector": "EDUCATION",
+      "subsector": "test-prep"
+    },
+    {
+      "name": "SpaceX",
+      "website": "https://spacex.com",
+      "sector": "OTHER",
+      "subsector": "aerospace"
+    },
+    {
+      "name": "Anduril Industries",
+      "website": "https://anduril.com",
+      "sector": "OTHER",
+      "subsector": "defense-tech"
+    },
+    {
+      "name": "Relativity Space",
+      "website": "https://relativityspace.com",
+      "sector": "OTHER",
+      "subsector": "aerospace"
+    },
+    {
+      "name": "Varda Space",
+      "website": "https://varda.com",
+      "sector": "OTHER",
+      "subsector": "space-manufacturing"
+    },
+    {
+      "name": "Shield AI",
+      "website": "https://shield.ai",
+      "sector": "OTHER",
+      "subsector": "defense-autonomy"
+    },
+    {
+      "name": "Saronic",
+      "website": "https://saronic.com",
+      "sector": "OTHER",
+      "subsector": "autonomous-vessels"
+    },
+    {
+      "name": "Castelion",
+      "website": "https://castelion.com",
+      "sector": "OTHER",
+      "subsector": "hypersonics"
+    },
+    {
+      "name": "Hadrian",
+      "website": "https://hadrian.co",
+      "sector": "OTHER",
+      "subsector": "precision-manufacturing"
+    },
+    {
+      "name": "Hermeus",
+      "website": "https://hermeus.com",
+      "sector": "OTHER",
+      "subsector": "hypersonic-aircraft"
+    },
+    {
+      "name": "Stoke Space",
+      "website": "https://stokespace.com",
+      "sector": "OTHER",
+      "subsector": "reusable-rockets"
+    },
+    {
+      "name": "Axiom Space",
+      "website": "https://axiomspace.com",
+      "sector": "OTHER",
+      "subsector": "space-stations"
+    },
+    {
+      "name": "Sierra Space",
+      "website": "https://sierraspace.com",
+      "sector": "OTHER",
+      "subsector": "space-systems"
+    },
+    {
+      "name": "Astranis",
+      "website": "https://astranis.com",
+      "sector": "OTHER",
+      "subsector": "satellites"
+    },
+    {
+      "name": "K2 Space",
+      "website": "https://k2space.com",
+      "sector": "OTHER",
+      "subsector": "satellites"
+    },
+    {
+      "name": "Impulse Space",
+      "website": "https://impulsespace.com",
+      "sector": "OTHER",
+      "subsector": "in-space-transport"
+    },
+    {
+      "name": "True Anomaly",
+      "website": "https://trueanomaly.space",
+      "sector": "OTHER",
+      "subsector": "space-defense"
+    },
+    {
+      "name": "Skydio",
+      "website": "https://skydio.com",
+      "sector": "OTHER",
+      "subsector": "drones"
+    },
+    {
+      "name": "Zipline",
+      "website": "https://flyzipline.com",
+      "sector": "OTHER",
+      "subsector": "drone-delivery"
+    },
+    {
+      "name": "Nuro",
+      "website": "https://nuro.ai",
+      "sector": "OTHER",
+      "subsector": "autonomous-delivery"
+    },
+    {
+      "name": "Waabi",
+      "website": "https://waabi.ai",
+      "sector": "OTHER",
+      "subsector": "autonomous-trucking"
+    },
+    {
+      "name": "Agility Robotics",
+      "website": "https://agilityrobotics.com",
+      "sector": "OTHER",
+      "subsector": "humanoid-robotics"
+    },
+    {
+      "name": "Stord",
+      "website": "https://stord.com",
+      "sector": "OTHER",
+      "subsector": "fulfillment"
+    },
+    {
+      "name": "Flock Safety",
+      "website": "https://flocksafety.com",
+      "sector": "OTHER",
+      "subsector": "public-safety"
+    },
+    {
+      "name": "EquipmentShare",
+      "website": "https://equipmentshare.com",
+      "sector": "OTHER",
+      "subsector": "construction-tech"
+    },
+    {
+      "name": "Firefly Aerospace",
+      "website": "https://fireflyspace.com",
+      "sector": "OTHER",
+      "subsector": "aerospace"
+    }
+  ]
+}

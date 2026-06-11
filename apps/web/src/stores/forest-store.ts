@@ -11,7 +11,7 @@ export interface CameraTarget {
   lookAt?: { x: number; y: number; z: number };
 }
 
-export const DEFAULT_CAMERA = { x: 96, y: 66, z: 152 };
+export const DEFAULT_CAMERA = { x: 116, y: 80, z: 184 };
 
 interface ForestState {
   // Loading

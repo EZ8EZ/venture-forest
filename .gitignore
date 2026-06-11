@@ -87,3 +87,6 @@ htmlcov/
 .parcel-cache/
 tmp/
 temp/
+
+# Raw provider responses (large, regenerable; pipeline caches)
+data/raw/harmonic/

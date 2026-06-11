@@ -45,7 +45,7 @@ export function ForestScene() {
       {/* Fallback color behind the sky dome, matched to the dusk horizon */}
       <color attach="background" args={['#7d8298']} />
       {/* Fog tinted toward the hazy horizon so distant trees dissolve into sky */}
-      <fog attach="fog" args={['#8a8fa4', 100, 460]} />
+      <fog attach="fog" args={['#8a8fa4', 130, 580]} />
 
       <Suspense fallback={null}>
         {/* Procedural scattering sky lit from the same sun as the scene */}

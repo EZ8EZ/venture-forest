@@ -9,16 +9,19 @@ import { GroveMarkers } from './GroveMarkers';
 import { EnvironmentParticles } from './EnvironmentParticles';
 import type { Company, Grove, Investor } from '@/lib/types';
 
-// Vintage grove centers for year-based grouping
+// Vintage grove centers for year-based grouping, spread for ~280 trees.
+// Pre-2020 vintages share the 'older' clearing.
 const VINTAGE_GROVES: Record<number, { cx: number; cz: number }> = {
-  2020: { cx: -55, cz: -45 },
-  2021: { cx: 0, cz: -55 },
-  2022: { cx: 55, cz: -45 },
-  2023: { cx: -55, cz: 10 },
-  2024: { cx: 0, cz: 0 },
-  2025: { cx: 55, cz: 10 },
-  2026: { cx: 0, cz: 55 },
+  2019: { cx: -95, cz: -80 },
+  2020: { cx: 0, cz: -100 },
+  2021: { cx: 95, cz: -80 },
+  2022: { cx: -110, cz: 15 },
+  2023: { cx: 0, cz: 0 },
+  2024: { cx: 110, cz: 15 },
+  2025: { cx: -60, cz: 95 },
+  2026: { cx: 60, cz: 95 },
 };
+const VINTAGE_FALLBACK_YEAR = 2019;
 
 function pseudoRandom(a: number, b: number): number {
   const s = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453;
@@ -37,17 +40,19 @@ export function ForestWorld() {
     if (!snapshot) return [];
     if (groupingMode === 'sector') return snapshot.placements;
 
-    // Vintage mode: reposition trees into year-based groves
+    // Vintage mode: reposition trees into year-based groves. Years before
+    // the first clearing collapse into it ("older" vintage).
     return snapshot.placements.map((p) => {
       const company = snapshot.companies.find((c) => c.id === p.company_id);
-      const year = company?.founded_year || 2023;
-      const grove = VINTAGE_GROVES[year] || VINTAGE_GROVES[2023];
+      const rawYear = company?.founded_year || 2023;
+      const year = Math.max(VINTAGE_FALLBACK_YEAR, rawYear);
+      const grove = VINTAGE_GROVES[year] || VINTAGE_GROVES[VINTAGE_FALLBACK_YEAR];
 
       // Deterministic scatter within vintage grove
       const hash1 = pseudoRandom(p.world_x * 1.1, p.world_z * 0.9);
       const hash2 = pseudoRandom(p.world_z * 1.3, p.world_x * 0.7);
       const angle = hash1 * Math.PI * 2;
-      const radius = 5 + hash2 * 22;
+      const radius = 8 + hash2 * 34;
 
       return {
         ...p,
@@ -60,21 +65,23 @@ export function ForestWorld() {
   // Vintage groves for GroveMarkers
   const vintageGroves = useMemo((): Grove[] => {
     if (!snapshot || groupingMode !== 'vintage') return [];
+    // Clamp founding years into the defined clearings so pre-2019
+    // companies share one "older" vintage instead of stacking labels
     const yearSet = new Set<number>();
     snapshot.companies.forEach((c) => {
-      if (c.founded_year) yearSet.add(c.founded_year);
+      if (c.founded_year) yearSet.add(Math.max(VINTAGE_FALLBACK_YEAR, c.founded_year));
     });
     return Array.from(yearSet)
       .sort()
       .map((year) => {
-        const grove = VINTAGE_GROVES[year] || VINTAGE_GROVES[2023];
+        const grove = VINTAGE_GROVES[year] || VINTAGE_GROVES[VINTAGE_FALLBACK_YEAR];
         return {
           id: `vintage-${year}`,
           sector: 'OTHER' as const,
           center_x: grove.cx,
           center_z: grove.cz,
-          radius: 30,
-          label: `${year}`,
+          radius: 42,
+          label: year === VINTAGE_FALLBACK_YEAR ? `${year} & earlier` : `${year}`,
         };
       });
   }, [snapshot, groupingMode]);
