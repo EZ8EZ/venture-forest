@@ -1,0 +1,3012 @@
+[
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "total_funding_usd",
+    "snapshot_value": 480000000,
+    "harmonic_value": 8975000
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "grant"
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-09-12",
+    "harmonic_value": "2024-06-05"
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 11
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 50
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~25"
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "11-50"
+  },
+  {
+    "company_id": "c-001",
+    "company_name": "Synthara AI",
+    "field": "description",
+    "snapshot_value": "Foundation model training infrastructure for enterprise deployments",
+    "harmonic_value": "In-memory computing for embedded systems."
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "total_funding_usd",
+    "snapshot_value": 110000000,
+    "harmonic_value": 329320000
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "series_f"
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-07-22",
+    "harmonic_value": "2022-01-19"
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "headcount_min",
+    "snapshot_value": 51,
+    "harmonic_value": 501
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "headcount_max",
+    "snapshot_value": 200,
+    "harmonic_value": 1000
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~517"
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "headcount_bucket",
+    "snapshot_value": "51-200",
+    "harmonic_value": "501-1000"
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "website",
+    "snapshot_value": "https://latticeai.com",
+    "harmonic_value": "https://lattice.com"
+  },
+  {
+    "company_id": "c-007",
+    "company_name": "Lattice AI",
+    "field": "description",
+    "snapshot_value": "AI-powered semiconductor design automation",
+    "harmonic_value": "AI-powered people management platform."
+  },
+  {
+    "company_id": "c-009",
+    "company_name": "ClearLedger",
+    "field": "headcount_min",
+    "snapshot_value": 51,
+    "harmonic_value": 1
+  },
+  {
+    "company_id": "c-009",
+    "company_name": "ClearLedger",
+    "field": "headcount_max",
+    "snapshot_value": 200,
+    "harmonic_value": 10
+  },
+  {
+    "company_id": "c-009",
+    "company_name": "ClearLedger",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~6"
+  },
+  {
+    "company_id": "c-009",
+    "company_name": "ClearLedger",
+    "field": "headcount_bucket",
+    "snapshot_value": "51-200",
+    "harmonic_value": "1-10"
+  },
+  {
+    "company_id": "c-009",
+    "company_name": "ClearLedger",
+    "field": "description",
+    "snapshot_value": "Real-time treasury management for mid-market companies",
+    "harmonic_value": "Crypto payments for businesses."
+  },
+  {
+    "company_id": "c-024",
+    "company_name": "Cellarium",
+    "field": "website",
+    "snapshot_value": "https://cellarium.bio",
+    "harmonic_value": "https://cellarium.ai"
+  },
+  {
+    "company_id": "c-024",
+    "company_name": "Cellarium",
+    "field": "description",
+    "snapshot_value": "Precision fermentation platform for alternative proteins",
+    "harmonic_value": "AI for cell biology research."
+  },
+  {
+    "company_id": "c-026",
+    "company_name": "GoodBowl",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 1
+  },
+  {
+    "company_id": "c-026",
+    "company_name": "GoodBowl",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 10
+  },
+  {
+    "company_id": "c-026",
+    "company_name": "GoodBowl",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~4"
+  },
+  {
+    "company_id": "c-026",
+    "company_name": "GoodBowl",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "1-10"
+  },
+  {
+    "company_id": "c-026",
+    "company_name": "GoodBowl",
+    "field": "website",
+    "snapshot_value": "https://goodbowl.com",
+    "harmonic_value": "https://goodbowl.business.site"
+  },
+  {
+    "company_id": "c-026",
+    "company_name": "GoodBowl",
+    "field": "description",
+    "snapshot_value": "Personalized meal kit delivery using AI nutrition planning",
+    "harmonic_value": "Restaurants, healthy, customizable bowls."
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "total_funding_usd",
+    "snapshot_value": 35000000,
+    "harmonic_value": 200000
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "latest_round_type",
+    "snapshot_value": "series_a",
+    "harmonic_value": "pre_seed"
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-01-18",
+    "harmonic_value": "2019-12-01"
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "headcount_min",
+    "snapshot_value": 11,
+    "harmonic_value": 1
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "headcount_max",
+    "snapshot_value": 50,
+    "harmonic_value": 10
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "headcount_display",
+    "snapshot_value": "11-50",
+    "harmonic_value": "~5"
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "headcount_bucket",
+    "snapshot_value": "11-50",
+    "harmonic_value": "1-10"
+  },
+  {
+    "company_id": "c-027",
+    "company_name": "Nomad Stays",
+    "field": "description",
+    "snapshot_value": "Flexible housing marketplace for remote workers and digital nomads",
+    "harmonic_value": "Verified Wi-Fi nomad accommodation platform."
+  },
+  {
+    "company_id": "c-028",
+    "company_name": "LoopWear",
+    "field": "website",
+    "snapshot_value": "https://loopwear.co",
+    "harmonic_value": "https://loopwear.com"
+  },
+  {
+    "company_id": "c-028",
+    "company_name": "LoopWear",
+    "field": "description",
+    "snapshot_value": "Circular fashion platform for renting and reselling premium clothing",
+    "harmonic_value": "Online men's fashion retailer."
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "total_funding_usd",
+    "snapshot_value": 30000000,
+    "harmonic_value": 35950
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "latest_round_type",
+    "snapshot_value": "series_a",
+    "harmonic_value": "pre_seed"
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-09-18",
+    "harmonic_value": "2022-03-15"
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "headcount_min",
+    "snapshot_value": 11,
+    "harmonic_value": 1
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "headcount_max",
+    "snapshot_value": 50,
+    "harmonic_value": 10
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "headcount_display",
+    "snapshot_value": "11-50",
+    "harmonic_value": "~2"
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "headcount_bucket",
+    "snapshot_value": "11-50",
+    "harmonic_value": "1-10"
+  },
+  {
+    "company_id": "c-033",
+    "company_name": "StackQL",
+    "field": "description",
+    "snapshot_value": "SQL interface for querying and managing cloud infrastructure",
+    "harmonic_value": "Manage cloud infrastructure with SQL."
+  },
+  {
+    "company_id": "c-047",
+    "company_name": "CampusWire",
+    "field": "total_funding_usd",
+    "snapshot_value": 9500000,
+    "harmonic_value": 65100000
+  },
+  {
+    "company_id": "c-047",
+    "company_name": "CampusWire",
+    "field": "latest_round_type",
+    "snapshot_value": "seed",
+    "harmonic_value": "series_b"
+  },
+  {
+    "company_id": "c-047",
+    "company_name": "CampusWire",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-05-10",
+    "harmonic_value": "2024-11-27"
+  },
+  {
+    "company_id": "c-047",
+    "company_name": "CampusWire",
+    "field": "headcount_display",
+    "snapshot_value": "1-10",
+    "harmonic_value": "~8"
+  },
+  {
+    "company_id": "c-047",
+    "company_name": "CampusWire",
+    "field": "description",
+    "snapshot_value": "Student engagement and communication platform for universities",
+    "harmonic_value": "Interactive college learning and communication."
+  },
+  {
+    "company_id": "c-054",
+    "company_name": "BioForge Labs",
+    "field": "website",
+    "snapshot_value": "https://bioforgelabs.com",
+    "harmonic_value": "http://bioforgelabs.com"
+  },
+  {
+    "company_id": "c-054",
+    "company_name": "BioForge Labs",
+    "field": "description",
+    "snapshot_value": "Synthetic biology for sustainable materials production",
+    "harmonic_value": "Pet food private label manufacturing."
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "total_funding_usd",
+    "snapshot_value": 13400000000,
+    "harmonic_value": 89191303914
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "latest_round_type",
+    "snapshot_value": "series_n",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-12-01",
+    "harmonic_value": "2026-05-29"
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "headcount_min",
+    "snapshot_value": 10001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "headcount_max",
+    "snapshot_value": 15000,
+    "harmonic_value": 18822
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "headcount_display",
+    "snapshot_value": "10001+",
+    "harmonic_value": "~18,822"
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "headcount_bucket",
+    "snapshot_value": "10001+",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-061",
+    "company_name": "SpaceX",
+    "field": "description",
+    "snapshot_value": "Space transportation and satellite internet company",
+    "harmonic_value": "Reusable rockets for space."
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "total_funding_usd",
+    "snapshot_value": 17900000000,
+    "harmonic_value": 192413000000
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-10-15",
+    "harmonic_value": "2026-05-11"
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "headcount_min",
+    "snapshot_value": 1001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "headcount_max",
+    "snapshot_value": 5000,
+    "harmonic_value": 13114
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~13,114"
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "headcount_bucket",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-062",
+    "company_name": "OpenAI",
+    "field": "description",
+    "snapshot_value": "AI research lab building general-purpose AI systems",
+    "harmonic_value": "AI models for content and analysis."
+  },
+  {
+    "company_id": "c-063",
+    "company_name": "Anthropic",
+    "field": "total_funding_usd",
+    "snapshot_value": 11500000000,
+    "harmonic_value": 129804000000
+  },
+  {
+    "company_id": "c-063",
+    "company_name": "Anthropic",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "series_h"
+  },
+  {
+    "company_id": "c-063",
+    "company_name": "Anthropic",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-11-20",
+    "harmonic_value": "2026-05-29"
+  },
+  {
+    "company_id": "c-063",
+    "company_name": "Anthropic",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~4,969"
+  },
+  {
+    "company_id": "c-063",
+    "company_name": "Anthropic",
+    "field": "description",
+    "snapshot_value": "AI safety company building reliable and interpretable AI systems",
+    "harmonic_value": "Safe, steerable AI for businesses."
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "total_funding_usd",
+    "snapshot_value": 9400000000,
+    "harmonic_value": 8215938068
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "latest_round_type",
+    "snapshot_value": "series_i",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-02-01",
+    "harmonic_value": "2026-03-17"
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "headcount_max",
+    "snapshot_value": 10000,
+    "harmonic_value": 15462
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "headcount_display",
+    "snapshot_value": "5001-10000",
+    "harmonic_value": "~15,462"
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "headcount_bucket",
+    "snapshot_value": "5001-10000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-064",
+    "company_name": "Stripe",
+    "field": "description",
+    "snapshot_value": "Financial infrastructure platform for internet businesses",
+    "harmonic_value": "Online payment processing infrastructure."
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "total_funding_usd",
+    "snapshot_value": 6200000000,
+    "harmonic_value": 27605735416
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "latest_round_type",
+    "snapshot_value": "series_j",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-12-10",
+    "harmonic_value": "2026-06-09"
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "headcount_max",
+    "snapshot_value": 10000,
+    "harmonic_value": 15416
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "headcount_display",
+    "snapshot_value": "5001-10000",
+    "harmonic_value": "~15,416"
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "headcount_bucket",
+    "snapshot_value": "5001-10000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-065",
+    "company_name": "Databricks",
+    "field": "description",
+    "snapshot_value": "Unified analytics platform for data and AI",
+    "harmonic_value": "Unified data, AI, and analytics platform."
+  },
+  {
+    "company_id": "c-066",
+    "company_name": "xAI",
+    "field": "website",
+    "snapshot_value": "https://xai.com",
+    "harmonic_value": "https://unkai.com"
+  },
+  {
+    "company_id": "c-066",
+    "company_name": "xAI",
+    "field": "description",
+    "snapshot_value": "AI company building Grok and pursuing AGI",
+    "harmonic_value": "XI"
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "total_funding_usd",
+    "snapshot_value": 6000000000,
+    "harmonic_value": 578780101
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "latest_round_date",
+    "snapshot_value": "2024-07-15",
+    "harmonic_value": "2025-09-30"
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "headcount_min",
+    "snapshot_value": 1001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "headcount_max",
+    "snapshot_value": 5000,
+    "harmonic_value": 16328
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~16,328"
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "headcount_bucket",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-067",
+    "company_name": "Canva",
+    "field": "description",
+    "snapshot_value": "Online design and visual communication platform",
+    "harmonic_value": "AI-powered visual content creation platform."
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "total_funding_usd",
+    "snapshot_value": 5700000000,
+    "harmonic_value": 11811340000
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "series_h"
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-08-01",
+    "harmonic_value": "2026-05-13"
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "headcount_min",
+    "snapshot_value": 1001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "headcount_max",
+    "snapshot_value": 5000,
+    "harmonic_value": 6803
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~6,803"
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "headcount_bucket",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "website",
+    "snapshot_value": "https://anduril.com",
+    "harmonic_value": "http://anduril.com"
+  },
+  {
+    "company_id": "c-069",
+    "company_name": "Anduril Industries",
+    "field": "description",
+    "snapshot_value": "Defense technology company building autonomous systems",
+    "harmonic_value": "Autonomous defense AI solutions."
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "total_funding_usd",
+    "snapshot_value": 1600000000,
+    "harmonic_value": 15902620000
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-05-15",
+    "harmonic_value": "2025-06-13"
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 6561
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~6,561"
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-070",
+    "company_name": "Scale AI",
+    "field": "description",
+    "snapshot_value": "AI data infrastructure for training models",
+    "harmonic_value": "AI data engine for model performance."
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "total_funding_usd",
+    "snapshot_value": 2200000000,
+    "harmonic_value": 4009784925
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-01-15",
+    "harmonic_value": "2026-05-13"
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~1,179"
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "website",
+    "snapshot_value": "https://mistralai.com",
+    "harmonic_value": "https://mistral.ai"
+  },
+  {
+    "company_id": "c-071",
+    "company_name": "Mistral AI",
+    "field": "description",
+    "snapshot_value": "European AI lab building open and commercial LLMs",
+    "harmonic_value": "Open-source customizable generative AI."
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "total_funding_usd",
+    "snapshot_value": 900000000,
+    "harmonic_value": 7000000
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-09-01",
+    "harmonic_value": "2006-10-25"
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 501
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 1000
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~688"
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "501-1000"
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "website",
+    "snapshot_value": "https://perplexity.com",
+    "harmonic_value": "http://www.perplexcity.com"
+  },
+  {
+    "company_id": "c-072",
+    "company_name": "Perplexity",
+    "field": "description",
+    "snapshot_value": "AI-powered answer engine and search platform",
+    "harmonic_value": "Alternate reality gaming experience."
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "total_funding_usd",
+    "snapshot_value": 800000000,
+    "harmonic_value": 765300000
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "series_f"
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-06-01",
+    "harmonic_value": "2025-06-10"
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,605"
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-073",
+    "company_name": "Glean",
+    "field": "description",
+    "snapshot_value": "AI-powered enterprise knowledge search",
+    "harmonic_value": "AI-powered enterprise knowledge discovery."
+  },
+  {
+    "company_id": "c-075",
+    "company_name": "Cohere",
+    "field": "total_funding_usd",
+    "snapshot_value": 970000000,
+    "harmonic_value": 1785000000
+  },
+  {
+    "company_id": "c-075",
+    "company_name": "Cohere",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-075",
+    "company_name": "Cohere",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-07-22",
+    "harmonic_value": "2025-09-24"
+  },
+  {
+    "company_id": "c-075",
+    "company_name": "Cohere",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~945"
+  },
+  {
+    "company_id": "c-075",
+    "company_name": "Cohere",
+    "field": "description",
+    "snapshot_value": "Enterprise AI platform for text understanding and generation",
+    "harmonic_value": "Generative AI for text and data."
+  },
+  {
+    "company_id": "c-076",
+    "company_name": "Figma",
+    "field": "total_funding_usd",
+    "snapshot_value": 600000000,
+    "harmonic_value": 1532874996
+  },
+  {
+    "company_id": "c-076",
+    "company_name": "Figma",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "ipo"
+  },
+  {
+    "company_id": "c-076",
+    "company_name": "Figma",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-01-01",
+    "harmonic_value": "2025-07-31"
+  },
+  {
+    "company_id": "c-076",
+    "company_name": "Figma",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~3,032"
+  },
+  {
+    "company_id": "c-076",
+    "company_name": "Figma",
+    "field": "website",
+    "snapshot_value": "https://figma.com",
+    "harmonic_value": "http://figma.com"
+  },
+  {
+    "company_id": "c-076",
+    "company_name": "Figma",
+    "field": "description",
+    "snapshot_value": "Collaborative interface design platform",
+    "harmonic_value": "Collaborative design and prototyping platform."
+  },
+  {
+    "company_id": "c-077",
+    "company_name": "Vercel",
+    "field": "total_funding_usd",
+    "snapshot_value": 560000000,
+    "harmonic_value": 863000000
+  },
+  {
+    "company_id": "c-077",
+    "company_name": "Vercel",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "series_f"
+  },
+  {
+    "company_id": "c-077",
+    "company_name": "Vercel",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-05-15",
+    "harmonic_value": "2025-09-30"
+  },
+  {
+    "company_id": "c-077",
+    "company_name": "Vercel",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~881"
+  },
+  {
+    "company_id": "c-077",
+    "company_name": "Vercel",
+    "field": "description",
+    "snapshot_value": "Frontend cloud platform for developers",
+    "harmonic_value": "Frontend cloud for developers."
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "total_funding_usd",
+    "snapshot_value": 740000000,
+    "harmonic_value": 734300000
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "latest_round_date",
+    "snapshot_value": "2024-04-01",
+    "harmonic_value": "2026-02-26"
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,543"
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-078",
+    "company_name": "Plaid",
+    "field": "description",
+    "snapshot_value": "Financial data infrastructure connecting apps to bank accounts",
+    "harmonic_value": "Connects financial accounts to apps."
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "total_funding_usd",
+    "snapshot_value": 1400000000,
+    "harmonic_value": 1847000000
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "series_g"
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-04-01",
+    "harmonic_value": "2025-05-09"
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "headcount_min",
+    "snapshot_value": 1001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "headcount_max",
+    "snapshot_value": 5000,
+    "harmonic_value": 7496
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~7,496"
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "headcount_bucket",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-079",
+    "company_name": "Rippling",
+    "field": "description",
+    "snapshot_value": "Unified workforce management platform",
+    "harmonic_value": "Unified HR, IT, and finance platform."
+  },
+  {
+    "company_id": "c-080",
+    "company_name": "Character.AI",
+    "field": "total_funding_usd",
+    "snapshot_value": 500000000,
+    "harmonic_value": 193000000
+  },
+  {
+    "company_id": "c-080",
+    "company_name": "Character.AI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-080",
+    "company_name": "Character.AI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-15",
+    "harmonic_value": "2024-08-02"
+  },
+  {
+    "company_id": "c-080",
+    "company_name": "Character.AI",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~280"
+  },
+  {
+    "company_id": "c-080",
+    "company_name": "Character.AI",
+    "field": "description",
+    "snapshot_value": "AI companion and character conversation platform",
+    "harmonic_value": "AI-powered character creation platform."
+  },
+  {
+    "company_id": "c-081",
+    "company_name": "Runway",
+    "field": "total_funding_usd",
+    "snapshot_value": 440000000,
+    "harmonic_value": 859500000
+  },
+  {
+    "company_id": "c-081",
+    "company_name": "Runway",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "series_e"
+  },
+  {
+    "company_id": "c-081",
+    "company_name": "Runway",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-06-20",
+    "harmonic_value": "2026-02-10"
+  },
+  {
+    "company_id": "c-081",
+    "company_name": "Runway",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~487"
+  },
+  {
+    "company_id": "c-081",
+    "company_name": "Runway",
+    "field": "description",
+    "snapshot_value": "AI creative tools for video generation and editing",
+    "harmonic_value": "AI-powered audiovisual content creation."
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "total_funding_usd",
+    "snapshot_value": 300000000,
+    "harmonic_value": 781000000
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-08-10",
+    "harmonic_value": "2026-05-05"
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 501
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 1000
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~932"
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "501-1000"
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "website",
+    "snapshot_value": "https://elevenlabs.com",
+    "harmonic_value": "https://elevenlabs.io"
+  },
+  {
+    "company_id": "c-082",
+    "company_name": "ElevenLabs",
+    "field": "description",
+    "snapshot_value": "AI voice synthesis and audio generation platform",
+    "harmonic_value": "AI-powered voice and content generation."
+  },
+  {
+    "company_id": "c-083",
+    "company_name": "Replit",
+    "field": "total_funding_usd",
+    "snapshot_value": 320000000,
+    "harmonic_value": 872020000
+  },
+  {
+    "company_id": "c-083",
+    "company_name": "Replit",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-083",
+    "company_name": "Replit",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-04-20",
+    "harmonic_value": "2026-05-29"
+  },
+  {
+    "company_id": "c-083",
+    "company_name": "Replit",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~225"
+  },
+  {
+    "company_id": "c-083",
+    "company_name": "Replit",
+    "field": "description",
+    "snapshot_value": "Browser-based collaborative coding platform with AI",
+    "harmonic_value": "AI-powered full-stack development platform."
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "total_funding_usd",
+    "snapshot_value": 250000000,
+    "harmonic_value": 779834583
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "series_e"
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-02-15",
+    "harmonic_value": "2025-06-12"
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 501
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 1000
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~585"
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "501-1000"
+  },
+  {
+    "company_id": "c-084",
+    "company_name": "Abridge",
+    "field": "description",
+    "snapshot_value": "AI-powered clinical documentation for healthcare",
+    "harmonic_value": "AI for real-time clinical notes."
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "total_funding_usd",
+    "snapshot_value": 1600000000,
+    "harmonic_value": 1201500000
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "series_f"
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-09-01",
+    "harmonic_value": "2025-06-17"
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,480"
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-085",
+    "company_name": "Applied Intuition",
+    "field": "description",
+    "snapshot_value": "Simulation and development platform for autonomous vehicles",
+    "harmonic_value": "Simulate, test, deploy autonomous vehicles."
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "total_funding_usd",
+    "snapshot_value": 900000000,
+    "harmonic_value": 3376250000
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-09-15",
+    "harmonic_value": "2026-05-07"
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "headcount_min",
+    "snapshot_value": 51,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "headcount_max",
+    "snapshot_value": 200,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~1,413"
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "headcount_bucket",
+    "snapshot_value": "51-200",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-086",
+    "company_name": "Cursor",
+    "field": "description",
+    "snapshot_value": "AI-native code editor built on VS Code",
+    "harmonic_value": "AI-powered coding efficiency platform."
+  },
+  {
+    "company_id": "c-087",
+    "company_name": "Hebbia",
+    "field": "total_funding_usd",
+    "snapshot_value": 300000000,
+    "harmonic_value": 161100000
+  },
+  {
+    "company_id": "c-087",
+    "company_name": "Hebbia",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-087",
+    "company_name": "Hebbia",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-07-01",
+    "harmonic_value": "2026-03-17"
+  },
+  {
+    "company_id": "c-087",
+    "company_name": "Hebbia",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~148"
+  },
+  {
+    "company_id": "c-087",
+    "company_name": "Hebbia",
+    "field": "description",
+    "snapshot_value": "AI platform for knowledge work and document analysis",
+    "harmonic_value": "Automating enterprise knowledge work."
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "total_funding_usd",
+    "snapshot_value": 350000000,
+    "harmonic_value": 253956570
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-01",
+    "harmonic_value": "2025-12-22"
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "headcount_min",
+    "snapshot_value": 201,
+    "harmonic_value": 51
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "headcount_max",
+    "snapshot_value": 500,
+    "harmonic_value": 200
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~114"
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "headcount_bucket",
+    "snapshot_value": "201-500",
+    "harmonic_value": "51-200"
+  },
+  {
+    "company_id": "c-088",
+    "company_name": "Watershed",
+    "field": "description",
+    "snapshot_value": "Enterprise climate and carbon management platform",
+    "harmonic_value": "Enterprise sustainability measurement and decarbonization."
+  },
+  {
+    "company_id": "c-089",
+    "company_name": "Redwood Materials",
+    "field": "total_funding_usd",
+    "snapshot_value": 2000000000,
+    "harmonic_value": 4797537328
+  },
+  {
+    "company_id": "c-089",
+    "company_name": "Redwood Materials",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "series_e"
+  },
+  {
+    "company_id": "c-089",
+    "company_name": "Redwood Materials",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-01-15",
+    "harmonic_value": "2026-01-28"
+  },
+  {
+    "company_id": "c-089",
+    "company_name": "Redwood Materials",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~750"
+  },
+  {
+    "company_id": "c-089",
+    "company_name": "Redwood Materials",
+    "field": "website",
+    "snapshot_value": "https://redwoodmaterials.com",
+    "harmonic_value": "http://redwoodmaterials.com"
+  },
+  {
+    "company_id": "c-089",
+    "company_name": "Redwood Materials",
+    "field": "description",
+    "snapshot_value": "Battery recycling and circular supply chain for EVs",
+    "harmonic_value": "Sustainable battery material recovery and reuse."
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "total_funding_usd",
+    "snapshot_value": 1300000000,
+    "harmonic_value": 1354667485
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-06-01",
+    "harmonic_value": "2025-03-10"
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,839"
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "website",
+    "snapshot_value": "https://relativityspace.com",
+    "harmonic_value": "http://relativityspace.com"
+  },
+  {
+    "company_id": "c-090",
+    "company_name": "Relativity Space",
+    "field": "description",
+    "snapshot_value": "3D-printed rockets and space launch vehicles",
+    "harmonic_value": "Reusable rockets, 3D printed."
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "total_funding_usd",
+    "snapshot_value": 7600000000,
+    "harmonic_value": 28791392242
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-05-20",
+    "harmonic_value": "2026-04-15"
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~2,346"
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-091",
+    "company_name": "CoreWeave",
+    "field": "description",
+    "snapshot_value": "GPU cloud computing infrastructure for AI workloads",
+    "harmonic_value": "GPU cloud for AI/ML."
+  },
+  {
+    "company_id": "c-092",
+    "company_name": "Cerebras Systems",
+    "field": "total_funding_usd",
+    "snapshot_value": 720000000,
+    "harmonic_value": 10312000000
+  },
+  {
+    "company_id": "c-092",
+    "company_name": "Cerebras Systems",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "ipo"
+  },
+  {
+    "company_id": "c-092",
+    "company_name": "Cerebras Systems",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-08-01",
+    "harmonic_value": "2026-05-18"
+  },
+  {
+    "company_id": "c-092",
+    "company_name": "Cerebras Systems",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~885"
+  },
+  {
+    "company_id": "c-092",
+    "company_name": "Cerebras Systems",
+    "field": "description",
+    "snapshot_value": "AI chip company building wafer-scale processors",
+    "harmonic_value": "AI supercomputing for faster training."
+  },
+  {
+    "company_id": "c-093",
+    "company_name": "Groq",
+    "field": "total_funding_usd",
+    "snapshot_value": 640000000,
+    "harmonic_value": 1870124998
+  },
+  {
+    "company_id": "c-093",
+    "company_name": "Groq",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-093",
+    "company_name": "Groq",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-04-01",
+    "harmonic_value": "2025-12-24"
+  },
+  {
+    "company_id": "c-093",
+    "company_name": "Groq",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~245"
+  },
+  {
+    "company_id": "c-093",
+    "company_name": "Groq",
+    "field": "description",
+    "snapshot_value": "AI inference acceleration hardware and cloud",
+    "harmonic_value": "Real-time AI inference platform."
+  },
+  {
+    "company_id": "c-094",
+    "company_name": "Navan",
+    "field": "total_funding_usd",
+    "snapshot_value": 1500000000,
+    "harmonic_value": 2359000000
+  },
+  {
+    "company_id": "c-094",
+    "company_name": "Navan",
+    "field": "latest_round_type",
+    "snapshot_value": "series_h",
+    "harmonic_value": "series_g"
+  },
+  {
+    "company_id": "c-094",
+    "company_name": "Navan",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-15",
+    "harmonic_value": "2026-04-07"
+  },
+  {
+    "company_id": "c-094",
+    "company_name": "Navan",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~3,433"
+  },
+  {
+    "company_id": "c-094",
+    "company_name": "Navan",
+    "field": "description",
+    "snapshot_value": "All-in-one corporate travel and expense management",
+    "harmonic_value": "AI-powered travel and expense management."
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "total_funding_usd",
+    "snapshot_value": 1600000000,
+    "harmonic_value": 2021500000
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-08-15",
+    "harmonic_value": "2026-04-13"
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "headcount_min",
+    "snapshot_value": 1001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "headcount_max",
+    "snapshot_value": 5000,
+    "harmonic_value": 17973
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~17,973"
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "headcount_bucket",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "website",
+    "snapshot_value": "https://zepto.com",
+    "harmonic_value": "https://zeptonow.com"
+  },
+  {
+    "company_id": "c-095",
+    "company_name": "Zepto",
+    "field": "description",
+    "snapshot_value": "10-minute grocery delivery platform in India",
+    "harmonic_value": "10-minute grocery and essentials delivery."
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "total_funding_usd",
+    "snapshot_value": 360000000,
+    "harmonic_value": 747289477
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "series_d"
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-06-01",
+    "harmonic_value": "2026-05-20"
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,612"
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-096",
+    "company_name": "Mercury",
+    "field": "description",
+    "snapshot_value": "Banking and financial services for startups",
+    "harmonic_value": "Startup banking and financial automation."
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "total_funding_usd",
+    "snapshot_value": 1200000000,
+    "harmonic_value": 3126698680
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "series_f"
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-01",
+    "harmonic_value": "2026-06-04"
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~3,225"
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-097",
+    "company_name": "Ramp",
+    "field": "description",
+    "snapshot_value": "Corporate card and spend management platform",
+    "harmonic_value": "Automated finance and expense management."
+  },
+  {
+    "company_id": "c-098",
+    "company_name": "Flexport",
+    "field": "total_funding_usd",
+    "snapshot_value": 2600000000,
+    "harmonic_value": 3206600000
+  },
+  {
+    "company_id": "c-098",
+    "company_name": "Flexport",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "debt"
+  },
+  {
+    "company_id": "c-098",
+    "company_name": "Flexport",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-02-15",
+    "harmonic_value": "2025-08-28"
+  },
+  {
+    "company_id": "c-098",
+    "company_name": "Flexport",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~2,833"
+  },
+  {
+    "company_id": "c-098",
+    "company_name": "Flexport",
+    "field": "description",
+    "snapshot_value": "Technology-driven freight forwarding and logistics",
+    "harmonic_value": "Global supply chain management platform."
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "total_funding_usd",
+    "snapshot_value": 2100000000,
+    "harmonic_value": 1971334012
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "latest_round_type",
+    "snapshot_value": "series_h",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "latest_round_date",
+    "snapshot_value": "2024-11-01",
+    "harmonic_value": "2024-08-14"
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 201
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 500
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~455"
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "201-500"
+  },
+  {
+    "company_id": "c-099",
+    "company_name": "Impossible Foods",
+    "field": "description",
+    "snapshot_value": "Plant-based meat alternatives using heme protein",
+    "harmonic_value": "Plant-based meat alternative producer"
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "total_funding_usd",
+    "snapshot_value": 750000000,
+    "harmonic_value": 352849697
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-01-10",
+    "harmonic_value": "2026-01-26"
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,862"
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-100",
+    "company_name": "Notion",
+    "field": "description",
+    "snapshot_value": "All-in-one workspace for notes, docs, and collaboration",
+    "harmonic_value": "All-in-one customizable workspace, AI-powered."
+  },
+  {
+    "company_id": "c-101",
+    "company_name": "Tempus AI",
+    "field": "total_funding_usd",
+    "snapshot_value": 1100000000,
+    "harmonic_value": 2397450000
+  },
+  {
+    "company_id": "c-101",
+    "company_name": "Tempus AI",
+    "field": "latest_round_type",
+    "snapshot_value": "series_g",
+    "harmonic_value": "debt"
+  },
+  {
+    "company_id": "c-101",
+    "company_name": "Tempus AI",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-04-01",
+    "harmonic_value": "2025-06-30"
+  },
+  {
+    "company_id": "c-101",
+    "company_name": "Tempus AI",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~3,015"
+  },
+  {
+    "company_id": "c-101",
+    "company_name": "Tempus AI",
+    "field": "website",
+    "snapshot_value": "https://tempus.com",
+    "harmonic_value": "http://tempus.com"
+  },
+  {
+    "company_id": "c-101",
+    "company_name": "Tempus AI",
+    "field": "description",
+    "snapshot_value": "AI platform for precision medicine and clinical data",
+    "harmonic_value": "AI-powered precision medicine platform."
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "total_funding_usd",
+    "snapshot_value": 1400000000,
+    "harmonic_value": 1013950000
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-07-01",
+    "harmonic_value": "2024-06-26"
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 201
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 500
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~470"
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "201-500"
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "website",
+    "snapshot_value": "https://recursionpharma.com",
+    "harmonic_value": "https://www.recursion.com"
+  },
+  {
+    "company_id": "c-102",
+    "company_name": "Recursion Pharmaceuticals",
+    "field": "description",
+    "snapshot_value": "AI-driven drug discovery platform",
+    "harmonic_value": "AI-powered drug discovery platform."
+  },
+  {
+    "company_id": "c-103",
+    "company_name": "Insitro",
+    "field": "total_funding_usd",
+    "snapshot_value": 640000000,
+    "harmonic_value": 805032179
+  },
+  {
+    "company_id": "c-103",
+    "company_name": "Insitro",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-103",
+    "company_name": "Insitro",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-02-01",
+    "harmonic_value": "2024-11-14"
+  },
+  {
+    "company_id": "c-103",
+    "company_name": "Insitro",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~247"
+  },
+  {
+    "company_id": "c-103",
+    "company_name": "Insitro",
+    "field": "description",
+    "snapshot_value": "Machine learning-driven drug discovery and development",
+    "harmonic_value": "ML-driven predictive disease models."
+  },
+  {
+    "company_id": "c-104",
+    "company_name": "Form Energy",
+    "field": "total_funding_usd",
+    "snapshot_value": 1200000000,
+    "harmonic_value": 1271999942
+  },
+  {
+    "company_id": "c-104",
+    "company_name": "Form Energy",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "debt"
+  },
+  {
+    "company_id": "c-104",
+    "company_name": "Form Energy",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-06-01",
+    "harmonic_value": "2024-12-16"
+  },
+  {
+    "company_id": "c-104",
+    "company_name": "Form Energy",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~833"
+  },
+  {
+    "company_id": "c-104",
+    "company_name": "Form Energy",
+    "field": "description",
+    "snapshot_value": "Iron-air battery technology for multi-day energy storage",
+    "harmonic_value": "Iron-air batteries for grid storage."
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "total_funding_usd",
+    "snapshot_value": 125000000,
+    "harmonic_value": 819899998
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "series_e"
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-05-01",
+    "harmonic_value": "2026-06-03"
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "headcount_min",
+    "snapshot_value": 51,
+    "harmonic_value": 201
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "headcount_max",
+    "snapshot_value": 200,
+    "harmonic_value": 500
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~401"
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "headcount_bucket",
+    "snapshot_value": "51-200",
+    "harmonic_value": "201-500"
+  },
+  {
+    "company_id": "c-105",
+    "company_name": "Suno",
+    "field": "description",
+    "snapshot_value": "AI music generation platform",
+    "harmonic_value": "AI-powered music creation platform."
+  },
+  {
+    "company_id": "c-106",
+    "company_name": "Pika",
+    "field": "website",
+    "snapshot_value": "https://pika.com",
+    "harmonic_value": "http://pika.com"
+  },
+  {
+    "company_id": "c-106",
+    "company_name": "Pika",
+    "field": "description",
+    "snapshot_value": "AI video generation and editing platform",
+    "harmonic_value": "Pika Technology, Inc."
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "total_funding_usd",
+    "snapshot_value": 140000000,
+    "harmonic_value": 531019902
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "series_d"
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-15",
+    "harmonic_value": "2026-01-08"
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "headcount_min",
+    "snapshot_value": 51,
+    "harmonic_value": 201
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "headcount_max",
+    "snapshot_value": 200,
+    "harmonic_value": 500
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~213"
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "headcount_bucket",
+    "snapshot_value": "51-200",
+    "harmonic_value": "201-500"
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "website",
+    "snapshot_value": "https://vardaspace.com",
+    "harmonic_value": "https://varda.com"
+  },
+  {
+    "company_id": "c-107",
+    "company_name": "Varda Space",
+    "field": "description",
+    "snapshot_value": "In-space manufacturing using microgravity",
+    "harmonic_value": "Orbital manufacturing and material return."
+  },
+  {
+    "company_id": "c-108",
+    "company_name": "Electric Hydrogen",
+    "field": "total_funding_usd",
+    "snapshot_value": 600000000,
+    "harmonic_value": 1055449980
+  },
+  {
+    "company_id": "c-108",
+    "company_name": "Electric Hydrogen",
+    "field": "latest_round_type",
+    "snapshot_value": "series_c",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-108",
+    "company_name": "Electric Hydrogen",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-09-01",
+    "harmonic_value": "2025-05-23"
+  },
+  {
+    "company_id": "c-108",
+    "company_name": "Electric Hydrogen",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~305"
+  },
+  {
+    "company_id": "c-108",
+    "company_name": "Electric Hydrogen",
+    "field": "website",
+    "snapshot_value": "https://electrichydrogen.com",
+    "harmonic_value": "https://eh2.com"
+  },
+  {
+    "company_id": "c-108",
+    "company_name": "Electric Hydrogen",
+    "field": "description",
+    "snapshot_value": "High-efficiency electrolyzers for green hydrogen production",
+    "harmonic_value": "Low-cost clean hydrogen production."
+  },
+  {
+    "company_id": "c-109",
+    "company_name": "Safe Superintelligence",
+    "field": "website",
+    "snapshot_value": "https://safesuperintelligence.com",
+    "harmonic_value": "https://www.superintelligence.com"
+  },
+  {
+    "company_id": "c-109",
+    "company_name": "Safe Superintelligence",
+    "field": "description",
+    "snapshot_value": "Pure-play AI safety research company",
+    "harmonic_value": "Safe AGI for humanity's benefit."
+  },
+  {
+    "company_id": "c-110",
+    "company_name": "Cradle",
+    "field": "total_funding_usd",
+    "snapshot_value": 73000000,
+    "harmonic_value": 102698742
+  },
+  {
+    "company_id": "c-110",
+    "company_name": "Cradle",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-06-15",
+    "harmonic_value": "2024-11-26"
+  },
+  {
+    "company_id": "c-110",
+    "company_name": "Cradle",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~111"
+  },
+  {
+    "company_id": "c-110",
+    "company_name": "Cradle",
+    "field": "description",
+    "snapshot_value": "AI-powered protein engineering platform",
+    "harmonic_value": "AI-driven protein sequence optimization."
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "total_funding_usd",
+    "snapshot_value": 900000000,
+    "harmonic_value": 2212563492
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "latest_round_type",
+    "snapshot_value": "series_h",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-10-01",
+    "harmonic_value": "2024-10-11"
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "headcount_min",
+    "snapshot_value": 1001,
+    "harmonic_value": 5001
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "headcount_max",
+    "snapshot_value": 5000,
+    "harmonic_value": 5038
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~5,038"
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "headcount_bucket",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "5001+"
+  },
+  {
+    "company_id": "c-111",
+    "company_name": "Monzo",
+    "field": "description",
+    "snapshot_value": "UK digital bank with smart money management",
+    "harmonic_value": "Mobile banking for financial oversight."
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "total_funding_usd",
+    "snapshot_value": 200000000,
+    "harmonic_value": 1000000000
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "debt"
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-11-01",
+    "harmonic_value": "2024-09-19"
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "headcount_min",
+    "snapshot_value": 51,
+    "harmonic_value": 201
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "headcount_max",
+    "snapshot_value": 200,
+    "harmonic_value": 500
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~325"
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "headcount_bucket",
+    "snapshot_value": "51-200",
+    "harmonic_value": "201-500"
+  },
+  {
+    "company_id": "c-112",
+    "company_name": "Aethon Energy",
+    "field": "description",
+    "snapshot_value": "Compact fusion energy systems for commercial power",
+    "harmonic_value": "Efficient onshore energy asset management"
+  },
+  {
+    "company_id": "c-113",
+    "company_name": "Augment Code",
+    "field": "total_funding_usd",
+    "snapshot_value": 227000000,
+    "harmonic_value": 252000000
+  },
+  {
+    "company_id": "c-113",
+    "company_name": "Augment Code",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-113",
+    "company_name": "Augment Code",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-01",
+    "harmonic_value": "2024-11-04"
+  },
+  {
+    "company_id": "c-113",
+    "company_name": "Augment Code",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~168"
+  },
+  {
+    "company_id": "c-113",
+    "company_name": "Augment Code",
+    "field": "website",
+    "snapshot_value": "https://augmentcode.com",
+    "harmonic_value": "http://augmentcode.com"
+  },
+  {
+    "company_id": "c-113",
+    "company_name": "Augment Code",
+    "field": "description",
+    "snapshot_value": "AI-powered software development platform for teams",
+    "harmonic_value": "AI-powered autonomous coding agents."
+  },
+  {
+    "company_id": "c-114",
+    "company_name": "Cognition",
+    "field": "total_funding_usd",
+    "snapshot_value": 200000000,
+    "harmonic_value": 1896000000
+  },
+  {
+    "company_id": "c-114",
+    "company_name": "Cognition",
+    "field": "latest_round_type",
+    "snapshot_value": "series_b",
+    "harmonic_value": "series_d"
+  },
+  {
+    "company_id": "c-114",
+    "company_name": "Cognition",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-07-01",
+    "harmonic_value": "2026-05-27"
+  },
+  {
+    "company_id": "c-114",
+    "company_name": "Cognition",
+    "field": "headcount_display",
+    "snapshot_value": "51-200",
+    "harmonic_value": "~142"
+  },
+  {
+    "company_id": "c-114",
+    "company_name": "Cognition",
+    "field": "description",
+    "snapshot_value": "AI software engineering agent (Devin)",
+    "harmonic_value": "AI software engineer for development."
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "total_funding_usd",
+    "snapshot_value": 700000000,
+    "harmonic_value": 1027274713
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-10-15",
+    "harmonic_value": "2024-12-02"
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1001
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 5000
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~1,165"
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1001-5000"
+  },
+  {
+    "company_id": "c-115",
+    "company_name": "Tenstorrent",
+    "field": "description",
+    "snapshot_value": "AI processor chips with open-source RISC-V architecture",
+    "harmonic_value": "AI hardware and software optimization."
+  },
+  {
+    "company_id": "c-116",
+    "company_name": "ClassDojo",
+    "field": "total_funding_usd",
+    "snapshot_value": 260000000,
+    "harmonic_value": 221120000
+  },
+  {
+    "company_id": "c-116",
+    "company_name": "ClassDojo",
+    "field": "latest_round_type",
+    "snapshot_value": "series_d",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-116",
+    "company_name": "ClassDojo",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-05-01",
+    "harmonic_value": "2024-04-03"
+  },
+  {
+    "company_id": "c-116",
+    "company_name": "ClassDojo",
+    "field": "headcount_display",
+    "snapshot_value": "201-500",
+    "harmonic_value": "~484"
+  },
+  {
+    "company_id": "c-116",
+    "company_name": "ClassDojo",
+    "field": "website",
+    "snapshot_value": "https://classdojo.com",
+    "harmonic_value": "http://classdojo.com"
+  },
+  {
+    "company_id": "c-116",
+    "company_name": "ClassDojo",
+    "field": "description",
+    "snapshot_value": "Communication platform connecting teachers, students, and families",
+    "harmonic_value": "Connects K-8 schools, families, students."
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "total_funding_usd",
+    "snapshot_value": 430000000,
+    "harmonic_value": 23500000
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "latest_round_type",
+    "snapshot_value": "series_f",
+    "harmonic_value": "unknown"
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-01-15",
+    "harmonic_value": "2019-05-07"
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "headcount_min",
+    "snapshot_value": 501,
+    "harmonic_value": 1
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "headcount_max",
+    "snapshot_value": 1000,
+    "harmonic_value": 10
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "headcount_display",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "~7"
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "headcount_bucket",
+    "snapshot_value": "501-1000",
+    "harmonic_value": "1-10"
+  },
+  {
+    "company_id": "c-117",
+    "company_name": "Handshake",
+    "field": "description",
+    "snapshot_value": "Career platform connecting students with employers",
+    "harmonic_value": "B2B wholesale commerce platform."
+  },
+  {
+    "company_id": "c-118",
+    "company_name": "Devoted Health",
+    "field": "total_funding_usd",
+    "snapshot_value": 1800000000,
+    "harmonic_value": 2621950017
+  },
+  {
+    "company_id": "c-118",
+    "company_name": "Devoted Health",
+    "field": "latest_round_type",
+    "snapshot_value": "series_e",
+    "harmonic_value": "series_f"
+  },
+  {
+    "company_id": "c-118",
+    "company_name": "Devoted Health",
+    "field": "latest_round_date",
+    "snapshot_value": "2025-03-01",
+    "harmonic_value": "2026-06-01"
+  },
+  {
+    "company_id": "c-118",
+    "company_name": "Devoted Health",
+    "field": "headcount_display",
+    "snapshot_value": "1001-5000",
+    "harmonic_value": "~2,146"
+  },
+  {
+    "company_id": "c-118",
+    "company_name": "Devoted Health",
+    "field": "website",
+    "snapshot_value": "https://devotedhealth.com",
+    "harmonic_value": "https://devoted.com"
+  },
+  {
+    "company_id": "c-118",
+    "company_name": "Devoted Health",
+    "field": "description",
+    "snapshot_value": "Medicare Advantage health plan powered by technology",
+    "harmonic_value": "Medicare Advantage for seniors."
+  }
+]

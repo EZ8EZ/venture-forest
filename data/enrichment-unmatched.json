@@ -1,0 +1,222 @@
+[
+  {
+    "id": "c-002",
+    "name": "NeuralPath",
+    "reason": "name collision: 'Neural Path' matches by name (1.00) but its domain neuralpathcom.wordpress.com differs from neuralpath.dev"
+  },
+  {
+    "id": "c-003",
+    "name": "Cortex Robotics",
+    "reason": "name collision: 'Cortex Robotics' matches by name (1.00) but its domain cortex-robotics.com differs from cortexrobotics.com"
+  },
+  {
+    "id": "c-004",
+    "name": "Graphene ML",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-006",
+    "name": "Echo Labs",
+    "reason": "name collision: 'Echo Labs' matches by name (1.00) but its domain echolabs.net differs from echolabs.ai"
+  },
+  {
+    "id": "c-008",
+    "name": "Tidemark Finance",
+    "reason": "domain tidemark.finance resolves to 'tidemark.finance - tidemark \u0627\u0644\u0645\u0635\u0627\u062f\u0631 \u0648\u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a.' (name similarity 0.79 below 0.85)"
+  },
+  {
+    "id": "c-010",
+    "name": "Paysail",
+    "reason": "name collision: 'PaySail' matches by name (1.00) but its domain paysail.co differs from paysail.com"
+  },
+  {
+    "id": "c-012",
+    "name": "Neobank Verde",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-013",
+    "name": "Fractal Insurance",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-015",
+    "name": "GridWeave",
+    "reason": "name collision: 'GridWeave' matches by name (1.00) but its domain gridweave.io differs from gridweave.energy"
+  },
+  {
+    "id": "c-017",
+    "name": "Kelp Carbon",
+    "reason": "best search candidate 'Kelp Island' similarity 0.60 below 0.92"
+  },
+  {
+    "id": "c-018",
+    "name": "TerraVolt EV",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-019",
+    "name": "Windlace",
+    "reason": "best search candidate 'WLS Headliners' similarity 0.38 below 0.92"
+  },
+  {
+    "id": "c-021",
+    "name": "NeuroLinq",
+    "reason": "name collision: 'Neurolinq Limited' matches by name (1.00) but its domain neurolinq.co.uk differs from neurolinq.com"
+  },
+  {
+    "id": "c-022",
+    "name": "RiboGenesis",
+    "reason": "best search candidate 'Tribo Genesis \u2013 Lugar de novos come\u00e7os' similarity 0.54 below 0.92"
+  },
+  {
+    "id": "c-023",
+    "name": "Flora Genomics",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-025",
+    "name": "PhageBio",
+    "reason": "best search candidate 'PHAGEBIOLAB' similarity 0.84 below 0.92"
+  },
+  {
+    "id": "c-029",
+    "name": "PetWise",
+    "reason": "name collision: 'PETWISE LTD' matches by name (1.00) but its domain petwiseaquatics.co.uk differs from petwise.app"
+  },
+  {
+    "id": "c-030",
+    "name": "FluxGame",
+    "reason": "name collision: 'Flux Games' matches by name (0.94) but its domain flux.games differs from fluxgame.gg"
+  },
+  {
+    "id": "c-031",
+    "name": "Fieldnote",
+    "reason": "name collision: 'Fieldnote' matches by name (1.00) but its domain fieldnote.co.uk differs from fieldnote.dev"
+  },
+  {
+    "id": "c-032",
+    "name": "Buildkite Flow",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-034",
+    "name": "DebugBear",
+    "reason": "name collision: 'DebugBear' matches by name (1.00) but its domain debugbear.com differs from debugbear.dev"
+  },
+  {
+    "id": "c-035",
+    "name": "DriftCode",
+    "reason": "name collision: 'Drift Code' matches by name (1.00) but its domain driftcode.in differs from driftcode.io"
+  },
+  {
+    "id": "c-037",
+    "name": "DataWeave HQ",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-038",
+    "name": "Procurix",
+    "reason": "name collision: 'Procurix' matches by name (1.00) but its domain procurix.ai differs from procurix.io"
+  },
+  {
+    "id": "c-039",
+    "name": "WorkHalo",
+    "reason": "name collision: 'WorkHalo' matches by name (1.00) but its domain workhalo.app differs from workhalo.com"
+  },
+  {
+    "id": "c-041",
+    "name": "CarePath",
+    "reason": "name collision: 'iO Urology Corp' matches by name (1.00) but its domain carepathurology.com differs from carepath.io"
+  },
+  {
+    "id": "c-042",
+    "name": "Radiant Dx",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-043",
+    "name": "MindWell",
+    "reason": "name collision: 'Mindwell' matches by name (1.00) but its domain mindwell.health differs from mindwell.app"
+  },
+  {
+    "id": "c-044",
+    "name": "LearnCraft",
+    "reason": "name collision: 'A Square LearnCraft LLP' matches by name (1.00) but its domain a2learncraft.com differs from learncraft.edu"
+  },
+  {
+    "id": "c-045",
+    "name": "SkillForge",
+    "reason": "name collision: 'SkillForge' matches by name (1.00) but its domain skillforge.com.au differs from skillforge.io"
+  },
+  {
+    "id": "c-046",
+    "name": "Linguaverse",
+    "reason": "name collision: 'Linguaverse' matches by name (1.00) but its domain linguaverse.net differs from linguaverse.app"
+  },
+  {
+    "id": "c-048",
+    "name": "OpenField Ag",
+    "reason": "best search candidate 'Openfield Agro' similarity 0.92 below 0.92"
+  },
+  {
+    "id": "c-049",
+    "name": "SatMesh",
+    "reason": "best search candidate 'Satmesh Bio-Tech' similarity 0.67 below 0.92"
+  },
+  {
+    "id": "c-051",
+    "name": "Oakridge AI",
+    "reason": "name collision: 'Oakridge Air' matches by name (0.95) but its domain oakridgeair.org differs from oakridgeai.com"
+  },
+  {
+    "id": "c-052",
+    "name": "VerdantPay",
+    "reason": "name collision: 'VerdantPay' matches by name (1.00) but its domain verdantpayment.com differs from verdantpay.com"
+  },
+  {
+    "id": "c-053",
+    "name": "SolarWeave",
+    "reason": "best search candidate 'MeiTaiCarrier.Com LLC' similarity 0.23 below 0.92"
+  },
+  {
+    "id": "c-055",
+    "name": "Canopy Health",
+    "reason": "name collision: 'Canopy Health' matches by name (1.00) but its domain canopyhealth.com differs from canopyhealth.org"
+  },
+  {
+    "id": "c-056",
+    "name": "PeakStack",
+    "reason": "name collision: 'Peak Stack' matches by name (1.00) but its domain peakstack.md differs from peakstack.io"
+  },
+  {
+    "id": "c-057",
+    "name": "Harbor Robotics",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-058",
+    "name": "EduPath AI",
+    "reason": "name collision: 'Edupath.ai' matches by name (1.00) but its domain edupath.ai differs from edupathlearning.com"
+  },
+  {
+    "id": "c-059",
+    "name": "TrueNorth Data",
+    "reason": "best search candidate 'Gold Tree Consulting' similarity 0.29 below 0.92"
+  },
+  {
+    "id": "c-060",
+    "name": "GridLeap Energy",
+    "reason": "no candidates from domain or search routes"
+  },
+  {
+    "id": "c-068",
+    "name": "Revolut",
+    "reason": "name collision: 'Revolut' matches by name (1.00) but its domain revolutcasino.net differs from revolut.com"
+  },
+  {
+    "id": "c-074",
+    "name": "Wiz",
+    "reason": "domain wiz.com resolves to 'wiz.com' (name similarity 0.67 below 0.85)"
+  }
+]
