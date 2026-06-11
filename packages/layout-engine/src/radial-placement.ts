@@ -91,10 +91,13 @@ export function computeRadialPlacements(
       const angleJitter = (rng() - 0.5) * 0.4;
       const angle = baseAngle + angleJitter;
 
-      // Tree sizing based on funding
+      // Tree sizing based on funding. Canonical visual-encoding curve,
+      // shared with scripts/enrich_from_harmonic.py: log scale with
+      // headroom above $10B so decacorns still differentiate instead of
+      // clamping to one cap.
       const fundingLog = funding > 0 ? Math.log10(funding) : 5;
-      const treeHeight = Math.max(1, Math.min(20, (fundingLog - 4) * 3));
-      const trunkRadius = Math.max(0.08, Math.min(1.2, treeHeight * 0.06));
+      const treeHeight = Math.max(1.5, Math.min(28, (fundingLog - 4.5) * 4));
+      const trunkRadius = Math.max(0.08, Math.min(1.4, treeHeight * 0.06));
 
       // Propose initial position
       let proposedX = grove.center_x + Math.cos(angle) * radialDistance;
@@ -130,7 +133,7 @@ export function computeRadialPlacements(
       });
 
       const visualImportance = funding > 0
-        ? Math.min(1, Math.log10(funding) / 10)
+        ? Math.min(1, Math.log10(funding) / 11.3)
         : 0.1;
 
       const placement: CompanyPlacement = {

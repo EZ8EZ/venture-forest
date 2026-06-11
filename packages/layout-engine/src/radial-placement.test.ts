@@ -80,11 +80,22 @@ describe("computeRadialPlacements", () => {
   it("scales tree height with funding within bounds", () => {
     const placements = computeRadialPlacements(companies, groves);
     for (const p of placements) {
-      expect(p.tree_height).toBeGreaterThanOrEqual(1);
-      expect(p.tree_height).toBeLessThanOrEqual(20);
+      expect(p.tree_height).toBeGreaterThanOrEqual(1.5);
+      expect(p.tree_height).toBeLessThanOrEqual(28);
     }
     const heightOf = (id: string) => placements.find((p) => p.company_id === id)!.tree_height;
     expect(heightOf("a")).toBeGreaterThan(heightOf("c"));
+  });
+
+  it("differentiates decacorn heights instead of clamping at one cap", () => {
+    const giants = [
+      makeCompany("g1", Sector.AI_ML, 190_000_000_000),
+      makeCompany("g2", Sector.AI_ML, 30_000_000_000),
+    ];
+    const giantGroves = allocateGroves(giants);
+    const placements = computeRadialPlacements(giants, giantGroves);
+    const h = (id: string) => placements.find((p) => p.company_id === id)!.tree_height;
+    expect(h("g1")).toBeGreaterThan(h("g2"));
   });
 
   it("handles an empty company list", () => {
